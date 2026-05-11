@@ -4,4 +4,4 @@ FROM eclipse-temurin:17-jre-jammy
 COPY --from=build /target/*.jar app.jar
 EXPOSE 12000
 # We add "server.port" directly into the start command to be 100% sure
-ENTRYPOINT ["java", "-Dserver.port=12000", "-Xmx512m", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dserver.port=${PORT}", "-jar", "app.jar"]
