@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Central Tech Portal</title>
+    <title>TheNexusWeb | The Logic-Driven Search Portal</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -15,21 +15,21 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--white-text);
             margin: 0;
-            padding-top: 40px;
-            padding-bottom: 100px;
+            padding-top: 50px; /* Space for fixed top bar */
+            padding-bottom: 110px; /* Space for sticky footer ad */
         }
 
-        /* Top Bar */
+        /* Fixed Top Bar */
         .top-bar {
             position: fixed;
             top: 0;
             width: 100%;
             background: #000;
-            padding: 8px 20px;
+            padding: 10px 20px;
             font-size: 0.75rem;
             display: flex;
             justify-content: space-between;
@@ -55,8 +55,8 @@
             100% { box-shadow: 0 0 0 0px rgba(35, 134, 54, 0); }
         }
 
-        header { padding: 30px 20px; text-align: center; }
-        .logo { font-size: 2.5rem; font-weight: 800; }
+        header { padding: 40px 20px; text-align: center; }
+        .logo { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; }
         .logo .the { color: var(--grey-text); }
         .logo .nexus { color: var(--purple-brand); }
 
@@ -66,7 +66,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 20px;
-            padding: 20px;
+            padding: 0 20px;
         }
 
         .card {
@@ -77,17 +77,26 @@
             margin-bottom: 20px;
         }
 
-        /* Custom Search Styling */
-        .search-container {
+        /* GOOGLE SEARCH CUSTOM STYLING (FIXES GHOST TEXT) */
+        .search-area {
             background: #0d1117;
-            padding: 10px;
+            padding: 15px;
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
-        .gsc-control-cse { background-color: transparent !important; border: none !important; }
-        .gsc-input-box { background-color: #161b22 !important; border: 1px solid #30363d !important; border-radius: 4px !important; }
+
+        /* Fixes visibility in Google search box */
+        input.gsc-input {
+            color: #ffffff !important;
+            background: #161b22 !important;
+            font-size: 16px !important;
+        }
+        .gsc-input-box {
+            background-color: #161b22 !important;
+            border: 1px solid #30363d !important;
+        }
+        .gsc-control-cse { background-color: transparent !important; border: none !important; padding: 0 !important; }
         .gsc-search-button-v2 { background-color: var(--purple-brand) !important; border-radius: 4px !important; }
-        input.gsc-input { color: white !important; }
 
         .btn {
             background: var(--purple-brand);
@@ -108,7 +117,7 @@
 <body>
 
 <div class="top-bar">
-    <div><span class="pulse"></span> NODE: ACCRA_GH | STATUS: ACTIVE</div>
+    <div><span class="pulse"></span> NODE: ACCRA_GH | STATUS: OPERATIONAL</div>
     <div id="clock">00:00:00</div>
 </div>
 
@@ -116,41 +125,41 @@
     <div class="logo">
         <span class="the">The</span><span class="nexus">NexusWeb</span>
     </div>
-    <p style="color: var(--grey-text);">v1.2 | The Logic-Driven Search Portal</p>
+    <p style="color: var(--grey-text);">Global Tech Portal & Wired Logic Hub</p>
 </header>
 
 <div class="container">
     <main>
         <div class="card" style="border: 2px solid var(--purple-brand);">
             <h2 style="margin-top: 0;">Nexus Search</h2>
-            <p style="font-size: 0.8rem; color: var(--grey-text);">Search verified tech docs, GitHub, and global logic nodes.</p>
-            <div class="search-container">
+            <p style="font-size: 0.85rem; color: var(--grey-text);">Search the entire web. Results will open on the Nexus Search page.</p>
+            <div class="search-area">
                 <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
-                <div class="gcse-search"></div>
+                <div class="gcse-searchbox-only" data-resultsUrl="/search" data-newWindow="false"></div>
             </div>
         </div>
 
         <div class="card">
-            <h2><span style="color: var(--purple-brand);">#</span> News Feed</h2>
-            <p><strong>[SYSTEM]</strong> Nexus Search v1.2 Integrated Successfully.</p>
-            <p><strong>[REVENUE]</strong> A-Ads unit verifying traffic flow.</p>
+            <h2><span style="color: var(--purple-brand);">#</span> System Status</h2>
+            <p><strong>[Ad-Node]</strong> A-Ads Integrated & Active.</p>
+            <p><strong>[Logic]</strong> v1.3 Portal Engine deployed. Search visibility fixed.</p>
         </div>
     </main>
 
     <aside>
         <div class="card" style="border-color: var(--purple-brand);">
-            <h3>.com Fund</h3>
-            <p style="font-size: 0.85rem;">Target: $12.00 for TheNexusWeb.com</p>
-            <div style="background: #0d1117; height: 10px; border-radius: 5px; margin: 10px 0;">
-                <div style="background: var(--purple-brand); width: 12%; height: 100%; border-radius: 5px;"></div>
+            <h3>.com Fund Tracker</h3>
+            <p style="font-size: 0.85rem;">Progress toward <strong>TheNexusWeb.com</strong></p>
+            <div style="background: #0d1117; height: 12px; border-radius: 6px; margin: 12px 0;">
+                <div style="background: var(--purple-brand); width: 14%; height: 100%; border-radius: 6px;"></div>
             </div>
-            <button class="btn" style="font-size: 0.7rem; background: #238636;">LIVE REVENUE SYNC</button>
+            <p style="font-size: 0.7rem; color: var(--grey-text);">Every search contributes to the node fund.</p>
         </div>
 
         <div class="card">
-            <h3>Wired Logic</h3>
-            <p style="font-size: 0.8rem;">Technical podcasting and hardware longevity discussions.</p>
-            <button class="btn">Listen to Latest</button>
+            <h3>Wired Logic Podcast</h3>
+            <p style="font-size: 0.85rem;">Discussing M1 Mac Mini longevity and tech logic.</p>
+            <button class="btn">Stream Latest</button>
         </div>
     </aside>
 </div>
