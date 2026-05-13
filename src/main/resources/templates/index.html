@@ -15,16 +15,15 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--white-text);
             margin: 0;
-            padding-top: 40px; /* Space for fixed top bar */
-            padding-bottom: 100px; /* Space for sticky footer ad */
-            line-height: 1.6;
+            padding-top: 40px;
+            padding-bottom: 100px;
         }
 
-        /* Fixed Top Bar */
+        /* Top Bar */
         .top-bar {
             position: fixed;
             top: 0;
@@ -56,8 +55,8 @@
             100% { box-shadow: 0 0 0 0px rgba(35, 134, 54, 0); }
         }
 
-        header { padding: 40px 20px; text-align: center; }
-        .logo { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        header { padding: 30px 20px; text-align: center; }
+        .logo { font-size: 2.5rem; font-weight: 800; }
         .logo .the { color: var(--grey-text); }
         .logo .nexus { color: var(--purple-brand); }
 
@@ -78,23 +77,17 @@
             margin-bottom: 20px;
         }
 
-        /* Sticky Sidebar */
-        .ad-sidebar {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 60px;
-        }
-
-        .tool-input {
-            width: 100%;
+        /* Custom Search Styling */
+        .search-container {
             background: #0d1117;
-            border: 1px solid #30363d;
-            color: white;
             padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
+            border-radius: 8px;
+            margin-top: 10px;
         }
+        .gsc-control-cse { background-color: transparent !important; border: none !important; }
+        .gsc-input-box { background-color: #161b22 !important; border: 1px solid #30363d !important; border-radius: 4px !important; }
+        .gsc-search-button-v2 { background-color: var(--purple-brand) !important; border-radius: 4px !important; }
+        input.gsc-input { color: white !important; }
 
         .btn {
             background: var(--purple-brand);
@@ -105,21 +98,17 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: opacity 0.2s;
         }
-
-        .btn:hover { opacity: 0.9; }
 
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
-            .ad-sidebar { position: static; }
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
-    <div><span class="pulse"></span> LIVE NODE: ACCRA_GH_PORTAL</div>
+    <div><span class="pulse"></span> NODE: ACCRA_GH | STATUS: ACTIVE</div>
     <div id="clock">00:00:00</div>
 </div>
 
@@ -127,42 +116,41 @@
     <div class="logo">
         <span class="the">The</span><span class="nexus">NexusWeb</span>
     </div>
-    <p style="color: var(--grey-text); font-size: 0.9rem;">Wired Logic • Software Mastery • Hardware Longevity</p>
+    <p style="color: var(--grey-text);">v1.2 | The Logic-Driven Search Portal</p>
 </header>
 
 <div class="container">
     <main>
-        <div class="card">
-            <h2><span style="color: var(--purple-brand);">#</span> The Wire (Live Feed)</h2>
-            <p><strong>[Update]</strong> Portal Engine v1.1 deployed. A-Ads node integrated.</p>
-            <p><strong>[Tech]</strong> Monitoring Mac Mini M1 thermal efficiency for podcasting setup.</p>
+        <div class="card" style="border: 2px solid var(--purple-brand);">
+            <h2 style="margin-top: 0;">Nexus Search</h2>
+            <p style="font-size: 0.8rem; color: var(--grey-text);">Search verified tech docs, GitHub, and global logic nodes.</p>
+            <div class="search-container">
+                <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
+                <div class="gcse-search"></div>
+            </div>
         </div>
 
         <div class="card">
-            <h2><span style="color: var(--purple-brand);">#</span> Logic Utility Tools</h2>
-            <p style="font-size: 0.8rem; color: var(--grey-text);">Quick text formatter for developers:</p>
-            <textarea id="toolInput" class="tool-input" rows="3" placeholder="Paste your code notes here..."></textarea>
-            <div style="display: flex; gap: 10px;">
-                <button onclick="transformText('upper')" style="flex:1; padding: 10px; border-radius: 4px; cursor: pointer;">UPPERCASE</button>
-                <button onclick="transformText('lower')" style="flex:1; padding: 10px; border-radius: 4px; cursor: pointer;">lowercase</button>
-            </div>
+            <h2><span style="color: var(--purple-brand);">#</span> News Feed</h2>
+            <p><strong>[SYSTEM]</strong> Nexus Search v1.2 Integrated Successfully.</p>
+            <p><strong>[REVENUE]</strong> A-Ads unit verifying traffic flow.</p>
         </div>
     </main>
 
-    <aside class="ad-sidebar">
+    <aside>
         <div class="card" style="border-color: var(--purple-brand);">
-            <h3>.com Fund Progress</h3>
+            <h3>.com Fund</h3>
             <p style="font-size: 0.85rem;">Target: $12.00 for TheNexusWeb.com</p>
             <div style="background: #0d1117; height: 10px; border-radius: 5px; margin: 10px 0;">
                 <div style="background: var(--purple-brand); width: 12%; height: 100%; border-radius: 5px;"></div>
             </div>
-            <p style="font-size: 0.7rem; color: var(--grey-text);">Monetization: A-ADS ACTIVE</p>
+            <button class="btn" style="font-size: 0.7rem; background: #238636;">LIVE REVENUE SYNC</button>
         </div>
 
         <div class="card">
-            <h3>Wired Logic Podcast</h3>
-            <p style="font-size: 0.85rem;">Join the conversation on technical logic and hardware.</p>
-            <button class="btn">Listen Now</button>
+            <h3>Wired Logic</h3>
+            <p style="font-size: 0.8rem;">Technical podcasting and hardware longevity discussions.</p>
+            <button class="btn">Listen to Latest</button>
         </div>
     </aside>
 </div>
@@ -180,11 +168,10 @@
                 <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style='border:0; padding:0; width:100%; height:90px; overflow:hidden; margin: auto'></iframe>
             </div>
         </div>
-        <style>
-            #aadsstickymp4icdj6:checked + div { display: none; }
-        </style>
+        <style>#aadsstickymp4icdj6:checked + div { display: none; }</style>
     </div>
 </div>
+
 <script>
     function updateClock() {
         const now = new Date();
@@ -192,12 +179,6 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
-
-    function transformText(type) {
-        const input = document.getElementById('toolInput');
-        if (type === 'upper') input.value = input.value.toUpperCase();
-        if (type === 'lower') input.value = input.value.toLowerCase();
-    }
 </script>
 
 </body>
