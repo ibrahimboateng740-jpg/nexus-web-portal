@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Real-Time Tech Portal</title>
-    <script src='https://wm-scripts.com/p/Bqjs5pdg5.js' async></script>
+    <title>TheNexusWeb | Central Tech Portal</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -20,17 +19,25 @@
             background-color: var(--bg-color);
             color: var(--white-text);
             margin: 0;
+            padding-top: 40px; /* Space for fixed top bar */
+            padding-bottom: 100px; /* Space for sticky footer ad */
             line-height: 1.6;
         }
 
+        /* Fixed Top Bar */
         .top-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
             background: #000;
             padding: 8px 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             justify-content: space-between;
             color: var(--grey-text);
             border-bottom: 1px solid #30363d;
+            z-index: 1000;
+            box-sizing: border-box;
         }
 
         .pulse {
@@ -50,7 +57,7 @@
         }
 
         header { padding: 40px 20px; text-align: center; }
-        .logo { font-size: 3rem; font-weight: 800; letter-spacing: -1.5px; }
+        .logo { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
         .logo .the { color: var(--grey-text); }
         .logo .nexus { color: var(--purple-brand); }
 
@@ -71,47 +78,48 @@
             margin-bottom: 20px;
         }
 
-        .ad-sidebar { position: sticky; top: 20px; }
-        
-        .ad-box {
-            background: #000;
-            border: 1px solid #30363d;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border-radius: 8px;
+        /* Sticky Sidebar */
+        .ad-sidebar {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 60px;
         }
 
-        .rss-item {
-            border-left: 3px solid var(--purple-brand);
-            padding-left: 15px;
-            margin-bottom: 20px;
+        .tool-input {
+            width: 100%;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
         }
 
         .btn {
             background: var(--purple-brand);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            transition: opacity 0.2s;
         }
 
-        #clock { font-weight: bold; color: var(--white-text); }
+        .btn:hover { opacity: 0.9; }
 
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
+            .ad-sidebar { position: static; }
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
-    <div><span class="pulse"></span> THE NEXUS NETWORK: ONLINE</div>
+    <div><span class="pulse"></span> LIVE NODE: ACCRA_GH_PORTAL</div>
     <div id="clock">00:00:00</div>
 </div>
 
@@ -119,54 +127,64 @@
     <div class="logo">
         <span class="the">The</span><span class="nexus">NexusWeb</span>
     </div>
-    <p style="color: var(--grey-text);">Software Logic • Hardware Longevity • Wired Tech News</p>
+    <p style="color: var(--grey-text); font-size: 0.9rem;">Wired Logic • Software Mastery • Hardware Longevity</p>
 </header>
 
 <div class="container">
     <main>
         <div class="card">
-            <h2><span style="color: var(--purple-brand);">#</span> Real-Time Feed</h2>
-            <div class="rss-item">
-                <small style="color: var(--purple-brand);">SYSTEM STATUS</small>
-                <p>TheNexusWeb v1.0 is now live on Render. Deployment successful.</p>
-            </div>
-            <div class="rss-item">
-                <small style="color: var(--grey-text);">COMMUNITY</small>
-                <p>Wired Logic Podcast integration pending. Content syncing in progress...</p>
-            </div>
+            <h2><span style="color: var(--purple-brand);">#</span> The Wire (Live Feed)</h2>
+            <p><strong>[Update]</strong> Portal Engine v1.1 deployed. A-Ads node integrated.</p>
+            <p><strong>[Tech]</strong> Monitoring Mac Mini M1 thermal efficiency for podcasting setup.</p>
         </div>
 
         <div class="card">
-            <h2>Developer Utilities</h2>
-            <p>Free tools for the Nexus community:</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div style="padding: 15px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; text-align: center;">
-                    <strong>Port Checker</strong>
-                </div>
-                <div style="padding: 15px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; text-align: center;">
-                    <strong>Java Debugger</strong>
-                </div>
+            <h2><span style="color: var(--purple-brand);">#</span> Logic Utility Tools</h2>
+            <p style="font-size: 0.8rem; color: var(--grey-text);">Quick text formatter for developers:</p>
+            <textarea id="toolInput" class="tool-input" rows="3" placeholder="Paste your code notes here..."></textarea>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="transformText('upper')" style="flex:1; padding: 10px; border-radius: 4px; cursor: pointer;">UPPERCASE</button>
+                <button onclick="transformText('lower')" style="flex:1; padding: 10px; border-radius: 4px; cursor: pointer;">lowercase</button>
             </div>
         </div>
     </main>
 
     <aside class="ad-sidebar">
-        <div class="card">
-            <h3 style="font-size: 0.7rem; color: var(--grey-text); text-transform: uppercase;">Sponsored</h3>
-            <div class="ad-box">
-                <meta name='admaven-placement' content='Bqjs5pdg5'>
-                <p style="font-size: 0.8rem; color: #30363d;">Ad Content Loading...</p>
+        <div class="card" style="border-color: var(--purple-brand);">
+            <h3>.com Fund Progress</h3>
+            <p style="font-size: 0.85rem;">Target: $12.00 for TheNexusWeb.com</p>
+            <div style="background: #0d1117; height: 10px; border-radius: 5px; margin: 10px 0;">
+                <div style="background: var(--purple-brand); width: 12%; height: 100%; border-radius: 5px;"></div>
             </div>
+            <p style="font-size: 0.7rem; color: var(--grey-text);">Monetization: A-ADS ACTIVE</p>
         </div>
-        
+
         <div class="card">
-            <h3>Support Nexus</h3>
-            <p style="font-size: 0.85rem;">Every visitor helps us maintain the server and pay infrastructure bills.</p>
-            <button class="btn">Donate via PayPal</button>
+            <h3>Wired Logic Podcast</h3>
+            <p style="font-size: 0.85rem;">Join the conversation on technical logic and hardware.</p>
+            <button class="btn">Listen Now</button>
         </div>
     </aside>
 </div>
 
+<div style="position: absolute; z-index: 99999">
+    <input autocomplete="off" type="checkbox" id="aadsstickymp4icdj6" hidden />
+    <div style="padding-top: 0; padding-bottom: auto;">
+        <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;bottom:0;left:0;right:0;margin:auto; z-index: 99999;">
+            <label for="aadsstickymp4icdj6" style="top: 50%;transform: translateY(-50%);right:24px; position: absolute; border-radius: 4px; background: rgba(248, 248, 249, 0.90); padding: 4px; z-index: 100000; cursor:pointer">
+                <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+                    <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
+                </svg>
+            </label>
+            <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998; background: #000; border-top: 1px solid #333;">
+                <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style='border:0; padding:0; width:100%; height:90px; overflow:hidden; margin: auto'></iframe>
+            </div>
+        </div>
+        <style>
+            #aadsstickymp4icdj6:checked + div { display: none; }
+        </style>
+    </div>
+</div>
 <script>
     function updateClock() {
         const now = new Date();
@@ -174,6 +192,12 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    function transformText(type) {
+        const input = document.getElementById('toolInput');
+        if (type === 'upper') input.value = input.value.toUpperCase();
+        if (type === 'lower') input.value = input.value.toLowerCase();
+    }
 </script>
 
 </body>
