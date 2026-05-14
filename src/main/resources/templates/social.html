@@ -1,36 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TheNexusWeb | Social Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; }
-        .header { padding: 20px; border-bottom: 1px solid #333; display: flex; align-items: center; }
-        .back-btn { color: #8A2BE2; text-decoration: none; margin-right: 20px; font-size: 1.2rem; }
-        .container { padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-        .social-card { background: #111; border: 1px solid #333; border-radius: 15px; padding: 20px; height: 600px; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <h1>Social Hub</h1>
+<div id="hq-feed-content">
     </div>
 
-    <div class="container">
-        <div class="social-card">
-            <h3><i class="fa-brands fa-x-twitter"></i> Trending on X</h3>
-            <a class="twitter-timeline" data-height="500" data-theme="dark" href="https://twitter.com/X?ref_src=twsrc%5Etfw">Tweets</a> 
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
+<div id="hq-sentinel" style="height: 20px; margin-bottom: 50px;"></div>
 
-        <div class="social-card">
-            <h3><i class="fa-brands fa-instagram"></i> Instagram Feed</h3>
-            <div style="height: 400px; display: flex; align-items: center; justify-content: center; background: #000; border-radius: 10px;">
-                <p style="color: #555; text-align: center;">Connecting to Meta API...<br><small>Login to sync your feed</small></p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<div id="hq-loader" style="display:none; text-align:center; padding:20px;">
+    <div class="live-dot"></div> Updating Headquarters Feed...
+</div>
+
+<script>
+    // 1. CONFIGURATION
+    const hqSources = [
+        { name: 'TechCrunch', tag: 'News', url: 'https://techcrunch.com/feed/' },
+        { name: 'NY Tech', tag: 'X', url: 'https://rss.app/feeds/example1.xml' }
+    ];
+
+    let postCount = 0; // Tracks how many we've shown
+    let isLoading = false;
+
+    // 2. THE ENGINE: FETCHES & BUILDS POSTS
+    async function loadMorePosts() {
+        if (isLoading) return;
+        isLoading = true;
+        document.getElementById('hq-loader').style.display = 'block';
+
+        const feedContainer = document.getElementById('hq-feed-content');
+        let newHTML = '';
+
+        for (let source of hqSources) {
+            try {
+                // We add a timestamp to the URL to trick the cache into giving us fresh data
+                const apiCall = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&_=${Date.now()}`;
+                const response = await fetch(apiCall);
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    // We grab a small "slice" of posts based on how many times we've scrolled
+                    // This simulates "infinite" loading from the feed
+                    const start = postCount;
+                    const end = postCount + 3;
+                    const itemsToShow = data.items.slice(start, end);
+
+                    itemsToShow.forEach(item => {
+                        newHTML += `
+                            <div class="feed-post">
+                                <span class="platform-tag">${source.tag}</span>
+                                <span class="source-name">${source.name}</span>
+                                <a href="${item.link}" target="_blank" class="post-title">${item.title}</a>
+                                <div class="post-meta">
+                                    <span>🕒 ${new Date(item.pubDate).toLocaleDateString()}</span>
+                                    <span>👁️ ${Math.floor(Math.random() * 1000) + postCount * 10} Views</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) { console.error("Uplink failed"); }
+        }
+
+        // Append the new posts to the bottom
+        feedContainer.insertAdjacentHTML('beforeend', newHTML);
+        postCount += 3; // Prepare next slice
+        isLoading = false;
+        document.getElementById('hq-loader').style.display = 'none';
+    }
+
+    // 3. THE WATCHER: DETECTS WHEN YOU REACH THE BOTTOM
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            console.log("Bottom reached! Loading more...");
+            loadMorePosts();
+        }
+    }, { threshold: 1.0 });
+
+    // Start watching the sentinel
+    observer.observe(document.getElementById('hq-sentinel'));
+
+    // Initial load
+    window.onload = loadMorePosts;
+</script>
