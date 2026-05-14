@@ -2,306 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Your Daily Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>TheNexusWeb | Your World Online</title>
     <style>
-        :root {
-            --bg: #000000;
-            --panel: #111111;
-            --card-bg: #1a1a1a;
-            --accent: #8A2BE2;
-            --text: #ffffff;
-            --grey: #888888;
-            --border: #333333;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; background: #fff; }
+        header { padding: 15px 20px; display: flex; align-items: center; border-bottom: 2px solid #eee; }
+        .logo { color: #d81e06; font-size: 38px; font-weight: 900; margin-right: 30px; text-decoration: none; font-family: serif; }
+        
+        /* THE SEARCH BOX THAT BEATS GOOGLE */
+        .search-container { flex-grow: 1; display: flex; border: 2px solid #ffbe00; border-radius: 4px; overflow: hidden; }
+        .search-input { width: 85%; border: none; padding: 12px; font-size: 16px; outline: none; }
+        .search-btn { width: 15%; background: #ffbe00; border: none; font-weight: bold; cursor: pointer; font-size: 16px; }
 
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            display: flex;
-            min-height: 100vh;
-        }
+        .main-grid { display: grid; grid-template-columns: 200px 1fr 300px; gap: 20px; padding: 20px; }
+        
+        /* NAV CHANNELS */
+        .nav-links a { display: block; padding: 10px; color: #16387c; text-decoration: none; font-weight: bold; border-bottom: 1px solid #eee; }
+        .nav-links a:hover { color: #d81e06; background: #f9f9f9; }
 
-        /* SIDEBAR (AOL CHANNELS STYLE) */
-        nav {
-            width: 240px;
-            height: 100vh;
-            background: var(--panel);
-            border-right: 2px solid var(--border);
-            position: fixed;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
+        /* CENTER NEWS FEED */
+        .news-section { border: 1px solid #ddd; border-radius: 5px; padding: 15px; }
+        .headline { font-size: 20px; color: #16387c; margin-bottom: 10px; display: block; text-decoration: none; }
 
-        .brand-box {
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .brand-box h1 {
-            font-size: 1.4rem;
-            color: var(--accent);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .channel-link {
-            display: flex;
-            align-items: center;
-            color: #bbbbbb;
-            text-decoration: none;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .channel-link i {
-            width: 30px;
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        .channel-link:hover {
-            background: #222222;
-            color: #ffffff;
-            transform: translateX(5px);
-        }
-
-        .channel-link.active {
-            background: var(--accent);
-            color: white;
-        }
-
-        .channel-link.active i {
-            color: white;
-        }
-
-        /* MAIN CONTENT AREA */
-        main {
-            margin-left: 240px;
-            width: calc(100% - 240px);
-            padding-bottom: 120px; /* Space for Ad Footer */
-        }
-
-        /* TOP GREETING BAR */
-        .top-shelf {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: var(--panel);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 900;
-        }
-
-        /* WELCOME & SEARCH SECTION */
-        .welcome-center {
-            max-width: 850px;
-            margin: 50px auto;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .welcome-center h2 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .search-container {
-            background: #ffffff;
-            padding: 8px;
-            border-radius: 50px;
-            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
-            margin: 35px 0;
-        }
-
-        /* GRID CONTENT */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 0 40px;
-        }
-
-        .portal-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 25px;
-            transition: transform 0.3s;
-        }
-
-        .portal-card:hover {
-            border-color: var(--accent);
-        }
-
-        .portal-card h3 {
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* BUTTONS */
-        .btn-action {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* SIDEBAR WEATHER BOX */
-        .sidebar-weather {
-            margin-top: auto;
-            background: #000;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-        }
-
-        /* AD FOOTER DOCK */
-        .ad-footer {
-            position: fixed;
-            bottom: 0;
-            left: 240px;
-            right: 0;
-            background: #000;
-            border-top: 1px solid var(--border);
-            height: 90px;
-            text-align: center;
-            z-index: 1001;
-        }
-
-        @media (max-width: 768px) {
-            nav { width: 70px; padding: 10px; }
-            nav .brand-box, nav span, nav .sidebar-weather { display: none; }
-            main { margin-left: 70px; width: calc(100% - 70px); }
-            .ad-footer { left: 70px; }
-        }
+        /* PREMIUM AD SPACE */
+        .ad-sidebar { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; text-align: center; }
+        .bank-ad-placeholder { background: #fff; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="brand-box">
-        <h1>TheNexusWeb</h1>
+<header>
+    <a href="/" class="logo">TheNexusWeb</a>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search the web, news, and logic...">
+        <button class="search-btn">Search</button>
     </div>
-    <a href="/" class="channel-link active"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-    <a href="/news" class="channel-link"><i class="fa-solid fa-newspaper"></i> <span>News Feed</span></a>
-    <a href="/social" class="channel-link"><i class="fa-solid fa-share-nodes"></i> <span>Social Hub</span></a>
-    <a href="/weather" class="channel-link"><i class="fa-solid fa-cloud-sun"></i> <span>Weather</span></a>
-    
-    <div id="dynamic-links"></div> <a href="/help" class="channel-link"><i class="fa-solid fa-circle-question"></i> <span>Help</span></a>
+</header>
 
-    <div class="sidebar-weather" onclick="location.href='/weather'">
-        <small style="color: var(--grey);">ACCRA, GH</small>
-        <div style="font-size: 1.2rem; font-weight: bold; margin: 5px 0;">28°C ☁️</div>
-        <div style="font-size: 0.7rem; color: var(--accent);">VIEW FORECAST</div>
-    </div>
-</nav>
-
-<main>
-    <div class="top-shelf">
-        <div id="greeting" style="font-weight: 600; color: #ccc; font-size: 0.95rem;">Initializing...</div>
-        <div id="auth-section"></div>
+<div class="main-grid">
+    <div class="nav-links">
+        <a href="/">🏠 Home</a>
+        <a href="/social">👥 Social Hub</a>
+        <a href="/news">📰 Trending News</a>
+        <a href="/weather">⛅ Accra / NY Weather</a>
+        <a href="/login">🔑 My Account</a>
     </div>
 
-    <div class="welcome-center">
-        <h2>Good Evening, Everyone</h2>
-        <p style="color: var(--grey);">Your starting point for News, Social Trends, and Tech Logic.</p>
-        
-        <div class="search-container">
-            <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
-            <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
+    <div class="news-section">
+        <div style="background: #eee; padding: 5px 10px; font-weight: bold; margin-bottom: 15px;">TOP STORIES</div>
+        <a href="#" class="headline">Wired Logic: Why TheNexusWeb is the New Home for Tech</a>
+        <p style="font-size: 14px;">From the streets of Accra to the skyscrapers of New York, the portal is expanding...</p>
+        <hr>
+        <ul style="color: #16387c; font-size: 14px; line-height: 2;">
+            <li>• New security updates for personal accounts</li>
+            <li>• How to integrate PayPal for local services</li>
+            <li>• Best rooftop spots in NYC for summer 2026</li>
+        </ul>
+    </div>
+
+    <div class="ad-sidebar">
+        <div style="font-size: 10px; color: #999; margin-bottom: 5px;">SPONSORED</div>
+        <div class="bank-ad-placeholder">
+            <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden;"></iframe>
         </div>
+        <p style="font-size: 12px; color: #666;">Get professional rewards with TheNexusWeb Gold.</p>
     </div>
-
-    <div class="content-grid">
-        <div class="portal-card">
-            <h3><i class="fa-solid fa-fire" style="color: #ff4500;"></i> Trending News</h3>
-            <p style="font-size: 0.85rem; color: var(--grey);">Catch up on what's happening locally and globally.</p>
-            <ul style="padding: 0; list-style: none; font-size: 0.9rem;">
-                <li style="padding: 8px 0; border-bottom: 1px solid #222;">🚀 Tech expansion in West Africa...</li>
-                <li style="padding: 8px 0; border-bottom: 1px solid #222;">📈 Digital economy updates 2026...</li>
-            </ul>
-            <a href="/news" style="color: var(--accent); font-size: 0.8rem; text-decoration: none; font-weight: bold;">READ ALL NEWS →</a>
-        </div>
-
-        <div class="portal-card">
-            <h3><i class="fa-solid fa-microphone" style="color: #1DA1F2;"></i> Wired Logic</h3>
-            <p style="font-size: 0.85rem; color: var(--grey);">Listen to the latest episode of our technical podcast.</p>
-            <div style="background: #222; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-style: italic;">
-                "Why hardware longevity matters in 2026..."
-            </div>
-            <a href="/social" class="btn-action">LISTEN NOW</a>
-        </div>
-    </div>
-</main>
-
-<div class="ad-footer">
-    <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style="border:0; padding:0; width:100%; height:90px; overflow:hidden;"></iframe>
 </div>
 
-<script>
-    function initializePortal() {
-        const hour = new Date().getHours();
-        const gBox = document.getElementById('greeting');
-        const authBox = document.getElementById('auth-section');
-        const dynamicLinks = document.getElementById('dynamic-links');
-        
-        const username = localStorage.getItem('username') || "Friend";
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-        // Set Time-Based Greeting
-        let timeMsg = "Good Evening";
-        if (hour < 12) timeMsg = "Good Morning";
-        else if (hour < 18) timeMsg = "Good Afternoon";
-        
-        gBox.innerText = `${timeMsg}, ${username}`;
-
-        // Set Auth Display
-        if (isLoggedIn) {
-            authBox.innerHTML = `
-                <span style="margin-right:15px; cursor:pointer;">🔔</span>
-                <button onclick="signOut()" style="background:none; border:1px solid #f85149; color:#f85149; padding:5px 12px; border-radius:20px; cursor:pointer;">Sign Out</button>
-            `;
-            dynamicLinks.innerHTML = `
-                <a href="/settings" class="channel-link"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
-            `;
-        } else {
-            authBox.innerHTML = `<a href="/login" class="btn-action">Sign In</a>`;
-        }
-    }
-
-    function signOut() {
-        localStorage.clear();
-        window.location.reload();
-    }
-
-    window.onload = initializePortal;
-</script>
+<footer style="text-align: center; padding: 30px; border-top: 1px solid #eee; font-size: 12px;">
+    <a href="/privacy">Privacy Policy</a> | <a href="/help">Help</a> | <a href="/about">About Us</a>
+    <p>&copy; 2026 TheNexusWeb. Build in Accra. Ready for New York.</p>
+</footer>
 
 </body>
 </html>
