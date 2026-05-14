@@ -3,92 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Portal</title>
+    <title>TheNexusWeb | Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg: #0a0c10; --card: #161b22; --accent: #8A2BE2; --text: #c9d1d9; --border: #30363d; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; overflow-x: hidden; }
-        
-        /* SIDEBAR OVERHAUL */
-        nav { width: 260px; height: 100vh; background: #010409; border-right: 1px solid var(--border); position: fixed; padding: 25px; box-sizing: border-box; display: flex; flex-direction: column; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 40px; }
-        .logo span { color: var(--accent); }
-        nav a { color: #8b949e; text-decoration: none; padding: 12px 15px; border-radius: 8px; margin-bottom: 8px; transition: 0.2s; font-size: 0.95rem; }
-        nav a:hover { background: #21262d; color: #fff; }
-        nav a.active { background: rgba(138, 43, 226, 0.15); color: var(--accent); border-left: 3px solid var(--accent); }
+        :root { --bg: #000000; --panel: #1a1a1a; --accent: #8A2BE2; --text: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; }
 
-        /* MAIN CONTENT AREA */
-        main { margin-left: 260px; width: 100%; min-height: 100vh; background: radial-gradient(circle at top right, #161021, transparent); }
-        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid var(--border); background: rgba(10, 12, 16, 0.8); backdrop-filter: blur(10px); sticky: top; }
+        /* SIDEBAR (AOL CHANNELS STYLE) */
+        nav { 
+            width: 220px; height: 100vh; background: #111; border-right: 2px solid #333; 
+            position: fixed; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;
+        }
+        .brand-box { padding: 10px 0; border-bottom: 1px solid #333; margin-bottom: 20px; text-align: center; }
+        .brand-box h1 { font-size: 1.2rem; color: var(--accent); margin: 0; letter-spacing: 1px; }
+
+        .channel-link { 
+            display: flex; align-items: center; color: #bbb; text-decoration: none; 
+            padding: 12px; margin-bottom: 5px; border-radius: 5px; transition: 0.2s;
+        }
+        .channel-link i { width: 25px; color: var(--accent); font-size: 1.1rem; }
+        .channel-link:hover { background: #222; color: #fff; }
+        .channel-link.active { background: var(--accent); color: white; }
+        .channel-link.active i { color: white; }
+
+        /* MAIN STAGE */
+        main { margin-left: 220px; width: calc(100% - 220px); min-height: 100vh; }
         
-        /* HERO SEARCH BOX */
-        .hero { padding: 80px 40px; text-align: center; max-width: 800px; margin: auto; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
-        .search-box { background: var(--card); border: 1px solid var(--border); padding: 10px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
+        /* TOP GREETING BAR */
+        .top-shelf {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 30px; background: #111; border-bottom: 1px solid #333;
+        }
+
+        /* CENTRAL SEARCH (AOL LANDING STYLE) */
+        .welcome-center {
+            max-width: 700px; margin: 60px auto; text-align: center; padding: 0 20px;
+        }
+        .welcome-center h2 { font-size: 2rem; margin-bottom: 10px; }
+        .search-container {
+            background: #fff; padding: 5px; border-radius: 50px; 
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4); margin-top: 30px;
+        }
+
         /* BUTTONS */
-        .btn-primary { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
-        
-        /* FOOTER AD */
-        .ad-dock { position: fixed; bottom: 0; left: 260px; right: 0; height: 90px; background: #000; border-top: 1px solid var(--border); z-index: 1000; text-align: center; }
+        .btn-sign { background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
 
-        /* GOOGLE SEARCH FIX */
-        .gsc-control-cse { background: transparent !important; border: none !important; }
-        input.gsc-input { color: #fff !important; background: transparent !important; padding: 10px !important; }
+        /* WEATHER FOOTER IN SIDEBAR */
+        .sidebar-weather { margin-top: auto; background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #333; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">The<span>Nexus</span></div>
-    <a href="/" class="active">Dashboard</a>
-    <a href="#">Tech News</a>
-    <a href="#">Social</a>
-    <div id="user-nav"></div> <div style="margin-top: auto; padding: 15px; background: var(--card); border-radius: 10px; font-size: 0.8rem;">
-        <div style="color: #8b949e;">Accra Weather</div>
-        <div style="font-size: 1.1rem; font-weight: bold; margin-top: 5px;">28°C ☁️</div>
+    <div class="brand-box">
+        <h1>TheNexusWeb</h1>
+    </div>
+    <a href="/" class="channel-link active"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#" class="channel-link"><i class="fa-solid fa-newspaper"></i> News</a>
+    <a href="#" class="channel-link"><i class="fa-solid fa-cloud-sun"></i> Weather</a>
+    <a href="#" class="channel-link"><i class="fa-solid fa-comments"></i> Social</a>
+    <div id="logged-in-links"></div>
+    <a href="#" class="channel-link"><i class="fa-solid fa-circle-question"></i> Help</a>
+
+    <div class="sidebar-weather">
+        <small style="color: #888;">ACCRA, GH</small>
+        <div style="font-size: 1.2rem; font-weight: bold;">28°C ☁️</div>
     </div>
 </nav>
 
 <main>
-    <div class="top-nav">
-        <div id="greeting" style="font-weight: 500;">...</div>
-        <div id="auth-zone"></div>
+    <div class="top-shelf">
+        <div id="greeting" style="font-weight: bold; color: #888;">Checking system...</div>
+        <div id="auth-ui"></div>
     </div>
 
-    <div class="hero">
-        <h1>What are we building today?</h1>
-        <p style="color: #8b949e; margin-bottom: 30px;">Search documentation, code repositories, and technical logic.</p>
-        <div class="search-box">
+    <div class="welcome-center">
+        <h2>Welcome to TheNexusWeb</h2>
+        <p style="color: #888;">Your logic-driven gateway to the technical world.</p>
+        
+        <div class="search-container">
             <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
             <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
         </div>
     </div>
 </main>
 
-<div class="ad-dock">
+<div style="position: fixed; bottom: 0; left: 220px; right: 0; background: #000; border-top: 1px solid #333; height: 90px; text-align: center;">
     <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style="border:0; padding:0; width:100%; height:90px; overflow:hidden;"></iframe>
 </div>
 
 <script>
-    function initialize() {
+    function loadPortal() {
         const hour = new Date().getHours();
         const g = document.getElementById('greeting');
-        const auth = document.getElementById('auth-zone');
-        const userNav = document.getElementById('user-nav');
-        const user = localStorage.getItem('username') || "Developer";
-        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const auth = document.getElementById('auth-ui');
+        const side = document.getElementById('logged-in-links');
+        
+        const user = localStorage.getItem('username') || "Guest";
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-        // Set Greeting
-        let timeMsg = (hour < 12) ? "Good Morning" : (hour < 18) ? "Good Afternoon" : "Good Evening";
-        g.innerText = `${timeMsg}, ${user}`;
+        // GREETING
+        let msg = (hour < 12) ? "Good Morning" : (hour < 18) ? "Good Afternoon" : "Good Evening";
+        g.innerText = `${msg}, ${user}`;
 
-        // Set Auth UI
-        if (loggedIn) {
-            auth.innerHTML = `🔔 <button onclick="logout()" style="background:none; border:1px solid var(--border); color:#f85149; margin-left:15px; cursor:pointer; padding:5px 10px; border-radius:6px;">Sign Out</button>`;
-            userNav.innerHTML = `<a href="#">Settings</a><a href="#">Help</a>`;
+        // AUTH UI
+        if (isLoggedIn) {
+            auth.innerHTML = `<span style="margin-right:15px;">🔔</span> <button onclick="logout()" style="background:none; border:1px solid #f85149; color:#f85149; cursor:pointer; padding:5px 10px; border-radius:15px;">Sign Out</button>`;
+            side.innerHTML = `<a href="#" class="channel-link"><i class="fa-solid fa-gear"></i> Settings</a>`;
         } else {
-            auth.innerHTML = `<a href="/login" class="btn-primary">Sign In</a>`;
-            userNav.innerHTML = `<a href="#">Help</a>`;
+            auth.innerHTML = `<a href="/login" class="btn-sign">Sign In</a>`;
         }
     }
 
@@ -97,7 +120,7 @@
         window.location.reload();
     }
 
-    initialize();
+    loadPortal();
 </script>
 
 </body>
