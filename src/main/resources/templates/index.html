@@ -3,192 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | The Logic-Driven Search Portal</title>
+    <title>TheNexusWeb | Central Portal</title>
     <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --grey-text: #888888;
-            --purple-brand: #8A2BE2;
-            --white-text: #c9d1d9;
-            --live-green: #238636;
-        }
+        :root { --bg: #0d1117; --card: #161b22; --accent: #8A2BE2; --text: #c9d1d9; --border: #30363d; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; }
+        
+        /* SIDEBAR */
+        nav { width: 260px; height: 100vh; background: #000; border-right: 1px solid var(--border); position: fixed; padding: 20px; box-sizing: border-box; }
+        .brand { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 30px; }
+        nav a { color: #888; text-decoration: none; padding: 12px; border-radius: 8px; display: block; margin-bottom: 5px; }
+        nav a:hover { background: var(--card); color: white; }
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--white-text);
-            margin: 0;
-            padding-top: 50px; /* Space for fixed top bar */
-            padding-bottom: 110px; /* Space for sticky footer ad */
-        }
+        /* MAIN */
+        main { margin-left: 260px; width: 100%; min-height: 100vh; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid var(--border); background: rgba(13,17,23,0.9); position: sticky; top: 0; z-index: 100; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; margin: 20px; }
 
-        /* Fixed Top Bar */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: #000;
-            padding: 10px 20px;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            color: var(--grey-text);
-            border-bottom: 1px solid #30363d;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .pulse {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--live-green);
-            border-radius: 50%;
-            margin-right: 5px;
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0px rgba(35, 134, 54, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(35, 134, 54, 0); }
-            100% { box-shadow: 0 0 0 0px rgba(35, 134, 54, 0); }
-        }
-
-        header { padding: 40px 20px; text-align: center; }
-        .logo { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; }
-        .logo .the { color: var(--grey-text); }
-        .logo .nexus { color: var(--purple-brand); }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            padding: 0 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* GOOGLE SEARCH CUSTOM STYLING (FIXES GHOST TEXT) */
-        .search-area {
-            background: #0d1117;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-
-        /* Fixes visibility in Google search box */
-        input.gsc-input {
-            color: #ffffff !important;
-            background: #161b22 !important;
-            font-size: 16px !important;
-        }
-        .gsc-input-box {
-            background-color: #161b22 !important;
-            border: 1px solid #30363d !important;
-        }
-        .gsc-control-cse { background-color: transparent !important; border: none !important; padding: 0 !important; }
-        .gsc-search-button-v2 { background-color: var(--purple-brand) !important; border-radius: 4px !important; }
-
-        .btn {
-            background: var(--purple-brand);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
-        }
+        /* SEARCH FIX */
+        .gsc-control-cse { background-color: transparent !important; border: none !important; }
+        input.gsc-input { color: #fff !important; background: #0d1117 !important; }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <div><span class="pulse"></span> NODE: ACCRA_GH | STATUS: OPERATIONAL</div>
-    <div id="clock">00:00:00</div>
-</div>
-
-<header>
-    <div class="logo">
-        <span class="the">The</span><span class="nexus">NexusWeb</span>
+<nav>
+    <div class="brand">TheNexusWeb</div>
+    <a href="/">🏠 Home</a>
+    <a href="#">📰 Tech News</a>
+    <a href="#">👥 Wired Social</a>
+    <div id="auth-nav"></div>
+    <div style="margin-top:20px; padding:15px; background:#1c2128; border-radius:10px; border:1px solid var(--border);">
+        <small style="color:#888;">Accra Weather</small><br><strong>28°C</strong> Partly Cloudy
     </div>
-    <p style="color: var(--grey-text);">Global Tech Portal & Wired Logic Hub</p>
-</header>
+</nav>
 
-<div class="container">
-    <main>
-        <div class="card" style="border: 2px solid var(--purple-brand);">
-            <h2 style="margin-top: 0;">Nexus Search</h2>
-            <p style="font-size: 0.85rem; color: var(--grey-text);">Search the entire web. Results will open on the Nexus Search page.</p>
-            <div class="search-area">
-                <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
-                <div class="gcse-searchbox-only" data-resultsUrl="/search" data-newWindow="false"></div>
-            </div>
-        </div>
+<main>
+    <header>
+        <h3 id="greeting">...</h3>
+        <div id="header-tools"></div>
+    </header>
 
-        <div class="card">
-            <h2><span style="color: var(--purple-brand);">#</span> System Status</h2>
-            <p><strong>[Ad-Node]</strong> A-Ads Integrated & Active.</p>
-            <p><strong>[Logic]</strong> v1.3 Portal Engine deployed. Search visibility fixed.</p>
-        </div>
-    </main>
-
-    <aside>
-        <div class="card" style="border-color: var(--purple-brand);">
-            <h3>.com Fund Tracker</h3>
-            <p style="font-size: 0.85rem;">Progress toward <strong>TheNexusWeb.com</strong></p>
-            <div style="background: #0d1117; height: 12px; border-radius: 6px; margin: 12px 0;">
-                <div style="background: var(--purple-brand); width: 14%; height: 100%; border-radius: 6px;"></div>
-            </div>
-            <p style="font-size: 0.7rem; color: var(--grey-text);">Every search contributes to the node fund.</p>
-        </div>
-
-        <div class="card">
-            <h3>Wired Logic Podcast</h3>
-            <p style="font-size: 0.85rem;">Discussing M1 Mac Mini longevity and tech logic.</p>
-            <button class="btn">Stream Latest</button>
-        </div>
-    </aside>
-</div>
-
-<div style="position: absolute; z-index: 99999">
-    <input autocomplete="off" type="checkbox" id="aadsstickymp4icdj6" hidden />
-    <div style="padding-top: 0; padding-bottom: auto;">
-        <div style="width:100%;height:auto;position:fixed;text-align:center;font-size:0;bottom:0;left:0;right:0;margin:auto; z-index: 99999;">
-            <label for="aadsstickymp4icdj6" style="top: 50%;transform: translateY(-50%);right:24px; position: absolute; border-radius: 4px; background: rgba(248, 248, 249, 0.90); padding: 4px; z-index: 100000; cursor:pointer">
-                <svg fill="#000000" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-                    <polygon points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490 489.292,457.678 277.331,245.004 489.292,32.337 "/>
-                </svg>
-            </label>
-            <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998; background: #000; border-top: 1px solid #333;">
-                <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style='border:0; padding:0; width:100%; height:90px; overflow:hidden; margin: auto'></iframe>
-            </div>
-        </div>
-        <style>#aadsstickymp4icdj6:checked + div { display: none; }</style>
+    <div class="card" style="border-left: 5px solid var(--accent);">
+        <h2>Global Nexus Search</h2>
+        <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
+        <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
     </div>
+</main>
+
+<div style="width:100%;height:auto;position:fixed;text-align:center;bottom:0;left:0;right:0;z-index:99999;background:#000;border-top:1px solid #333;">
+    <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style="border:0; padding:0; width:100%; height:90px; overflow:hidden;"></iframe>
 </div>
 
 <script>
-    function updateClock() {
-        const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString();
+    function updateGreeting() {
+        const hour = new Date().getHours();
+        const g = document.getElementById('greeting');
+        let user = localStorage.getItem('username') || "Developer";
+        
+        if (hour < 12) g.innerText = "Good Morning, " + user;
+        else if (hour < 18) g.innerText = "Good Afternoon, " + user;
+        else g.innerText = "Good Evening, " + user;
     }
-    setInterval(updateClock, 1000);
-    updateClock();
-</script>
 
+    function checkAuth() {
+        const h = document.getElementById('header-tools');
+        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (loggedIn) {
+            h.innerHTML = `🔔 <a href="/settings" style="text-decoration:none; margin:0 15px;">⚙️</a> <button onclick="localStorage.clear(); location.reload();">Sign Out</button>`;
+        } else {
+            h.innerHTML = `<a href="/login" style="background:var(--accent); color:white; padding:8px 15px; border-radius:5px; text-decoration:none;">Sign In</a>`;
+        }
+    }
+
+    updateGreeting();
+    checkAuth();
+</script>
 </body>
 </html>
