@@ -1,4 +1,4 @@
-package com.nexus; // Make sure this matches your actual package name
+package com.nexus;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,36 +8,26 @@ public class WebController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // Looks for index.html
+        return "index";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // Looks for login.html
-    }
-
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup"; // Looks for signup.html
-    }
-
-    @GetMapping("/search")
-    public String search() {
-        return "search"; // Looks for search.html
+        return "login";
     }
 
     @GetMapping("/social")
     public String social() {
-        return "social"; // Looks for social.html - THIS FIXES THE SOCIAL ERROR
+        return "social";
     }
 
-    @GetMapping("/news")
-    public String news() {
-        return "news"; // Looks for news.html
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "privacy";
     }
     
-    @GetMapping("/weather")
-    public String weather() {
-        return "weather"; // Looks for weather.html
+    @GetMapping("/news")
+    public String news() {
+        return "news";
     }
 }
