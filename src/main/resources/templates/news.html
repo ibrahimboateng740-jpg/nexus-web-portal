@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Headquarters | TheNexusWeb</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f0f2f5; }
+        header { padding: 15px 20px; display: flex; align-items: center; border-bottom: 3px solid #d81e06; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { color: #d81e06; font-size: 32px; font-weight: 900; text-decoration: none; font-family: serif; }
+        
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        
+        .news-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
+        .news-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .news-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        
+        .news-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .news-title { font-size: 18px; font-weight: 700; color: #16387c; text-decoration: none; line-height: 1.4; margin-bottom: 10px; }
+        .news-desc { font-size: 14px; color: #555; line-height: 1.6; flex-grow: 1; }
+
+        /* RATING BUTTONS */
+        .rating-section { display: flex; gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
+        .btn-rate { flex: 1; border: 1px solid #ddd; background: #fff; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .btn-like:hover { background: #e7f3ef; border-color: #28a745; color: #28a745; }
+        .btn-dislike:hover { background: #fce8e8; border-color: #d81e06; color: #d81e06; }
+        
+        .status-msg { text-align: center; color: #666; padding: 50px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">TheNexusWeb</a>
+    <div style="margin-left: 20px; font-size: 14px; color: #16387c; font-weight: bold;">SATELLITE NEWS FEED</div>
+</header>
+
+<div class="container">
+    <div id="status" class="status-msg">Connecting to News Grid...</div>
+    <div class="news-grid" id="news-container"></div>
+</div>
+
+<script>
+    const API_KEY = '7f670038ba5d43ac8d887a8e9f9d7fb7';
+    
+    // Logic to remember what the user hates
+    let dislikedKeywords = JSON.parse(localStorage.getItem('nexus_dislikes')) || [];
+
+    async function loadNews() {
+        const container = document.getElementById('news-container');
+        const status = document.getElementById('status');
+        
+        try {
+            // Fetching Top Technology Headlines
+            const response = await fetch(`https://newsapi.org/v2/top-headlines?category=technology&language=en&apiKey=${API_KEY}`);
+            const data = await response.json();
+
+            if (data.status === 'ok') {
+                status.style.display = 'none';
+                container.innerHTML = '';
+
+                data.articles.forEach((article, index) => {
+                    // Check if title contains a disliked word
+                    const shouldHide = dislikedKeywords.some(word => article.title.toLowerCase().includes(word.toLowerCase()));
+                    if (shouldHide) return;
+
+                    const card = `
+                        <div class="news-card" id="news-item-${index}">
+                            <img src="${article.urlToImage || 'https://via.placeholder.com/400x200?text=Nexus+News'}" class="news-img">
+                            <div class="news-body">
+                                <a href="${article.url}" target="_blank" class="news-title">${article.title}</a>
+                                <p class="news-desc">${article.description ? article.description.substring(0, 100) + '...' : 'Click to read the full story on the Nexus portal.'}</p>
+                                <div class="rating-section">
+                                    <button class="btn-rate btn-like" onclick="rate('like', ${index})">👍 Like</button>
+                                    <button class="btn-rate btn-dislike" onclick="rate('dislike', ${index}, '${article.title}')">👎 Dislike</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+            }
+        } catch (error) {
+            status.innerText = "Connection Failed. Check your Satellite Uplink.";
+        }
+    }
+
+    function rate(type, id, title) {
+        const element = document.getElementById(`news-item-${id}`);
+        
+        if (type === 'dislike') {
+            // Personalization Logic: Extract the first two words of the title to "learn" user taste
+            const words = title.split(' ');
+            const keyword = words[0].toLowerCase();
+            dislikedKeywords.push(keyword);
+            localStorage.setItem('nexus_dislikes', JSON.stringify(dislikedKeywords));
+
+            // Visual effect: Hide and reload
+            element.style.opacity = '0.3';
+            element.style.filter = 'grayscale(1)';
+            setTimeout(() => {
+                loadNews(); // Refresh feed to show new recommendations
+            }, 800);
+        } else {
+            // Like Logic: Could trigger Google Analytics or a "Thank You" toast
+            element.style.borderColor = '#28a745';
+            alert("Thanks! We'll show you more logic like this.");
+        }
+    }
+
+    window.onload = loadNews;
+</script>
+
+</body>
+</html>
