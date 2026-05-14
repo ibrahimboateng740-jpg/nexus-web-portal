@@ -3,53 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Welcome</title>
+    <title>TheNexusWeb | Your Daily Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg: #000000; --panel: #1a1a1a; --accent: #8A2BE2; --text: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; }
+        :root {
+            --bg: #000000;
+            --panel: #111111;
+            --card-bg: #1a1a1a;
+            --accent: #8A2BE2;
+            --text: #ffffff;
+            --grey: #888888;
+            --border: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
 
         /* SIDEBAR (AOL CHANNELS STYLE) */
-        nav { 
-            width: 220px; height: 100vh; background: #111; border-right: 2px solid #333; 
-            position: fixed; display: flex; flex-direction: column; padding: 15px; box-sizing: border-box;
+        nav {
+            width: 240px;
+            height: 100vh;
+            background: var(--panel);
+            border-right: 2px solid var(--border);
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 1000;
         }
-        .brand-box { padding: 10px 0; border-bottom: 1px solid #333; margin-bottom: 20px; text-align: center; }
-        .brand-box h1 { font-size: 1.2rem; color: var(--accent); margin: 0; letter-spacing: 1px; }
 
-        .channel-link { 
-            display: flex; align-items: center; color: #bbb; text-decoration: none; 
-            padding: 12px; margin-bottom: 5px; border-radius: 5px; transition: 0.2s;
+        .brand-box {
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 25px;
+            text-align: center;
         }
-        .channel-link i { width: 25px; color: var(--accent); font-size: 1.1rem; }
-        .channel-link:hover { background: #222; color: #fff; }
-        .channel-link.active { background: var(--accent); color: white; }
-        .channel-link.active i { color: white; }
 
-        /* MAIN STAGE */
-        main { margin-left: 220px; width: calc(100% - 220px); min-height: 100vh; }
-        
+        .brand-box h1 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .channel-link {
+            display: flex;
+            align-items: center;
+            color: #bbbbbb;
+            text-decoration: none;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .channel-link i {
+            width: 30px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .channel-link:hover {
+            background: #222222;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .channel-link.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .channel-link.active i {
+            color: white;
+        }
+
+        /* MAIN CONTENT AREA */
+        main {
+            margin-left: 240px;
+            width: calc(100% - 240px);
+            padding-bottom: 120px; /* Space for Ad Footer */
+        }
+
         /* TOP GREETING BAR */
         .top-shelf {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 30px; background: #111; border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 900;
         }
 
-        /* CENTRAL SEARCH (AOL LANDING STYLE) */
+        /* WELCOME & SEARCH SECTION */
         .welcome-center {
-            max-width: 700px; margin: 60px auto; text-align: center; padding: 0 20px;
+            max-width: 850px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 0 20px;
         }
-        .welcome-center h2 { font-size: 2rem; margin-bottom: 10px; }
+
+        .welcome-center h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
         .search-container {
-            background: #fff; padding: 5px; border-radius: 50px; 
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4); margin-top: 30px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+            margin: 35px 0;
+        }
+
+        /* GRID CONTENT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 40px;
+        }
+
+        .portal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+
+        .portal-card:hover {
+            border-color: var(--accent);
+        }
+
+        .portal-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
         }
 
         /* BUTTONS */
-        .btn-sign { background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .btn-action {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
 
-        /* WEATHER FOOTER IN SIDEBAR */
-        .sidebar-weather { margin-top: auto; background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #333; }
+        /* SIDEBAR WEATHER BOX */
+        .sidebar-weather {
+            margin-top: auto;
+            background: #000;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        /* AD FOOTER DOCK */
+        .ad-footer {
+            position: fixed;
+            bottom: 0;
+            left: 240px;
+            right: 0;
+            background: #000;
+            border-top: 1px solid var(--border);
+            height: 90px;
+            text-align: center;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            nav { width: 70px; padding: 10px; }
+            nav .brand-box, nav span, nav .sidebar-weather { display: none; }
+            main { margin-left: 70px; width: calc(100% - 70px); }
+            .ad-footer { left: 70px; }
+        }
     </style>
 </head>
 <body>
@@ -58,69 +208,99 @@
     <div class="brand-box">
         <h1>TheNexusWeb</h1>
     </div>
-    <a href="/" class="channel-link active"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="#" class="channel-link"><i class="fa-solid fa-newspaper"></i> News</a>
-    <a href="#" class="channel-link"><i class="fa-solid fa-cloud-sun"></i> Weather</a>
-    <a href="#" class="channel-link"><i class="fa-solid fa-comments"></i> Social</a>
-    <div id="logged-in-links"></div>
-    <a href="#" class="channel-link"><i class="fa-solid fa-circle-question"></i> Help</a>
+    <a href="/" class="channel-link active"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+    <a href="/news" class="channel-link"><i class="fa-solid fa-newspaper"></i> <span>News Feed</span></a>
+    <a href="/social" class="channel-link"><i class="fa-solid fa-share-nodes"></i> <span>Social Hub</span></a>
+    <a href="/weather" class="channel-link"><i class="fa-solid fa-cloud-sun"></i> <span>Weather</span></a>
+    
+    <div id="dynamic-links"></div> <a href="/help" class="channel-link"><i class="fa-solid fa-circle-question"></i> <span>Help</span></a>
 
-    <div class="sidebar-weather">
-        <small style="color: #888;">ACCRA, GH</small>
-        <div style="font-size: 1.2rem; font-weight: bold;">28°C ☁️</div>
+    <div class="sidebar-weather" onclick="location.href='/weather'">
+        <small style="color: var(--grey);">ACCRA, GH</small>
+        <div style="font-size: 1.2rem; font-weight: bold; margin: 5px 0;">28°C ☁️</div>
+        <div style="font-size: 0.7rem; color: var(--accent);">VIEW FORECAST</div>
     </div>
 </nav>
 
 <main>
     <div class="top-shelf">
-        <div id="greeting" style="font-weight: bold; color: #888;">Checking system...</div>
-        <div id="auth-ui"></div>
+        <div id="greeting" style="font-weight: 600; color: #ccc; font-size: 0.95rem;">Initializing...</div>
+        <div id="auth-section"></div>
     </div>
 
     <div class="welcome-center">
-        <h2>Welcome to TheNexusWeb</h2>
-        <p style="color: #888;">Your logic-driven gateway to the technical world.</p>
+        <h2>Good Evening, Everyone</h2>
+        <p style="color: var(--grey);">Your starting point for News, Social Trends, and Tech Logic.</p>
         
         <div class="search-container">
             <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
             <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
         </div>
     </div>
+
+    <div class="content-grid">
+        <div class="portal-card">
+            <h3><i class="fa-solid fa-fire" style="color: #ff4500;"></i> Trending News</h3>
+            <p style="font-size: 0.85rem; color: var(--grey);">Catch up on what's happening locally and globally.</p>
+            <ul style="padding: 0; list-style: none; font-size: 0.9rem;">
+                <li style="padding: 8px 0; border-bottom: 1px solid #222;">🚀 Tech expansion in West Africa...</li>
+                <li style="padding: 8px 0; border-bottom: 1px solid #222;">📈 Digital economy updates 2026...</li>
+            </ul>
+            <a href="/news" style="color: var(--accent); font-size: 0.8rem; text-decoration: none; font-weight: bold;">READ ALL NEWS →</a>
+        </div>
+
+        <div class="portal-card">
+            <h3><i class="fa-solid fa-microphone" style="color: #1DA1F2;"></i> Wired Logic</h3>
+            <p style="font-size: 0.85rem; color: var(--grey);">Listen to the latest episode of our technical podcast.</p>
+            <div style="background: #222; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-style: italic;">
+                "Why hardware longevity matters in 2026..."
+            </div>
+            <a href="/social" class="btn-action">LISTEN NOW</a>
+        </div>
+    </div>
 </main>
 
-<div style="position: fixed; bottom: 0; left: 220px; right: 0; background: #000; border-top: 1px solid #333; height: 90px; text-align: center;">
+<div class="ad-footer">
     <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style="border:0; padding:0; width:100%; height:90px; overflow:hidden;"></iframe>
 </div>
 
 <script>
-    function loadPortal() {
+    function initializePortal() {
         const hour = new Date().getHours();
-        const g = document.getElementById('greeting');
-        const auth = document.getElementById('auth-ui');
-        const side = document.getElementById('logged-in-links');
+        const gBox = document.getElementById('greeting');
+        const authBox = document.getElementById('auth-section');
+        const dynamicLinks = document.getElementById('dynamic-links');
         
-        const user = localStorage.getItem('username') || "Guest";
+        const username = localStorage.getItem('username') || "Friend";
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-        // GREETING
-        let msg = (hour < 12) ? "Good Morning" : (hour < 18) ? "Good Afternoon" : "Good Evening";
-        g.innerText = `${msg}, ${user}`;
+        // Set Time-Based Greeting
+        let timeMsg = "Good Evening";
+        if (hour < 12) timeMsg = "Good Morning";
+        else if (hour < 18) timeMsg = "Good Afternoon";
+        
+        gBox.innerText = `${timeMsg}, ${username}`;
 
-        // AUTH UI
+        // Set Auth Display
         if (isLoggedIn) {
-            auth.innerHTML = `<span style="margin-right:15px;">🔔</span> <button onclick="logout()" style="background:none; border:1px solid #f85149; color:#f85149; cursor:pointer; padding:5px 10px; border-radius:15px;">Sign Out</button>`;
-            side.innerHTML = `<a href="#" class="channel-link"><i class="fa-solid fa-gear"></i> Settings</a>`;
+            authBox.innerHTML = `
+                <span style="margin-right:15px; cursor:pointer;">🔔</span>
+                <button onclick="signOut()" style="background:none; border:1px solid #f85149; color:#f85149; padding:5px 12px; border-radius:20px; cursor:pointer;">Sign Out</button>
+            `;
+            dynamicLinks.innerHTML = `
+                <a href="/settings" class="channel-link"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
+            `;
         } else {
-            auth.innerHTML = `<a href="/login" class="btn-sign">Sign In</a>`;
+            authBox.innerHTML = `<a href="/login" class="btn-action">Sign In</a>`;
         }
     }
 
-    function logout() {
+    function signOut() {
         localStorage.clear();
         window.location.reload();
     }
 
-    loadPortal();
+    window.onload = initializePortal;
 </script>
 
 </body>
