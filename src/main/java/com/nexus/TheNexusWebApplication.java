@@ -1,4 +1,4 @@
-package com.nexus; // Ensure this matches your folder path exactly
+package com.nexus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TheNexusWebApplication {
 
     public static void main(String[] args) {
-        // This is the power switch that starts TheNexusWeb
+        // Start the engine for TheNexusWeb
         SpringApplication.run(TheNexusWebApplication.class, args);
     }
 }
