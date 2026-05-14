@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Nexus | Social Hub</title>
+    <meta charset="UTF-8">
+    <title>TheNexusWeb | Social Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; }
-        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .feed-card { background: #111; border: 1px solid #333; border-radius: 15px; padding: 15px; height: 500px; overflow-y: scroll; }
-        .back-btn { color: #8A2BE2; text-decoration: none; display: block; margin-bottom: 20px; }
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; }
+        .header { padding: 20px; border-bottom: 1px solid #333; display: flex; align-items: center; }
+        .back-btn { color: #8A2BE2; text-decoration: none; margin-right: 20px; font-size: 1.2rem; }
+        .container { padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .social-card { background: #111; border: 1px solid #333; border-radius: 15px; padding: 20px; height: 600px; }
     </style>
 </head>
 <body>
-    <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
-    <h1>Social Hub</h1>
-    
-    <div class="social-grid">
-        <div class="feed-card">
-            <h3><i class="fa-brands fa-x-twitter"></i> X Trends</h3>
-            <a class="twitter-timeline" data-height="400" data-theme="dark" href="https://twitter.com/X?ref_src=twsrc%5Etfw">Tweets by X</a> 
+    <div class="header">
+        <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <h1>Social Hub</h1>
+    </div>
+
+    <div class="container">
+        <div class="social-card">
+            <h3><i class="fa-brands fa-x-twitter"></i> Trending on X</h3>
+            <a class="twitter-timeline" data-height="500" data-theme="dark" href="https://twitter.com/X?ref_src=twsrc%5Etfw">Tweets</a> 
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
 
-        <div class="feed-card">
-            <h3><i class="fa-brands fa-instagram"></i> Instagram & FB</h3>
-            <p style="color: #888; font-size: 0.8rem;">To see live Instagram/FB feeds, we will connect your official Meta Page once your .com is ready!</p>
-            <div style="background: #222; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                <i class="fa-brands fa-instagram" style="font-size: 3rem; color: #E1306C;"></i>
+        <div class="social-card">
+            <h3><i class="fa-brands fa-instagram"></i> Instagram Feed</h3>
+            <div style="height: 400px; display: flex; align-items: center; justify-content: center; background: #000; border-radius: 10px;">
+                <p style="color: #555; text-align: center;">Connecting to Meta API...<br><small>Login to sync your feed</small></p>
             </div>
         </div>
     </div>
