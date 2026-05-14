@@ -2,30 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TheNexusWeb | Your World Online</title>
+    <meta name="google-adsense-account" content="ca-pub-0000000000000000">
+    <title>TheNexusWeb | Main Portal</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #fff; }
-        header { padding: 15px 20px; display: flex; align-items: center; border-bottom: 2px solid #eee; }
-        .logo { color: #d81e06; font-size: 38px; font-weight: 900; margin-right: 30px; text-decoration: none; font-family: serif; }
+        body { font-family: Arial, Helvetica, sans-serif; background: #ffffff; margin: 0; color: #000; }
         
-        /* THE SEARCH BOX THAT BEATS GOOGLE */
-        .search-container { flex-grow: 1; display: flex; border: 2px solid #ffbe00; border-radius: 4px; overflow: hidden; }
-        .search-input { width: 85%; border: none; padding: 12px; font-size: 16px; outline: none; }
-        .search-btn { width: 15%; background: #ffbe00; border: none; font-weight: bold; cursor: pointer; font-size: 16px; }
-
-        .main-grid { display: grid; grid-template-columns: 200px 1fr 300px; gap: 20px; padding: 20px; }
+        /* HEADER: YAHOO 2007 STYLE */
+        header { padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #ccc; }
+        .logo { color: #d81e06; font-size: 44px; font-weight: 900; margin-right: 40px; text-decoration: none; font-family: "Times New Roman", Times, serif; }
         
-        /* NAV CHANNELS */
-        .nav-links a { display: block; padding: 10px; color: #16387c; text-decoration: none; font-weight: bold; border-bottom: 1px solid #eee; }
-        .nav-links a:hover { color: #d81e06; background: #f9f9f9; }
+        .search-container { flex-grow: 1; display: flex; border: 2px solid #ffbe00; border-radius: 4px; background: #fff; }
+        .search-input { width: 80%; border: none; padding: 12px; font-size: 16px; outline: none; }
+        .search-btn { width: 20%; background: #ffbe00; border: none; font-weight: bold; cursor: pointer; border-left: 1px solid #ccc; }
 
-        /* CENTER NEWS FEED */
-        .news-section { border: 1px solid #ddd; border-radius: 5px; padding: 15px; }
-        .headline { font-size: 20px; color: #16387c; margin-bottom: 10px; display: block; text-decoration: none; }
+        /* CONTENT LAYOUT */
+        .wrapper { display: grid; grid-template-columns: 180px 1fr 300px; gap: 20px; padding: 20px; }
 
-        /* PREMIUM AD SPACE */
-        .ad-sidebar { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; text-align: center; }
-        .bank-ad-placeholder { background: #fff; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        /* LEFT SIDEBAR CHANNELS */
+        .sidebar a { display: block; padding: 8px 5px; color: #16387c; text-decoration: none; font-weight: bold; border-bottom: 1px solid #f2f2f2; font-size: 14px; }
+        .sidebar a:hover { color: #d81e06; background: #f9f9f9; }
+
+        /* MAIN NEWS AREA */
+        .main-news { border: 1px solid #ddd; border-radius: 5px; padding: 0; overflow: hidden; }
+        .news-header { background: #f1f1f1; padding: 10px; font-weight: bold; border-bottom: 1px solid #ddd; color: #333; }
+        .news-body { padding: 15px; }
+        .headline { font-size: 22px; color: #16387c; text-decoration: none; font-weight: bold; }
+        
+        /* RIGHT AD BAR */
+        .login-box { background: #f5f8ff; border: 1px solid #adc5fb; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+        .ad-space { border: 1px solid #ccc; background: #fafafa; padding: 10px; text-align: center; min-height: 250px; }
+        
+        /* FOOTER */
+        footer { margin-top: 40px; padding: 25px; border-top: 1px solid #eee; text-align: center; font-size: 12px; color: #666; background: #fcfcfc; }
     </style>
 </head>
 <body>
@@ -33,44 +41,58 @@
 <header>
     <a href="/" class="logo">TheNexusWeb</a>
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search the web, news, and logic...">
-        <button class="search-btn">Search</button>
+        <input type="text" class="search-input" placeholder="Search the web, news, and tech...">
+        <button class="search-btn">Web Search</button>
     </div>
 </header>
 
-<div class="main-grid">
-    <div class="nav-links">
+<div class="wrapper">
+    <div class="sidebar">
         <a href="/">🏠 Home</a>
+        <a href="/news">📰 News</a>
         <a href="/social">👥 Social Hub</a>
-        <a href="/news">📰 Trending News</a>
-        <a href="/weather">⛅ Accra / NY Weather</a>
-        <a href="/login">🔑 My Account</a>
+        <a href="/weather">⛅ Weather</a>
+        <a href="#">💼 Jobs</a>
+        <a href="#">🎮 Games</a>
+        <a href="#">🎥 Movies</a>
     </div>
 
-    <div class="news-section">
-        <div style="background: #eee; padding: 5px 10px; font-weight: bold; margin-bottom: 15px;">TOP STORIES</div>
-        <a href="#" class="headline">Wired Logic: Why TheNexusWeb is the New Home for Tech</a>
-        <p style="font-size: 14px;">From the streets of Accra to the skyscrapers of New York, the portal is expanding...</p>
-        <hr>
-        <ul style="color: #16387c; font-size: 14px; line-height: 2;">
-            <li>• New security updates for personal accounts</li>
-            <li>• How to integrate PayPal for local services</li>
-            <li>• Best rooftop spots in NYC for summer 2026</li>
-        </ul>
+    <div class="main-news">
+        <div class="news-header">In the News</div>
+        <div class="news-body">
+            <a href="#" class="headline">Wired Logic: Bridging Accra and New York</a>
+            <p>Our latest technical deep-dive into how local web portals are outperforming global search engines by providing relevant local data.</p>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+            <ul style="color: #16387c; line-height: 1.8; font-size: 14px;">
+                <li>• New hardware updates for DirecTV systems</li>
+                <li>• How to set up PayPal for your business in Ghana</li>
+                <li>• Top 10 things to do in NY this summer 2026</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="ad-sidebar">
-        <div style="font-size: 10px; color: #999; margin-bottom: 5px;">SPONSORED</div>
-        <div class="bank-ad-placeholder">
+    <div class="right-bar">
+        <div class="login-box">
+            <strong>Welcome, Guest</strong>
+            <p style="font-size: 12px;">Sign in to check your mail.</p>
+            <button onclick="location.href='/login'" style="width: 100%; padding: 8px; background: #16387c; color: #fff; border: none; cursor: pointer; border-radius: 3px;">Sign In</button>
+        </div>
+
+        <div class="ad-space">
+            <div style="font-size: 10px; color: #999; margin-bottom: 5px;">ADVERTISEMENT</div>
             <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden;"></iframe>
         </div>
-        <p style="font-size: 12px; color: #666;">Get professional rewards with TheNexusWeb Gold.</p>
     </div>
 </div>
 
-<footer style="text-align: center; padding: 30px; border-top: 1px solid #eee; font-size: 12px;">
-    <a href="/privacy">Privacy Policy</a> | <a href="/help">Help</a> | <a href="/about">About Us</a>
-    <p>&copy; 2026 TheNexusWeb. Build in Accra. Ready for New York.</p>
+<footer>
+    <div style="margin-bottom: 10px;">
+        <a href="/about" style="color: #16387c; margin: 0 10px;">About</a> | 
+        <a href="/privacy" style="color: #16387c; margin: 0 10px;">Privacy Policy</a> | 
+        <a href="/help" style="color: #16387c; margin: 0 10px;">Terms</a> | 
+        <a href="/contact" style="color: #16387c; margin: 0 10px;">Contact</a>
+    </div>
+    <p>&copy; 2026 TheNexusWeb Portal. From Accra to the World.</p>
 </footer>
 
 </body>
