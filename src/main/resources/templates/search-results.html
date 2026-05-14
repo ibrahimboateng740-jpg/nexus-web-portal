@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NexusSearch Results | TheNexusWeb</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #fff; }
+        header { padding: 15px 20px; border-bottom: 1px solid #ddd; display: flex; align-items: center; }
+        .logo { color: #d81e06; font-size: 24px; font-weight: 900; text-decoration: none; margin-right: 20px; }
+        .search-bar { flex-grow: 1; max-width: 600px; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+        .container { max-width: 800px; margin: 20px 0 0 150px; }
+        .result-item { margin-bottom: 30px; }
+        .result-url { font-size: 14px; color: #006621; }
+        .result-link { font-size: 18px; color: #1a0dab; text-decoration: none; font-weight: bold; }
+        .result-desc { font-size: 14px; color: #545454; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">TheNexusWeb</a>
+    <input type="text" class="search-bar" th:value="${userQuery}">
+</header>
+
+<div class="container">
+    <p style="color: #70757a;">Showing results for: <strong th:text="${userQuery}"></strong></p>
+    
+    <div class="result-item">
+        <div class="result-url">thenexusweb.com > logic</div>
+        <a href="#" class="result-link">Latest Technical Logic - Wired Logic Podcast</a>
+        <p class="result-desc">Stream the latest episodes of Wired Logic, broadcasting from Accra and New York. Deep dives into satellite hardware and Java backend development.</p>
+    </div>
+
+    <div class="result-item">
+        <div class="result-url">news.thenexusweb.com</div>
+        <a href="/news" class="result-link">Global Tech News Hub</a>
+        <p class="result-desc">Real-time aggregated tech news filtered through the Nexus logic engine. See what's happening in NY and GH right now.</p>
+    </div>
+</div>
+
+</body>
+</html>
