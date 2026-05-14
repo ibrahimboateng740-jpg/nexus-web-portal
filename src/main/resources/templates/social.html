@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nexus | Social Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; padding: 20px; }
+        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .feed-card { background: #111; border: 1px solid #333; border-radius: 15px; padding: 15px; height: 500px; overflow-y: scroll; }
+        .back-btn { color: #8A2BE2; text-decoration: none; display: block; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
+    <h1>Social Hub</h1>
+    
+    <div class="social-grid">
+        <div class="feed-card">
+            <h3><i class="fa-brands fa-x-twitter"></i> X Trends</h3>
+            <a class="twitter-timeline" data-height="400" data-theme="dark" href="https://twitter.com/X?ref_src=twsrc%5Etfw">Tweets by X</a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+        <div class="feed-card">
+            <h3><i class="fa-brands fa-instagram"></i> Instagram & FB</h3>
+            <p style="color: #888; font-size: 0.8rem;">To see live Instagram/FB feeds, we will connect your official Meta Page once your .com is ready!</p>
+            <div style="background: #222; height: 300px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-brands fa-instagram" style="font-size: 3rem; color: #E1306C;"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
