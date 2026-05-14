@@ -3,80 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb | Central Portal</title>
+    <title>TheNexusWeb | Portal</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --accent: #8A2BE2; --text: #c9d1d9; --border: #30363d; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; }
+        :root { --bg: #0a0c10; --card: #161b22; --accent: #8A2BE2; --text: #c9d1d9; --border: #30363d; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; overflow-x: hidden; }
         
-        /* SIDEBAR */
-        nav { width: 260px; height: 100vh; background: #000; border-right: 1px solid var(--border); position: fixed; padding: 20px; box-sizing: border-box; }
-        .brand { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 30px; }
-        nav a { color: #888; text-decoration: none; padding: 12px; border-radius: 8px; display: block; margin-bottom: 5px; }
-        nav a:hover { background: var(--card); color: white; }
+        /* SIDEBAR OVERHAUL */
+        nav { width: 260px; height: 100vh; background: #010409; border-right: 1px solid var(--border); position: fixed; padding: 25px; box-sizing: border-box; display: flex; flex-direction: column; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 40px; }
+        .logo span { color: var(--accent); }
+        nav a { color: #8b949e; text-decoration: none; padding: 12px 15px; border-radius: 8px; margin-bottom: 8px; transition: 0.2s; font-size: 0.95rem; }
+        nav a:hover { background: #21262d; color: #fff; }
+        nav a.active { background: rgba(138, 43, 226, 0.15); color: var(--accent); border-left: 3px solid var(--accent); }
 
-        /* MAIN */
-        main { margin-left: 260px; width: 100%; min-height: 100vh; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; border-bottom: 1px solid var(--border); background: rgba(13,17,23,0.9); position: sticky; top: 0; z-index: 100; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 25px; margin: 20px; }
+        /* MAIN CONTENT AREA */
+        main { margin-left: 260px; width: 100%; min-height: 100vh; background: radial-gradient(circle at top right, #161021, transparent); }
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; border-bottom: 1px solid var(--border); background: rgba(10, 12, 16, 0.8); backdrop-filter: blur(10px); sticky: top; }
+        
+        /* HERO SEARCH BOX */
+        .hero { padding: 80px 40px; text-align: center; max-width: 800px; margin: auto; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
+        .search-box { background: var(--card); border: 1px solid var(--border); padding: 10px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* BUTTONS */
+        .btn-primary { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+        
+        /* FOOTER AD */
+        .ad-dock { position: fixed; bottom: 0; left: 260px; right: 0; height: 90px; background: #000; border-top: 1px solid var(--border); z-index: 1000; text-align: center; }
 
-        /* SEARCH FIX */
-        .gsc-control-cse { background-color: transparent !important; border: none !important; }
-        input.gsc-input { color: #fff !important; background: #0d1117 !important; }
+        /* GOOGLE SEARCH FIX */
+        .gsc-control-cse { background: transparent !important; border: none !important; }
+        input.gsc-input { color: #fff !important; background: transparent !important; padding: 10px !important; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="brand">TheNexusWeb</div>
-    <a href="/">🏠 Home</a>
-    <a href="#">📰 Tech News</a>
-    <a href="#">👥 Social</a>
-    <div id="auth-nav"></div>
-    <div style="margin-top:20px; padding:15px; background:#1c2128; border-radius:10px; border:1px solid var(--border);">
-        <small style="color:#888;">Accra Weather</small><br><strong>28°C</strong> Partly Cloudy
+    <div class="logo">The<span>Nexus</span></div>
+    <a href="/" class="active">Dashboard</a>
+    <a href="#">Tech News</a>
+    <a href="#">Social</a>
+    <div id="user-nav"></div> <div style="margin-top: auto; padding: 15px; background: var(--card); border-radius: 10px; font-size: 0.8rem;">
+        <div style="color: #8b949e;">Accra Weather</div>
+        <div style="font-size: 1.1rem; font-weight: bold; margin-top: 5px;">28°C ☁️</div>
     </div>
 </nav>
 
 <main>
-    <header>
-        <h3 id="greeting">...</h3>
-        <div id="header-tools"></div>
-    </header>
+    <div class="top-nav">
+        <div id="greeting" style="font-weight: 500;">...</div>
+        <div id="auth-zone"></div>
+    </div>
 
-    <div class="card" style="border-left: 5px solid var(--accent);">
-        <h2>Global Nexus Search</h2>
-        <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
-        <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
+    <div class="hero">
+        <h1>What are we building today?</h1>
+        <p style="color: #8b949e; margin-bottom: 30px;">Search documentation, code repositories, and technical logic.</p>
+        <div class="search-box">
+            <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
+            <div class="gcse-searchbox-only" data-resultsUrl="/search"></div>
+        </div>
     </div>
 </main>
 
-<div style="width:100%;height:auto;position:fixed;text-align:center;bottom:0;left:0;right:0;z-index:99999;background:#000;border-top:1px solid #333;">
+<div class="ad-dock">
     <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=Adaptive" style="border:0; padding:0; width:100%; height:90px; overflow:hidden;"></iframe>
 </div>
 
 <script>
-    function updateGreeting() {
+    function initialize() {
         const hour = new Date().getHours();
         const g = document.getElementById('greeting');
-        let user = localStorage.getItem('username') || "Developer";
-        
-        if (hour < 12) g.innerText = "Good Morning, " + user;
-        else if (hour < 18) g.innerText = "Good Afternoon, " + user;
-        else g.innerText = "Good Evening, " + user;
-    }
-
-    function checkAuth() {
-        const h = document.getElementById('header-tools');
+        const auth = document.getElementById('auth-zone');
+        const userNav = document.getElementById('user-nav');
+        const user = localStorage.getItem('username') || "Developer";
         const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        // Set Greeting
+        let timeMsg = (hour < 12) ? "Good Morning" : (hour < 18) ? "Good Afternoon" : "Good Evening";
+        g.innerText = `${timeMsg}, ${user}`;
+
+        // Set Auth UI
         if (loggedIn) {
-            h.innerHTML = `🔔 <a href="/settings" style="text-decoration:none; margin:0 15px;">⚙️</a> <button onclick="localStorage.clear(); location.reload();">Sign Out</button>`;
+            auth.innerHTML = `🔔 <button onclick="logout()" style="background:none; border:1px solid var(--border); color:#f85149; margin-left:15px; cursor:pointer; padding:5px 10px; border-radius:6px;">Sign Out</button>`;
+            userNav.innerHTML = `<a href="#">Settings</a><a href="#">Help</a>`;
         } else {
-            h.innerHTML = `<a href="/login" style="background:var(--accent); color:white; padding:8px 15px; border-radius:5px; text-decoration:none;">Sign In</a>`;
+            auth.innerHTML = `<a href="/login" class="btn-primary">Sign In</a>`;
+            userNav.innerHTML = `<a href="#">Help</a>`;
         }
     }
 
-    updateGreeting();
-    checkAuth();
+    function logout() {
+        localStorage.clear();
+        window.location.reload();
+    }
+
+    initialize();
 </script>
+
 </body>
 </html>
