@@ -1,80 +1,143 @@
-<div id="hq-feed-content">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Social Stream | TheNexusWeb HQ</title>
+    <style>
+        :root { --nexus-red: #d81e06; --nexus-blue: #16387c; --bg: #f0f2f5; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--bg); }
+        
+        /* HEADER */
+        header { background: #fff; padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--nexus-red); box-shadow: 0 2px 10px rgba(0,0,0,0.1); sticky; top: 0; z-index: 100; }
+        .logo { color: var(--nexus-red); font-size: 30px; font-weight: 900; text-decoration: none; font-family: serif; }
+        .status-bar { font-size: 12px; font-weight: bold; color: var(--nexus-blue); text-transform: uppercase; letter-spacing: 1px; }
+        .live-dot { height: 10px; width: 10px; background: #28a745; border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
+
+        .main-layout { display: grid; grid-template-columns: 280px 1fr 320px; gap: 25px; padding: 25px; max-width: 1500px; margin: auto; }
+
+        /* POST CARDS */
+        .feed-post { background: #fff; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 20px; overflow: hidden; transition: 0.3s; }
+        .feed-post:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
+        .post-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; }
+        .provider-tag { font-size: 10px; font-weight: bold; color: #fff; background: var(--nexus-blue); padding: 3px 10px; border-radius: 20px; }
+        .platform-x { background: #000; }
+        .platform-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        
+        .post-content { padding: 20px; font-size: 16px; line-height: 1.5; color: #1a1a1a; }
+        .post-footer { padding: 12px 20px; background: #fafafa; display: flex; gap: 20px; font-size: 13px; color: #666; border-top: 1px solid #eee; }
+        
+        /* LIKE/DISLIKE SYSTEM */
+        .action-btn { cursor: pointer; border: none; background: none; color: var(--nexus-blue); font-weight: bold; }
+        .action-btn:hover { color: var(--nexus-red); }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        #sentinel { height: 50px; text-align: center; font-weight: bold; color: #999; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">TheNexusWeb</a>
+    <div class="status-bar"><span class="live-dot"></span> Real-Time Uplink Active</div>
+</header>
+
+<div class="main-layout">
+    <div class="sidebar-left">
+        <div style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #ddd;">
+            <h4 style="margin-top:0; color: var(--nexus-blue);">Wired Logic HQ</h4>
+            <p style="font-size: 13px; color: #555;">Scanning real-time signals from providers globally.</p>
+            <hr>
+            <p style="font-size: 11px; color: #999;">Uptime: 99.9%<br>Location: Accra/NY Hub</p>
+        </div>
     </div>
 
-<div id="hq-sentinel" style="height: 20px; margin-bottom: 50px;"></div>
+    <div id="dynamic-stream">
+        <div id="initial-load" style="text-align: center; padding: 50px;">
+            <p>Initiating Nexus Aggregator...</p>
+        </div>
+    </div>
 
-<div id="hq-loader" style="display:none; text-align:center; padding:20px;">
-    <div class="live-dot"></div> Updating Headquarters Feed...
+    <div class="sidebar-right">
+        <div style="background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #ddd; text-align: center;">
+            <div style="font-size: 10px; color: #999; margin-bottom: 10px;">GLOBAL SPONSOR</div>
+            <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=300x250" style="border:0; width:100%; height:250px;"></iframe>
+        </div>
+    </div>
 </div>
 
+<div id="sentinel">Fetching more real-time posts...</div>
+
 <script>
-    // 1. CONFIGURATION
-    const hqSources = [
-        { name: 'TechCrunch', tag: 'News', url: 'https://techcrunch.com/feed/' },
-        { name: 'NY Tech', tag: 'X', url: 'https://rss.app/feeds/example1.xml' }
+    // These act as our Real-Time Bridges
+    const providers = [
+        { name: 'TechCrunch', type: 'News', url: 'https://techcrunch.com/feed/' },
+        { name: 'Engadget', type: 'Tech', url: 'https://www.engadget.com/rss.xml' },
+        { name: 'X-Global', type: 'X', url: 'https://rss.app/feeds/uY7x2p9L0z.xml' } // Replace with your generated Bridge
     ];
 
-    let postCount = 0; // Tracks how many we've shown
-    let isLoading = false;
+    let postIndex = 0;
 
-    // 2. THE ENGINE: FETCHES & BUILDS POSTS
-    async function loadMorePosts() {
-        if (isLoading) return;
-        isLoading = true;
-        document.getElementById('hq-loader').style.display = 'block';
+    async function fetchStream() {
+        const stream = document.getElementById('dynamic-stream');
+        const loader = document.getElementById('initial-load');
+        if(loader) loader.style.display = 'none';
 
-        const feedContainer = document.getElementById('hq-feed-content');
-        let newHTML = '';
-
-        for (let source of hqSources) {
+        for (let source of providers) {
             try {
-                // We add a timestamp to the URL to trick the cache into giving us fresh data
-                const apiCall = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&_=${Date.now()}`;
-                const response = await fetch(apiCall);
+                // Using the free RSS2JSON bridge - No API Key required for growth phase
+                const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}&_=${Date.now()}`);
                 const data = await response.json();
 
                 if (data.status === 'ok') {
-                    // We grab a small "slice" of posts based on how many times we've scrolled
-                    // This simulates "infinite" loading from the feed
-                    const start = postCount;
-                    const end = postCount + 3;
-                    const itemsToShow = data.items.slice(start, end);
-
-                    itemsToShow.forEach(item => {
-                        newHTML += `
-                            <div class="feed-post">
-                                <span class="platform-tag">${source.tag}</span>
-                                <span class="source-name">${source.name}</span>
-                                <a href="${item.link}" target="_blank" class="post-title">${item.title}</a>
-                                <div class="post-meta">
-                                    <span>🕒 ${new Date(item.pubDate).toLocaleDateString()}</span>
-                                    <span>👁️ ${Math.floor(Math.random() * 1000) + postCount * 10} Views</span>
+                    data.items.slice(0, 5).forEach(item => {
+                        const postHtml = `
+                            <div class="feed-post" id="post-${postIndex}">
+                                <div class="post-header">
+                                    <span class="provider-tag">${source.name}</span>
+                                    <span style="font-size: 12px; color: #999;">${new Date(item.pubDate).toLocaleTimeString()}</span>
+                                </div>
+                                <div class="post-content">
+                                    <a href="${item.link}" target="_blank" style="text-decoration:none; color:inherit;">
+                                        <strong>${item.title}</strong>
+                                        <p style="font-size: 14px; color: #444; margin-top: 10px;">${item.description.substring(0, 150)}...</p>
+                                    </a>
+                                </div>
+                                <div class="post-footer">
+                                    <button class="action-btn" onclick="rate('like', ${postIndex})">👍 Helpful</button>
+                                    <button class="action-btn" onclick="rate('dislike', ${postIndex})">👎 Not Interested</button>
+                                    <span>👁️ ${Math.floor(Math.random() * 5000)} HQ Views</span>
                                 </div>
                             </div>
                         `;
+                        stream.insertAdjacentHTML('beforeend', postHtml);
+                        postIndex++;
                     });
                 }
-            } catch (e) { console.error("Uplink failed"); }
+            } catch (err) { console.error("Uplink lost for " + source.name); }
         }
-
-        // Append the new posts to the bottom
-        feedContainer.insertAdjacentHTML('beforeend', newHTML);
-        postCount += 3; // Prepare next slice
-        isLoading = false;
-        document.getElementById('hq-loader').style.display = 'none';
     }
 
-    // 3. THE WATCHER: DETECTS WHEN YOU REACH THE BOTTOM
-    const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            console.log("Bottom reached! Loading more...");
-            loadMorePosts();
+    function rate(action, id) {
+        const post = document.getElementById(`post-${id}`);
+        if (action === 'dislike') {
+            post.style.opacity = '0.2';
+            post.style.pointerEvents = 'none';
+            // Here is where the "Recommendation Logic" happens
+            console.log("Reporting negative feedback to Google Analytics...");
+        } else {
+            post.style.border = '2px solid #28a745';
         }
-    }, { threshold: 1.0 });
+    }
 
-    // Start watching the sentinel
-    observer.observe(document.getElementById('hq-sentinel'));
+    // INFINITE SCROLL WATCHER
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) fetchStream();
+    });
+    observer.observe(document.getElementById('sentinel'));
 
-    // Initial load
-    window.onload = loadMorePosts;
+    window.onload = fetchStream;
 </script>
+
+</body>
+</html>
