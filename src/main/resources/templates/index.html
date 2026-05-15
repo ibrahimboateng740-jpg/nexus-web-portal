@@ -2,65 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TheNexusWeb | Main Portal</title>
+    <title>TheNexusWeb | Global Headquarters</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #fff; }
-        header { padding: 15px 20px; display: flex; align-items: center; border-bottom: 2px solid #eee; }
-        .logo { color: #d81e06; font-size: 38px; font-weight: 900; text-decoration: none; font-family: serif; margin-right: 30px; }
+        body { font-family: Arial, sans-serif; margin: 0; background: #fff; text-align: center; }
+        .nav-bar { display: flex; justify-content: flex-end; padding: 20px; gap: 20px; }
+        .nav-bar a { text-decoration: none; color: #333; font-size: 14px; }
         
-        /* FUNCTIONAL SEARCH BAR */
-        .search-container { flex-grow: 1; display: flex; border: 2px solid #ffbe00; border-radius: 4px; overflow: hidden; }
-        .search-input { width: 85%; border: none; padding: 12px; font-size: 16px; outline: none; }
-        .search-btn { width: 15%; background: #ffbe00; border: none; font-weight: bold; cursor: pointer; font-size: 16px; }
-
-        .main-grid { display: grid; grid-template-columns: 200px 1fr 300px; gap: 20px; padding: 20px; }
-        .nav-links a { display: block; padding: 10px; color: #16387c; text-decoration: none; font-weight: bold; border-bottom: 1px solid #eee; }
-        .nav-links a:hover { color: #d81e06; background: #f9f9f9; }
-        .news-section { border: 1px solid #ddd; border-radius: 5px; padding: 15px; }
-        .ad-sidebar { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; text-align: center; }
-        footer { text-align: center; padding: 30px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+        .main-content { margin-top: 100px; }
+        .nexus-logo { font-size: 90px; font-weight: 900; color: #d81e06; font-family: serif; margin-bottom: 30px; }
+        
+        /* THE SEARCH BOX FIX */
+        .search-form { max-width: 600px; margin: auto; position: relative; }
+        .search-input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #dfe1e5; font-size: 16px; outline: none; box-shadow: none; transition: 0.3s; }
+        .search-input:hover, .search-input:focus { box-shadow: 0 1px 6px rgba(32,33,36,0.28); border-color: rgba(223,225,229,0); }
+        
+        .btn-group { margin-top: 30px; display: flex; justify-content: center; gap: 15px; }
+        .btn { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 20px; color: #3c4043; border-radius: 4px; cursor: pointer; }
+        .btn:hover { border: 1px solid #dadce0; color: #202124; }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="/" class="logo">TheNexusWeb</a>
-    <form action="https://www.google.com/search" method="GET" target="_blank" class="search-container">
-        <input type="text" name="q" class="search-input" placeholder="Search the web, news, and logic...">
-        <button type="submit" class="search-btn">Web Search</button>
-    </form>
-</header>
-
-<div class="main-grid">
-    <div class="nav-links">
-        <a href="/">🏠 Home</a>
-        <a href="/social">👥 Social Hub</a>
-        <a href="/news">📰 Trending News</a>
-        <a href="/login">🔑 My Account</a>
-    </div>
-
-    <div class="news-section">
-        <div style="background: #eee; padding: 5px 10px; font-weight: bold; margin-bottom: 15px;">TOP STORIES</div>
-        <h3 style="color: #16387c;">Wired Logic: Portal Launch 2026</h3>
-        <p>TheNexusWeb is live! Bridging the gap between Accra and New York with real-time tech updates.</p>
-        <hr>
-        <ul style="color: #16387c; font-size: 14px; line-height: 2;">
-            <li>• New security updates for personal accounts</li>
-            <li>• Best satellite hardware for 2026</li>
-        </ul>
-    </div>
-
-    <div class="ad-sidebar">
-        <div style="font-size: 10px; color: #999; margin-bottom: 5px;">SPONSORED</div>
-        <div style="background: #fff; border: 1px solid #ccc; height: 250px; display: flex; align-items: center; justify-content: center;">
-            <iframe data-aa="2437525" src="//acceptable.a-ads.com/2437525/?size=300x250" style="border:0; padding:0; width:300px; height:250px; overflow:hidden;"></iframe>
-        </div>
-    </div>
+<div class="nav-bar">
+    <a href="/social">Social Hub</a>
+    <a href="/news">Global News</a>
+    <a href="/login">Account</a>
 </div>
 
-<footer>
-    <a href="/privacy">Privacy Policy</a> | <a href="/help">Help</a>
-    <p>&copy; 2026 TheNexusWeb. Built in Accra. Ready for New York.</p>
+<div class="main-content">
+    <div class="nexus-logo">TheNexusWeb</div>
+
+    <form action="/search" method="GET" class="search-form">
+        <input type="text" name="q" class="search-input" placeholder="Search the Nexus Logic Engine...">
+        <div class="btn-group">
+            <input type="submit" class="btn" value="Nexus Search">
+            <button type="button" class="btn" onclick="location.href='/help'">Get Help</button>
+        </div>
+    </form>
+</div>
+
+<footer style="margin-top: 200px; font-size: 12px; color: #70757a;">
+    <p>&copy; 2026 TheNexusWeb HQ | Accra &bull; New York</p>
 </footer>
 
 </body>
