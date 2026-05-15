@@ -2,48 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TheNexusWeb | Global Headquarters</title>
+    <title>TheNexusWeb | Global HQ</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #fff; text-align: center; }
-        .nav-bar { display: flex; justify-content: flex-end; padding: 20px; gap: 20px; }
-        .nav-bar a { text-decoration: none; color: #333; font-size: 14px; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: #fff; text-align: center; overflow-x: hidden; }
+        .nav-bar { display: flex; justify-content: flex-end; padding: 20px 40px; gap: 25px; }
+        .nav-bar a { text-decoration: none; color: #5f6368; font-size: 14px; font-weight: 500; }
         
-        .main-content { margin-top: 100px; }
-        .nexus-logo { font-size: 90px; font-weight: 900; color: #d81e06; font-family: serif; margin-bottom: 30px; }
+        .main-hub { margin-top: 120px; }
+        .nexus-logo { font-size: 95px; font-weight: 900; color: #d81e06; font-family: serif; margin-bottom: 30px; letter-spacing: -3px; }
         
-        /* THE SEARCH BOX FIX */
-        .search-form { max-width: 600px; margin: auto; position: relative; }
-        .search-input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #dfe1e5; font-size: 16px; outline: none; box-shadow: none; transition: 0.3s; }
-        .search-input:hover, .search-input:focus { box-shadow: 0 1px 6px rgba(32,33,36,0.28); border-color: rgba(223,225,229,0); }
-        
-        .btn-group { margin-top: 30px; display: flex; justify-content: center; gap: 15px; }
-        .btn { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 20px; color: #3c4043; border-radius: 4px; cursor: pointer; }
-        .btn:hover { border: 1px solid #dadce0; color: #202124; }
+        /* SEARCH FIX */
+        .search-container { max-width: 580px; margin: auto; position: relative; }
+        .search-input { width: 100%; padding: 14px 25px; border-radius: 30px; border: 1px solid #dfe1e5; font-size: 16px; outline: none; transition: 0.2s; }
+        .search-input:hover { box-shadow: 0 1px 6px rgba(32,33,36,0.28); }
+
+        .btn-row { margin-top: 30px; display: flex; justify-content: center; gap: 12px; }
+        .btn { background: #f8f9fa; border: 1px solid #f8f9fa; padding: 10px 24px; border-radius: 4px; cursor: pointer; color: #3c4043; font-size: 14px; }
+        .btn:hover { border-color: #dadce0; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+
+        /* NOTIFICATION UI */
+        #notification-box { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+        .toast { background: #202124; color: #fff; padding: 14px 28px; border-radius: 10px; font-size: 13px; margin-top: 12px; 
+                 box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px;
+                 animation: slideIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; }
+        @keyframes slideIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
+        @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(20px); } }
+        .dot { height: 10px; width: 10px; background: #d81e06; border-radius: 50%; box-shadow: 0 0 8px #d81e06; }
     </style>
 </head>
 <body>
 
+<div th:if="${username != null}" id="notification-box"></div>
+
 <div class="nav-bar">
     <a href="/social">Social Hub</a>
     <a href="/news">Global News</a>
-    <a href="/login">Account</a>
+    <a href="/login" th:text="${username != null ? 'HQ Dashboard' : 'Sign In'}">Sign In</a>
 </div>
 
-<div class="main-content">
+<div class="main-hub">
     <div class="nexus-logo">TheNexusWeb</div>
-
-    <form action="/search" method="GET" class="search-form">
+    
+    <form action="/search" method="GET" class="search-container">
         <input type="text" name="q" class="search-input" placeholder="Search the Nexus Logic Engine...">
-        <div class="btn-group">
+        <div class="btn-row">
             <input type="submit" class="btn" value="Nexus Search">
-            <button type="button" class="btn" onclick="location.href='/help'">Get Help</button>
+            <button type="button" class="btn" onclick="location.href='/help'">System Help</button>
         </div>
     </form>
 </div>
 
 <footer style="margin-top: 200px; font-size: 12px; color: #70757a;">
-    <p>&copy; 2026 TheNexusWeb HQ | Accra &bull; New York</p>
+    <p>&copy; 2026 TheNexusWeb HQ | Serving Accra &bull; New York</p>
 </footer>
+
+<script th:inline="javascript">
+    /* THIS CODE ONLY EXECUTES IF USER IS LOGGED IN */
+    /*[+
+    const hqUser = [[${username}]];
+    if (hqUser) {
+        function pushNotification(message) {
+            const container = document.getElementById('notification-box');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<div class="dot"></div> <span>${message}</span>`;
+            container.appendChild(toast);
+            
+            // Auto-clean after 6 seconds
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.6s forwards';
+                setTimeout(() => toast.remove(), 600);
+            }, 6000);
+        }
+
+        window.onload = () => {
+            pushNotification("Nexus Uplink: Connected as " + hqUser);
+            setTimeout(() => pushNotification("Scanning logic towers in Accra..."), 2000);
+            setTimeout(() => pushNotification("Syncing New York utility status..."), 4000);
+        };
+    }
+    +]*/
+</script>
 
 </body>
 </html>
