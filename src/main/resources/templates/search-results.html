@@ -2,41 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NexusSearch Results | TheNexusWeb</title>
+    <title>Nexus Intelligence | Search</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #fff; }
-        header { padding: 15px 20px; border-bottom: 1px solid #ddd; display: flex; align-items: center; }
-        .logo { color: #d81e06; font-size: 24px; font-weight: 900; text-decoration: none; margin-right: 20px; }
-        .search-bar { flex-grow: 1; max-width: 600px; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
-        .container { max-width: 800px; margin: 20px 0 0 150px; }
+        :root { --nexus-red: #d81e06; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fff; }
+        .header { padding: 20px 50px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 30px; }
+        .logo { font-family: serif; font-weight: 900; color: var(--nexus-red); font-size: 24px; text-decoration: none; }
+        .search-bar { width: 500px; padding: 12px 20px; border-radius: 25px; border: 1px solid #dfe1e5; outline: none; }
+        .container { max-width: 800px; margin: 30px 150px; }
         .result-item { margin-bottom: 30px; }
-        .result-url { font-size: 14px; color: #006621; }
-        .result-link { font-size: 18px; color: #1a0dab; text-decoration: none; font-weight: bold; }
-        .result-desc { font-size: 14px; color: #545454; line-height: 1.4; }
+        .result-url { font-size: 14px; color: #202124; margin-bottom: 4px; }
+        .result-title { font-size: 20px; color: #1a0dab; text-decoration: none; display: block; margin-bottom: 4px; }
+        .result-title:hover { text-decoration: underline; }
+        .result-snippet { font-size: 14px; color: #4d5156; line-height: 1.5; }
     </style>
 </head>
 <body>
+    <div class="header">
+        <a href="/" class="logo">TheNexusWeb</a>
+        <form action="/search" method="GET">
+            <input type="text" name="q" class="search-bar" th:value="${userQuery}">
+        </form>
+    </div>
+    <div class="container">
+        <p style="color: #70757a; font-size: 14px;">Logic results for: <b th:text="${userQuery}"></b></p>
+        
+        <div class="result-item">
+            <div class="result-url">https://thenexusweb.com > <span th:text="${userQuery}"></span></div>
+            <a href="#" class="result-title">Global Data regarding <span th:text="${userQuery}"></span></a>
+            <div class="result-snippet">Nexus Logic Engine has scanned decentralized nodes. Comprehensive intelligence on <span th:text="${userQuery}"></span> is now aggregated for HQ viewing...</div>
+        </div>
 
-<header>
-    <a href="/" class="logo">TheNexusWeb</a>
-    <input type="text" class="search-bar" th:value="${userQuery}">
-</header>
-
-<div class="container">
-    <p style="color: #70757a;">Showing results for: <strong th:text="${userQuery}"></strong></p>
-    
-    <div class="result-item">
-        <div class="result-url">thenexusweb.com > logic</div>
-        <a href="#" class="result-link">Latest Technical Logic - Wired Logic Podcast</a>
-        <p class="result-desc">Stream the latest episodes of Wired Logic, broadcasting from Accra and New York. Deep dives into satellite hardware and Java backend development.</p>
+        <div id="dynamic-results"></div>
     </div>
 
-    <div class="result-item">
-        <div class="result-url">news.thenexusweb.com</div>
-        <a href="/news" class="result-link">Global Tech News Hub</a>
-        <p class="result-desc">Real-time aggregated tech news filtered through the Nexus logic engine. See what's happening in NY and GH right now.</p>
-    </div>
-</div>
-
+    <script>
+        // Simple logic to generate more results based on your query
+        const query = "[[${userQuery}]]";
+        const resultsBox = document.getElementById('dynamic-results');
+        const platforms = ['Wikipedia', 'Reuters', 'Wired', 'GitHub', 'LinkedIn'];
+        
+        platforms.forEach(p => {
+            resultsBox.innerHTML += `
+                <div class="result-item">
+                    <div class="result-url">https://${p.toLowerCase()}.com > news</div>
+                    <a href="#" class="result-title">${p} Insight on ${query}</a>
+                    <div class="result-snippet">Latest updates and technical documentation regarding ${query} via ${p} official channels.</div>
+                </div>`;
+        });
+    </script>
 </body>
 </html>
