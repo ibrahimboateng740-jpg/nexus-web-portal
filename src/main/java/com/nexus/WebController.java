@@ -1,14 +1,15 @@
-package com.thenexus.controller; // Ensure this matches your project structure
+package com.thenexus.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 
 @Controller
 public class WebController {
 
-    // 1. HOME HUB (/)
+    // 1. HOME HUB
     @GetMapping("/")
     public String home(Principal principal, Model model) {
         if (principal != null) {
@@ -17,7 +18,21 @@ public class WebController {
         return "index";
     }
 
-    // 2. NEWS FEED (/news)
+    // 2. SEARCH ENGINE MAPPING (Fixes the 404 when searching)
+    @GetMapping("/search")
+    public String nexusSearch(@RequestParam(name = "q", required = false) String query, Model model, Principal principal) {
+        if (principal != null) {
+            model.addAttribute("username", principal.getName());
+        }
+        // If the query is empty, just go home
+        if (query == null || query.trim().isEmpty()) {
+            return "redirect:/";
+        }
+        model.addAttribute("userQuery", query);
+        return "search-results"; // Ensure search-results.html exists in templates!
+    }
+
+    // 3. NEWS FEED
     @GetMapping("/news")
     public String news(Principal principal, Model model) {
         if (principal != null) {
@@ -26,7 +41,7 @@ public class WebController {
         return "news";
     }
 
-    // 3. SOCIAL HUB (/social)
+    // 4. SOCIAL HUB
     @GetMapping("/social")
     public String social(Principal principal, Model model) {
         if (principal != null) {
@@ -35,7 +50,7 @@ public class WebController {
         return "social";
     }
 
-    // 4. PODCAST HQ (/podcasts)
+    // 5. PODCAST HQ
     @GetMapping("/podcasts")
     public String podcasts(Principal principal, Model model) {
         if (principal != null) {
@@ -44,7 +59,7 @@ public class WebController {
         return "podcasts";
     }
 
-    // 5. SYSTEM HELP (/help)
+    // 6. SYSTEM HELP
     @GetMapping("/help")
     public String help(Principal principal, Model model) {
         if (principal != null) {
@@ -53,12 +68,10 @@ public class WebController {
         return "help";
     }
 
-    // 6. LOGIN / DASHBOARD (/login)
+    // 7. LOGIN
     @GetMapping("/login")
-    public String login(Principal principal, Model model) {
-        if (principal != null) {
-            return "dashboard"; // If already logged in, go to dashboard
-        }
-        return "login"; // Otherwise, show login page
+    public String login(Principal principal) {
+        if (principal != null) return "redirect:/"; 
+        return "login";
     }
 }
