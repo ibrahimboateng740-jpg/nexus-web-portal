@@ -11,9 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #090d16;
-            color: #f1f5f9;
-            font-family: 'Inter', sans-serif;
+            background-color: #090d16 !important;
+            color: #f1f5f9 !important;
+            font-family: 'Inter', sans-serif !important;
         }
         .portal-card {
             background-color: #111827;
@@ -31,12 +31,13 @@
         }
     </style>
 </head>
-<body class="h-screen w-screen flex overflow-hidden">
+<body class="h-screen w-screen flex overflow-hidden bg-[#090d16]">
 
     <aside class="w-80 bg-[#0f1422] border-r border-gray-800 flex flex-col justify-between p-4 z-20">
         <div class="flex flex-col gap-6 h-full overflow-y-auto custom-scrollbar pr-1">
+            
             <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
-                <div class="p-2.5 bg-blue-600 text-white rounded-xl shadow-md shadow-blue-500/10">
+                <div class="p-2.5 bg-blue-600 text-white rounded-xl shadow-md">
                     <i data-lucide="layers" class="w-5 h-5"></i>
                 </div>
                 <div>
@@ -48,22 +49,22 @@
             <nav class="flex flex-col gap-1.5" id="nexusNavDeck">
                 <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest pl-2 mb-1">Applications</span>
                 
-                <button id="btn-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer">
+                <button type="button" id="btn-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="layout-grid" class="w-4 h-4"></i> Main Dashboard</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                 </button>
                 
-                <button id="btn-social" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button type="button" id="btn-social" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="message-square-share" class="w-4 h-4"></i> Social Feed Node</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
                 
-                <button id="btn-news" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button type="button" id="btn-news" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="globe-2" class="w-4 h-4"></i> Live RSS Streams</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
                 
-                <button id="btn-podcast" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button type="button" id="btn-podcast" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="podcast" class="w-4 h-4"></i> Wired Logic Podcast</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
@@ -80,7 +81,7 @@
                 <div class="relative">
                     <input type="text" id="sidebarDictQuery" placeholder="Look up any word..." 
                            class="w-full bg-[#090d16] border border-gray-800 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition-all pr-8">
-                    <button id="btn-sidebar-dict" class="absolute right-2.5 top-3 text-gray-500 hover:text-blue-500 transition-colors">
+                    <button type="button" id="btn-sidebar-dict" class="absolute right-2.5 top-3 text-gray-500 hover:text-blue-500 transition-colors cursor-pointer">
                         <i data-lucide="search" class="w-3.5 h-3.5"></i>
                     </button>
                 </div>
@@ -95,7 +96,7 @@
                 <div class="w-2 h-2 bg-emerald-500 rounded-full shadow shadow-emerald-500/50"></div>
                 <div class="flex flex-col">
                     <span class="text-xs font-medium text-gray-300">Global Node Network</span>
-                    <span class="text-[10px] text-gray-500">Dynamic IP Detection</span>
+                    <span class="text-[10px] text-gray-500">Location Dynamic</span>
                 </div>
             </div>
             <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500/80"></i>
@@ -109,7 +110,6 @@
                 <h2 id="viewTitle" class="text-xl font-bold tracking-tight text-white">System Main Dashboard</h2>
                 <p id="viewDescription" class="text-xs text-gray-400 mt-0.5">Welcome back to your central control hub panel overview.</p>
             </div>
-            
             <div class="flex items-center gap-3 text-xs bg-[#111827] px-3.5 py-2 rounded-xl border border-gray-800">
                 <span class="flex items-center gap-1.5 text-gray-300"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Status: Active</span>
             </div>
@@ -121,7 +121,7 @@
                 <div class="lg:col-span-2 flex flex-col gap-6">
                     <div class="portal-card rounded-2xl p-5 shadow-sm">
                         <h3 class="text-sm font-semibold text-white mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="text-blue-500 w-4 h-4"></i> Welcome to TheNexusWeb</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">This is the upgraded modern layout engine. All applications running inside your ecosystem are mapped to the side navigation panel. Select any app terminal card to instantly expand its view metrics directly on screen.</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">This is the upgraded modern layout engine built to handle dynamic applications. Select any application node on your left sidebar map navigation dashboard to bring it to full screen focus mode instantly.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="portal-card p-4 rounded-xl flex items-center gap-3">
@@ -134,3 +134,182 @@
                         </div>
                     </div>
                 </div>
+                <div class="portal-card rounded-2xl p-5">
+                    <h3 class="text-sm font-semibold text-white mb-3">Quick Overview Metrics</h3>
+                    <div class="text-xs text-gray-400 border border-gray-800 p-3 rounded-xl bg-gray-900/30">Select options on your left sidebar to expand your system components here.</div>
+                </div>
+            </div>
+
+            <div id="view-social" class="nexus-view hidden flex flex-col gap-4">
+                <div class="portal-card rounded-2xl p-5">
+                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
+                        <i data-lucide="message-square-share" class="text-blue-500 w-4 h-4"></i> Integrated Social Portal Stream
+                    </h3>
+                    <div class="p-8 border border-dashed border-gray-800 rounded-xl text-center bg-gray-900/10">
+                        <p class="text-xs text-gray-500">Social engine pipeline listening for gateway initialization parameters...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-news" class="nexus-view hidden flex flex-col gap-4">
+                <div class="portal-card rounded-2xl p-5">
+                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
+                        <i data-lucide="globe-2" class="text-blue-500 w-4 h-4"></i> Global Telemetry News Feed
+                    </h3>
+                    <ul class="flex flex-col gap-3 text-xs">
+                        <li class="border-b border-gray-800/60 pb-2 hover:border-gray-700 transition-colors">
+                            <span class="text-gray-500 text-[10px] block mb-0.5">SYS NEWS // TODAY</span>
+                            <a href="#" class="text-gray-300 hover:text-blue-400 font-medium">System navigation routing layout models cleanly upgraded across deployment zones.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="view-podcast" class="nexus-view hidden flex flex-col gap-4">
+                <div class="portal-card rounded-2xl p-5">
+                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
+                        <i data-lucide="podcast" class="text-blue-500 w-4 h-4"></i> Wired Logic Media Transmissions
+                    </h3>
+                    <div class="bg-[#090d16] border border-gray-800 p-4 rounded-xl flex items-center gap-4">
+                        <button type="button" class="w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-500 transition-colors flex items-center justify-center text-white shadow shadow-blue-500/20 cursor-pointer">
+                            <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
+                        </button>
+                        <div class="flex-1">
+                            <h4 class="text-xs font-semibold text-gray-200">Episode 01: Compiled Logic Architectures & Layout Designs</h4>
+                            <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 relative">
+                                <div class="bg-blue-500 w-1/4 h-full rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Draw the vector icons instantly on file load Execution
+        lucide.createIcons();
+
+        // Safe DOM Content Execution Wrapper
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Map structural objects explicitly to isolate logic execution loops
+            const interfaceViews = {
+                dashboard: {
+                    button: document.getElementById('btn-dashboard'),
+                    screen: document.getElementById('view-dashboard'),
+                    headTitle: "System Main Dashboard",
+                    headDesc: "Welcome back to your central control hub panel overview."
+                },
+                social: {
+                    button: document.getElementById('btn-social'),
+                    screen: document.getElementById('view-social'),
+                    headTitle: "Social Communications Link",
+                    headDesc: "Monitor active conversations and developer portal node threads."
+                },
+                news: {
+                    button: document.getElementById('btn-news'),
+                    screen: document.getElementById('view-news'),
+                    headTitle: "Live Telemetry Feeds",
+                    headDesc: "Real-time automated content aggregates coming across your server nodes."
+                },
+                podcast: {
+                    button: document.getElementById('btn-podcast'),
+                    screen: document.getElementById('view-podcast'),
+                    headTitle: "Wired Logic Console Player",
+                    headDesc: "Stream audio logs and catalog transmission arrays smoothly."
+                }
+            };
+
+            // Loop and attach direct click listeners to the specific elements
+            Object.keys(interfaceViews).forEach(key => {
+                const node = interfaceViews[key];
+                
+                if (node.button) {
+                    node.button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        // 1. Hide every screen view container panel
+                        Object.keys(interfaceViews).forEach(k => {
+                            interfaceViews[k].screen.classList.add('hidden');
+                        });
+                        
+                        // 2. Clear out the hidden class boundary rule on selected panel
+                        node.screen.classList.remove('hidden');
+                        
+                        // 3. Clear design attributes globally from all buttons
+                        document.querySelectorAll('.nav-btn').forEach(btn => {
+                            btn.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer";
+                            const iconChevron = btn.querySelector('[data-lucide="chevron-right"]');
+                            if (iconChevron) iconChevron.classList.add('opacity-0');
+                        });
+                        
+                        // 4. Paint selected style specifications onto the active node button
+                        node.button.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer";
+                        const activeChevronIcon = node.button.querySelector('[data-lucide="chevron-right"]');
+                        if (activeChevronIcon) activeChevronIcon.classList.remove('opacity-0');
+                        
+                        // 5. Update display headers dynamically
+                        document.getElementById('viewTitle').innerText = node.headTitle;
+                        document.getElementById('viewDescription').innerText = node.headDesc;
+                    });
+                }
+            });
+
+            // Dictionary Interactive Execution Wiring Links
+            const searchFieldElement = document.getElementById('sidebarDictQuery');
+            const targetTriggerBtn = document.getElementById('btn-sidebar-dict');
+
+            if (targetTriggerBtn && searchFieldElement) {
+                targetTriggerBtn.addEventListener('click', () => triggerLiveWordFetch());
+                searchFieldElement.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        triggerLiveWordFetch();
+                    }
+                });
+            }
+        });
+
+        // Dictionary API Async Engine Runner Function
+        async function triggerLiveWordFetch() {
+            const inputField = document.getElementById('sidebarDictQuery');
+            const renderTargetNode = document.getElementById('sidebarDictOutput');
+            const sanitizedString = inputField.value.trim().toLowerCase();
+
+            if (!sanitizedString) return;
+
+            renderTargetNode.classList.remove('hidden');
+            renderTargetNode.innerHTML = `<div class="flex items-center gap-2 text-blue-400 animate-pulse"><i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Processing string...</div>`;
+            lucide.createIcons();
+
+            try {
+                const restConnection = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${sanitizedString}`);
+                if (!restConnection.ok) throw new Error();
+
+                const responsePayloadArray = await restConnection.json();
+                const primaryMatchObject = responsePayloadArray[0];
+                
+                const wordClassification = primaryMatchObject.meanings[0]?.partOfSpeech || 'noun';
+                const definitiveText = primaryMatchObject.meanings[0]?.definitions[0]?.definition || 'Definition missing.';
+                const textualContextExample = primaryMatchObject.meanings[0]?.definitions[0]?.example;
+
+                renderTargetNode.innerHTML = `
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-1">
+                            <strong class="text-blue-400 font-bold">${primaryMatchObject.word}</strong>
+                            <span class="text-[10px] text-gray-500">${primaryMatchObject.phonetic || ''}</span>
+                        </div>
+                        <span class="text-[9px] text-amber-500 font-bold uppercase">[ ${wordClassification} ]</span>
+                        <p class="text-gray-300 text-[11px] leading-relaxed">${definitiveText}</p>
+                        ${textualContextExample ? `<p class="text-gray-500 italic text-[10px] mt-0.5 border-l border-gray-700 pl-1.5">"${textualContextExample}"</p>` : ''}
+                    </div>
+                `;
+            } catch (err) {
+                renderTargetNode.innerHTML = `<div class="text-rose-400 flex items-center gap-1.5"><i data-lucide="info" class="w-3.5 h-3.5"></i> Match trace dropped.</div>`;
+                lucide.createIcons();
+            }
+        }
+    </script>
+</body>
+</html>
