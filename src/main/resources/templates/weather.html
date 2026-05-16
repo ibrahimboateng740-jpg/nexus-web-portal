@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Met-Office | TheNexusWeb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --nexus-red: #d81e06; --nexus-dark: #0f0f0f; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--nexus-dark); color: #fff; display: flex; }
+        .sidebar { width: 240px; background: #000; height: 100vh; position: fixed; border-right: 1px solid #222; }
+        .nav-item { display: flex; align-items: center; padding: 15px 25px; text-decoration: none; color: #999; font-size: 13px; font-weight: 600; gap: 12px; }
+        .nav-item.active { background: #161616; color: #fff; border-left: 4px solid var(--nexus-red); }
+        
+        .main-content { margin-left: 240px; flex-grow: 1; padding: 40px; }
+        .weather-panel { background: #161616; border: 1px solid #222; border-radius: 12px; padding: 30px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .temp-display { font-size: 64px; font-weight: 900; color: var(--nexus-red); }
+        .forecast-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .forecast-table th, .forecast-table td { padding: 15px; text-align: left; border-bottom: 1px solid #222; }
+        .forecast-table th { background: #000; color: var(--nexus-red); font-size: 12px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div style="padding:25px; font-weight:900; color:var(--nexus-red); font-family:serif; font-size:22px;">TheNexusWeb</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home Hub</a>
+        <a href="/news" class="nav-item"><i class="fa-solid fa-rss"></i> News HQ</a>
+        <a href="/movies" class="nav-item"><i class="fa-solid fa-film"></i> Cinema HQ</a>
+        <a href="/music" class="nav-item"><i class="fa-solid fa-music"></i> Global Beats</a>
+        <a href="/weather" class="nav-item active"><i class="fa-solid fa-cloud-sun"></i> Met-Office</a>
+    </div>
+
+    <div class="main-content">
+        <h2>METEOROLOGICAL INTELLIGENCE UNIT</h2>
+        <div class="weather-panel">
+            <div>
+                <div style="font-size: 24px; font-weight: bold;" id="node-name">STATION LOCATION DETECTING...</div>
+                <div style="color:#666; margin-top:5px;" id="node-coords">Awaiting geospatial sync...</div>
+            </div>
+            <div class="temp-display" id="node-temp">--°C</div>
+        </div>
+
+        <h3>5-DAY PREDICATIVE CLIMATE TIMELINE</h3>
+        <table class="forecast-table">
+            <thead>
+                <tr><th>Timeline Vector</th><th>Max Thermal Index</th><th>Precipitation Estimate</th></tr>
+            </thead>
+            <tbody id="forecast-body">
+                <tr><td colspan="3">Awaiting timeline compilation...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const { latitude, longitude } = pos.coords;
+            document.getElementById('node-coords').innerText = `LAT: ${latitude.toFixed(4)} // LON: ${longitude.toFixed(4)}`;
+            
+            try {
+                const loc = await (await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)).json();
+                document.getElementById('node-name').innerText = (loc.address.city || loc.address.town || "Global Node").toUpperCase();
+                
+                const w = await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,precipitation_probability_max&current_weather=true&timezone=auto`)).json();
+                document.getElementById('node-temp').innerText = Math.round(w.current_weather.temperature) + "°C";
+                
+                let html = '';
+                for(let i=0; i<5; i++) {
+                    html += `<tr>
+                        <td><b>Vector ${w.daily.time[i]}</b></td>
+                        <td style="color:var(--nexus-red)"><b>${Math.round(w.daily.temperature_2m_max[i])}°C</b></td>
+                        <td>${w.daily.precipitation_probability_max[i]}% Probability</td>
+                    </tr>`;
+                }
+                document.getElementById('forecast-body').innerHTML = html;
+            } catch(e) { document.getElementById('node-name').innerText = "LINK REJECTED"; }
+        });
+    </script>
+</body>
+</html>
