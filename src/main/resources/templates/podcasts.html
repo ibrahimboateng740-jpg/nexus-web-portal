@@ -1,40 +1,44 @@
-<div class="search-section" style="margin: 20px 0;">
-    <input type="text" id="pod-search" placeholder="Search Podcasts..." style="padding:10px; width:300px; border-radius:20px; border:1px solid #ddd;">
-    <button onclick="searchPodcasts()" style="padding:10px 20px; border-radius:20px; background:var(--nexus-red); color:#fff; border:none; cursor:pointer;">Search</button>
-</div>
-
-<div id="podcast-feed" class="podcast-grid"></div>
-
-<script>
-    // RSS Bridge to get unlimited podcasts
-    async function searchPodcasts() {
-        const query = document.getElementById('pod-search').value || 'technology';
-        const grid = document.getElementById('podcast-feed');
-        grid.innerHTML = 'Scanning...';
-        
-        // Using ITunes API (Free, no key needed, refreshed daily)
-        const res = await fetch(`https://itunes.apple.com/search?term=${query}&entity=podcast&limit=12`);
-        const data = await res.json();
-        
-        grid.innerHTML = '';
-        data.results.forEach(pod => {
-            grid.innerHTML += `
-                <div class="p-card">
-                    <img src="${pod.artworkUrl600}" class="p-art">
-                    <span class="p-title">${pod.collectionName}</span>
-                    <button class="btn-play" onclick="nexusPlay('${pod.collectionName}', '${pod.artistName}', '${pod.feedUrl}')">▶ LISTEN</button>
-                </div>`;
-        });
-    }
-
-    function nexusPlay(title, artist, feedUrl) {
-        // To play from a feed, we need to grab the MP3. 
-        // For now, we link them to the preview or feed.
-        alert("Establishing Link to: " + title);
-        const player = document.getElementById('nexus-player');
-        player.style.display = 'flex';
-        document.getElementById('playing-title').innerText = title;
-        // In a full build, you'd parse the feedUrl for the latest MP3
-    }
-    window.onload = searchPodcasts;
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>TheNexusWeb - Podcasts</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; }
+        .nexus-blue { color: #0254eb; }
+        .portal-panel-header { background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%); border-bottom: 1px solid #7bc5ff; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0254eb; border-radius: 3px; }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden">
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4"><strong>TheNexusWeb Headquarters</strong> <a href="/" class="text-blue-700 hover:underline">Home</a></div>
+        <div class="font-mono text-[11px]">SYS_STATUS: <strong class="text-emerald-700">ONLINE</strong></div>
+    </header>
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex flex-col items-start"><h1 class="text-4xl font-black italic nexus-blue">TheNexusWeb<span class="not-italic text-amber-500">!</span></h1><span class="text-[10px] font-bold bg-blue-50 border border-blue-200 px-1.5 rounded uppercase font-mono">MEDIA_PODCAST</span></div>
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm"><div class="flex bg-white border border-[#4a89c0]"><input type="text" placeholder="Search wired logic logs, episodes, or guests..." class="flex-1 px-3 py-2 text-sm focus:outline-none"><button class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] px-6 py-2 text-xs font-bold text-blue-900 border-l border-[#4a89c0]">Search</button></div></div>
+    </section>
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
+        <aside class="w-56 border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="px-2 py-1.5 text-xs font-bold text-blue-800 flex items-center gap-2"><i data-lucide="home" class="w-3.5 h-3.5"></i> Our Front Page</a>
+                <a href="/podcasts" class="px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2 shadow-sm"><i data-lucide="radio" class="w-3.5 h-3.5 text-blue-600"></i> Wired Logic Media</a>
+            </nav>
+        </aside>
+        <main class="flex-1 border border-gray-300 rounded overflow-hidden bg-white flex flex-col">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-end border-b border-gray-300"><h2 class="text-sm font-bold text-gray-800 pb-1.5">Podcast Console</h2></div>
+            <div class="flex-1 p-6 overflow-y-auto custom-scrollbar">
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded flex items-center justify-center text-white"><i data-lucide="mic" class="w-6 h-6"></i></div>
+                    <div><h4 class="text-xs font-bold text-blue-900">EP01: The Nexus Architecture</h4><p class="text-[11px] text-gray-500">Published Today // 45:12 Duration</p></div>
+                </div>
+            </div>
+        </main>
+        <aside class="w-72 border border-gray-300 bg-[#f4f7f9] p-3 text-xs"><h3 class="font-bold text-blue-900 mb-2">Recent Logs</h3><ul class="flex flex-col gap-2"><li>Wired Logic EP01</li></ul></aside>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
