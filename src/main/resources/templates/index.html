@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>/TheNexusWeb</title>
+    <title>TheNexusWeb Portal Hub</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -12,18 +12,14 @@
             color: #000000;
             font-family: Arial, Helvetica, sans-serif;
         }
-        /* Classic 2007 Yahoo Purple Theme Elements */
-        .yahoo-purple { color: #6001d2; }
-        .yahoo-bg-purple { background-color: #6001d2; }
-        .yahoo-border { border: 1px solid #7bc5ff; }
-        .yahoo-panel-header {
+        /* Elite Classic 2007 Portal Styling Specs */
+        .nexus-blue { color: #0254eb; }
+        .nexus-purple { color: #6001d2; }
+        .nexus-bg-header { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
             background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
             border-bottom: 1px solid #7bc5ff;
-        }
-        .yahoo-tab-active {
-            background: #ffffff;
-            border: 1px solid #7bc5ff;
-            border-bottom-color: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -32,7 +28,7 @@
             background: #f1f1f1;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #6001d2;
+            background: #0254eb;
             border-radius: 3px;
         }
     </style>
@@ -41,8 +37,8 @@
 
     <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
         <div class="flex items-center gap-4">
-            <span class="font-bold text-gray-700">Welcome to TheNexusWeb Terminal</span>
-            <a href="#" class="hover:underline text-blue-700">Make Yahoo! Your Homepage</a>
+            <span class="font-bold text-gray-700">Welcome to TheNexusWeb Headquarters Gateway</span>
+            <a href="#" class="hover:underline text-blue-700">Set TheNexusWeb As Your Default Core Homepage</a>
         </div>
         <div class="flex items-center gap-3 font-mono text-[11px]">
             <span>SYS_STATUS: <strong class="text-emerald-700">ONLINE</strong></span>
@@ -53,20 +49,20 @@
 
     <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
         <div class="flex flex-col items-center md:items-start select-none">
-            <h1 class="text-4xl font-black tracking-tighter yahoo-purple italic filter drop-shadow-sm">
-                Yahoo<span class="not-italic text-red-600">!</span>
+            <h1 class="text-4xl font-black tracking-tighter nexus-blue italic filter drop-shadow-sm">
+                TheNexusWeb<span class="not-italic text-amber-500">!</span>
             </h1>
-            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-amber-100 border border-amber-300 px-1 rounded mt-0.5">NEXUS_EDITION</span>
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-blue-50 border border-blue-200 px-1.5 rounded mt-0.5">CENTRAL_COMMAND</span>
         </div>
 
-        <div class="flex-1 w-full max-w-2xl bg-[#fcd880] p-1.5 rounded border border-[#f1b340] shadow-sm">
-            <div class="flex bg-white border border-[#bc903a]">
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
+            <div class="flex bg-white border border-[#4a89c0]">
                 <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
-                    <input type="radio" id="webSearch" name="searchScope" checked> <label for="webSearch" class="cursor-pointer">Web</label>
+                    <input type="radio" id="webSearch" name="searchScope" checked> <label for="webSearch" class="cursor-pointer">Network</label>
                 </div>
-                <input type="text" id="globalWebSearchField" placeholder="Search the dynamic internet or type a terminal shortcut..." 
+                <input type="text" id="globalWebSearchField" placeholder="Search the dynamic internet or query a node shortcut..." 
                        class="flex-1 px-3 py-2 text-sm text-black focus:outline-none font-sans">
-                <button type="button" class="bg-gradient-to-b from-[#fde69d] to-[#fbc84e] hover:to-[#f0b62e] border-l border-[#bc903a] px-6 py-2 text-xs font-bold text-black cursor-pointer shadow-inner">
+                <button type="button" class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] hover:to-[#5caee6] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 cursor-pointer shadow-inner">
                     Search
                 </button>
             </div>
@@ -76,24 +72,24 @@
     <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
 
         <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
-            <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pb-1.5 border-b border-gray-300 mb-2 pl-1">Services Directory</div>
+            <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pb-1.5 border-b border-gray-300 mb-2 pl-1">Nexus Core Matrix</div>
             
-            <nav class="flex flex-col gap-0.5" id="yahooNavDeck">
-                <button type="button" id="btn-dashboard" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer bg-white !border-[#7bc5ff] !text-purple-900">
-                    <i data-lucide="home" class="w-3.5 h-3.5 text-gray-500"></i> My Front Page
+            <nav class="flex flex-col gap-0.5" id="nexusNavDeck">
+                <button type="button" id="btn-dashboard" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer bg-white !border-[#7bc5ff] !text-blue-900">
+                    <i data-lucide="home" class="w-3.5 h-3.5 text-blue-600"></i> My Front Page
                 </button>
                 
                 <button type="button" id="btn-social" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center justify-between cursor-pointer">
-                    <span class="flex items-center gap-2"><i data-lucide="users" class="w-3.5 h-3.5 text-gray-500"></i> Yahoo! Messenger</span>
-                    <span class="text-[9px] bg-red-600 text-white px-1 font-mono rounded animate-pulse">NEW!</span>
+                    <span class="flex items-center gap-2"><i data-lucide="message-circle" class="w-3.5 h-3.5 text-gray-500"></i> Nexus Messenger</span>
+                    <span class="text-[9px] bg-red-600 text-white px-1 font-mono rounded animate-pulse">SOON</span>
                 </button>
                 
                 <button type="button" id="btn-news" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
-                    <i data-lucide="newspaper" class="w-3.5 h-3.5 text-gray-500"></i> News & Aggregates
+                    <i data-lucide="rss" class="w-3.5 h-3.5 text-gray-500"></i> Live RSS Streams
                 </button>
                 
                 <button type="button" id="btn-podcast" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
-                    <i data-lucide="play-circle" class="w-3.5 h-3.5 text-gray-500"></i> Yahoo! Launch Music
+                    <i data-lucide="radio" class="w-3.5 h-3.5 text-gray-500"></i> Wired Logic Media
                 </button>
             </nav>
 
@@ -107,44 +103,44 @@
             </div>
         </aside>
 
-        <main id="yahooMainContentWindow" class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+        <main id="nexusMainContentWindow" class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
             
-            <div class="yahoo-panel-header px-3 pt-2 flex justify-between items-end border-b border-gray-300">
+            <div class="portal-panel-header px-3 pt-2 flex justify-between items-end border-b border-gray-300">
                 <h2 id="viewTitle" class="text-sm font-bold text-gray-800 pb-1.5">Featured News Room & Telemetry</h2>
-                <span class="text-[10px] text-gray-500 pb-1.5 font-mono">Edition: Dynamic Location Node</span>
+                <span class="text-[10px] text-gray-500 pb-1.5 font-mono">Server Instance: Location Dynamic</span>
             </div>
 
             <div id="nexusViewContainer" class="flex-1 p-4 overflow-y-auto custom-scrollbar">
 
                 <div id="view-dashboard" class="nexus-view flex flex-col gap-4">
                     <div class="bg-blue-50 border border-blue-200 p-3.5 rounded text-xs text-gray-700 leading-relaxed">
-                        <strong class="text-blue-900 block text-sm mb-1">Do You Yahoo!? // Modern Deployment Node</strong>
-                        Welcome to your 2007-inspired web matrix portal homepage workspace. Click the primary applications shortcuts on your left directory panel to flip the central content frame between live network assets automatically without reloading the browser window frame.
+                        <strong class="text-blue-900 block text-sm mb-1">Welcome to TheNexusWeb Central Ecosystem Hub</strong>
+                        This is your dedicated 2007-inspired master portal layout. Click the primary navigation components on your left system directory map to swap active workspaces instantly without triggering heavy browser reloads.
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="border border-gray-200 rounded p-3 bg-gray-50">
-                            <h4 class="text-xs font-bold text-purple-900 border-b border-gray-200 pb-1 mb-2">Wired Logic Podcast Node</h4>
-                            <p class="text-[11px] text-gray-600">Initial master arrays compiled. Ready for syndication distribution layers across Apple Ecosystems.</p>
+                            <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-2">Wired Logic Podcast Node</h4>
+                            <p class="text-[11px] text-gray-600">Initial audio master files successfully generated. Standing by for distribution matrix syncing steps.</p>
                         </div>
                         <div class="border border-gray-200 rounded p-3 bg-gray-50">
-                            <h4 class="text-xs font-bold text-purple-900 border-b border-gray-200 pb-1 mb-2">Compute Infrastructure Status</h4>
-                            <p class="text-[11px] text-gray-600">Running comfortably on free subscription specifications with active automatic lifecycle balancing controls.</p>
+                            <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-2">Infrastructure Footprint</h4>
+                            <p class="text-[11px] text-gray-600">Running efficiently on free subscription layers with internal buffer scaling protocols active.</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="view-social" class="nexus-view hidden flex flex-col gap-3">
-                    <div class="border border-yellow-200 bg-yellow-50 p-4 rounded text-xs text-yellow-900 flex items-start gap-2">
-                        <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-yellow-700 mt-0.5"></i>
+                    <div class="border border-blue-200 bg-blue-50 p-4 rounded text-xs text-blue-900 flex items-start gap-2">
+                        <i data-lucide="info" class="w-4 h-4 shrink-0 text-blue-700 mt-0.5"></i>
                         <div>
                             <strong>Nexus Messenger Node Latent Stack</strong>
-                            <p class="mt-1 text-[11px] text-yellow-800">System architecture waiting to trigger until deployment scale expands. This pipeline element will safely sleep on free subscription tiers to preserve system overhead buffers.</p>
+                            <p class="mt-1 text-[11px] text-blue-800">System architecture waiting to trigger until deployment scale expands. This pipeline element safely sleeps on free subscription tiers to preserve server memory bounds.</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="view-news" class="nexus-view hidden flex flex-col gap-3">
-                    <h3 class="text-xs font-bold text-red-700 uppercase tracking-wider border-b border-gray-200 pb-1">Breaking Telemetry Logs</h3>
+                    <h3 class="text-xs font-bold text-blue-800 uppercase tracking-wider border-b border-gray-200 pb-1">Breaking Telemetry Logs</h3>
                     <ul class="flex flex-col gap-2 text-xs font-sans">
                         <li class="p-2 hover:bg-blue-50 rounded transition-colors border-b border-gray-100">
                             <span class="text-gray-400 font-mono text-[10px] mr-1">[05:16 UTC]</span>
@@ -155,14 +151,14 @@
 
                 <div id="view-podcast" class="nexus-view hidden flex flex-col gap-3">
                     <div class="border border-gray-200 rounded p-4 bg-gray-50">
-                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1.5"><i data-lucide="music" class="w-4 h-4 text-purple-700"></i> Yahoo! Launch Music Player</h4>
+                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1.5"><i data-lucide="radio" class="w-4 h-4 text-blue-700"></i> Wired Logic Media Center Console</h4>
                         <div class="flex items-center gap-4 bg-white p-3 border border-gray-200 rounded shadow-sm">
-                            <button type="button" class="w-9 h-9 rounded-full bg-purple-700 hover:bg-purple-800 text-white flex items-center justify-center cursor-pointer shadow">
+                            <button type="button" class="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center cursor-pointer shadow">
                                 <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
                             </button>
                             <div class="flex-1">
-                                <span class="text-[11px] font-bold text-purple-900 font-mono block">LOGIC_LOG_01.MP3</span>
-                                <span class="text-[10px] text-gray-400">Stream Transmission Pipeline Active</span>
+                                <span class="text-[11px] font-bold text-blue-900 font-mono block">WIRED_LOGIC_EP01.MP3</span>
+                                <span class="text-[10px] text-gray-400">Stream Transmission Line Primed</span>
                             </div>
                         </div>
                     </div>
@@ -174,9 +170,9 @@
         <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
             
             <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm">
-                <div class="yahoo-panel-header px-3 py-2 border-b border-[#7bc5ff] flex justify-between items-center">
-                    <span class="text-xs font-bold text-purple-900 flex items-center gap-1.5">
-                        <i data-lucide="help-circle" class="w-4 h-4 text-purple-700"></i> Yahoo! Answers Lexicon
+                <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff] flex justify-between items-center">
+                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                        <i data-lucide="help-circle" class="w-4 h-4 text-blue-700"></i> Nexus Answers Lexicon
                     </span>
                     <a href="/dictionary" class="text-[10px] text-blue-800 hover:underline flex items-center gap-0.5">Full Page <i data-lucide="external-link" class="w-2.5 h-2.5"></i></a>
                 </div>
@@ -186,8 +182,8 @@
                     
                     <div class="flex gap-1.5">
                         <input type="text" id="sidebarDictQuery" placeholder="What is your question/word?" 
-                               class="flex-1 bg-white border border-gray-400 rounded px-2.5 py-1.5 text-xs text-black focus:outline-none focus:border-purple-600 font-sans">
-                        <button type="button" id="btn-sidebar-dict" class="bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs px-3 rounded cursor-pointer shadow transition-colors">
+                               class="flex-1 bg-white border border-gray-400 rounded px-2.5 py-1.5 text-xs text-black focus:outline-none focus:border-blue-600 font-sans">
+                        <button type="button" id="btn-sidebar-dict" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-3 rounded cursor-pointer shadow transition-colors">
                             Scan
                         </button>
                     </div>
@@ -199,10 +195,10 @@
 
             <div class="border border-gray-300 bg-[#f4f7f9] rounded p-3 flex flex-col gap-2 text-xs">
                 <div class="flex items-center gap-2 font-bold text-gray-700">
-                    <i data-lucide="cloud-sun" class="w-4 h-4 text-amber-600"></i>
+                    <i data-lucide="cloud-sun" class="w-4 h-4 text-blue-600"></i>
                     <span>Dynamic Weather Widget</span>
                 </div>
-                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">System automatically analyzing client ingress packets to track geolocational metrics safely over cloud layers.</p>
+                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">Ecosystem automatically assessing ingress socket descriptors to capture dynamic geolocational variables safely over secure network profiles.</p>
             </div>
 
         </aside>
@@ -226,7 +222,7 @@
                 social: {
                     button: document.getElementById('btn-social'),
                     screen: document.getElementById('view-social'),
-                    headTitle: "Yahoo! Messenger Connector Node"
+                    headTitle: "Nexus Messenger Connector Node"
                 },
                 news: {
                     button: document.getElementById('btn-news'),
@@ -236,7 +232,7 @@
                 podcast: {
                     button: document.getElementById('btn-podcast'),
                     screen: document.getElementById('view-podcast'),
-                    headTitle: "Yahoo! Launch Music Console"
+                    headTitle: "Wired Logic Media Console"
                 }
             };
 
@@ -261,8 +257,8 @@
                             btn.className = "nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center justify-between cursor-pointer";
                         });
                         
-                        // 4. Paint Yahoo 2007 highlighted active colors onto clicked button node
-                        node.button.className = "nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-purple-900 bg-white border border-[#7bc5ff] rounded transition-all flex items-center justify-between cursor-pointer shadow-sm";
+                        // 4. Paint highlighted active colors onto clicked button node
+                        node.button.className = "nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded transition-all flex items-center justify-between cursor-pointer shadow-sm";
                         
                         // 5. Upgrade workspace titles directly inside the ribbon component
                         document.getElementById('viewTitle').innerText = node.headTitle;
@@ -293,7 +289,7 @@
             if (!sanitizedString) return;
 
             renderTargetNode.classList.remove('hidden');
-            renderTargetNode.innerHTML = `<div class="text-[11px] text-purple-700 animate-pulse font-mono">Parsing registry data vectors...</div>`;
+            renderTargetNode.innerHTML = `<div class="text-[11px] text-blue-700 animate-pulse font-mono">Parsing registry data vectors...</div>`;
 
             try {
                 const restConnection = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${sanitizedString}`);
@@ -309,7 +305,7 @@
                 renderTargetNode.innerHTML = `
                     <div class="flex flex-col gap-1">
                         <div class="flex items-center justify-between border-b border-gray-200 pb-0.5 mb-1">
-                            <strong class="text-purple-900">${primaryMatchObject.word}</strong>
+                            <strong class="text-blue-900">${primaryMatchObject.word}</strong>
                             <span class="text-[10px] text-gray-400">${primaryMatchObject.phonetic || ''}</span>
                         </div>
                         <span class="text-[9px] text-amber-600 font-bold uppercase tracking-wider">[ ${wordClassification} ]</span>
