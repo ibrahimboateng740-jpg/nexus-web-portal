@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global Beats | TheNexusWeb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --nexus-red: #d81e06; --nexus-dark: #0f0f0f; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--nexus-dark); color: #fff; display: flex; }
+        .sidebar { width: 240px; background: #000; height: 100vh; position: fixed; border-right: 1px solid #222; }
+        .nav-item { display: flex; align-items: center; padding: 15px 25px; text-decoration: none; color: #999; font-size: 13px; font-weight: 600; gap: 12px; }
+        .nav-item.active { background: #161616; color: #fff; border-left: 4px solid var(--nexus-red); }
+        
+        .main-content { margin-left: 240px; flex-grow: 1; padding: 40px; overflow-y: auto; height: 100vh; box-sizing: border-box; padding-bottom: 140px; }
+        .search-box { width: 100%; max-width: 600px; padding: 15px 25px; background: #1c1c1c; border: 1px solid #333; border-radius: 30px; color: #fff; font-size: 16px; outline: none; margin-bottom: 40px; }
+        
+        .track-list { display: flex; flex-direction: column; gap: 15px; }
+        .track-card { display: flex; align-items: center; background: #161616; padding: 15px 25px; border-radius: 8px; border: 1px solid #222; gap: 20px; }
+        .track-art { width: 55px; height: 55px; border-radius: 4px; }
+        .track-meta { flex: 1; }
+        .track-title { font-weight: bold; font-size: 15px; }
+        .track-artist { font-size: 12px; color: #888; margin-top: 4px; }
+        
+        .action-cluster { display: flex; gap: 10px; }
+        .btn-action { background: #252525; border: 1px solid #3d3d3d; color: #fff; padding: 10px 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        .btn-action:hover { background: var(--nexus-red); border-color: var(--nexus-red); }
+        .btn-action.liked { color: #28a745; }
+        .btn-action.disliked { color: var(--nexus-red); }
+
+        .media-dock { position: fixed; bottom: 0; left: 240px; right: 0; background: #000; border-top: 2px solid var(--nexus-red); padding: 20px 40px; display: none; align-items: center; justify-content: space-between; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div style="padding:25px; font-weight:900; color:var(--nexus-red); font-family:serif; font-size:22px;">TheNexusWeb</div>
+        <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home Hub</a>
+        <a href="/news" class="nav-item"><i class="fa-solid fa-rss"></i> News HQ</a>
+        <a href="/movies" class="nav-item"><i class="fa-solid fa-film"></i> Cinema HQ</a>
+        <a href="/music" class="nav-item active"><i class="fa-solid fa-music"></i> Global Beats</a>
+        <a href="/weather" class="nav-item"><i class="fa-solid fa-cloud-sun"></i> Met-Office</a>
+    </div>
+
+    <div class="main-content">
+        <h2>AUDIO STREAM INTERCEPT SYSTEM</h2>
+        <input type="text" id="music-search" class="search-box" placeholder="Scan artists, instrumentation, or playlists..." onkeyup="if(event.key==='Enter') executeMusicSearch()">
+        <div id="tracks" class="track-list">Loading High-Fidelity Audio Layers...</div>
+    </div>
+
+    <div id="dock" class="media-dock">
+        <div>
+            <div id="dock-title" style="font-weight:bold; font-size:14px;">Title</div>
+            <div id="dock-artist" style="font-size:11px; color:#666; margin-top:2px;">Artist</div>
+        </div>
+        <audio id="core-audio" controls style="width: 50%; height: 32px;"></audio>
+        <button class="btn-action" onclick="document.getElementById('dock').style.display='none'">TERMINATE LINK</button>
+    </div>
+
+    <script>
+        async function executeMusicSearch() {
+            const query = document.getElementById('music-search').value || 'Afrobeats';
+            const box = document.getElementById('tracks');
+            box.innerHTML = '<p>Synchronizing frequency matrices...</p>';
+            
+            try {
+                const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=25`);
+                const data = await res.json();
+                box.innerHTML = data.results.map(s => `
+                    <div class="track-card">
+                        <img src="${s.artworkUrl100}" class="track-art">
+                        <div class="track-meta">
+                            <div class="track-title">${s.trackName}</div>
+                            <div class="track-artist">${s.artistName}</div>
+                        </div>
+                        <div class="action-cluster">
+                            <button class="btn-action" onclick="engageAudio('${s.trackName.replace(/'/g, "")}', '${s.artistName.replace(/'/g, "")}', '${s.previewUrl}')"><i class="fa-solid fa-play"></i> STREAM</button>
+                            <button class="btn-action" onclick="this.classList.toggle('liked')"><i class="fa-solid fa-thumbs-up"></i></button>
+                            <button class="btn-action" onclick="this.classList.toggle('disliked')"><i class="fa-solid fa-thumbs-down"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch(e) { box.innerHTML = '<p>Audio network uplink failed.</p>'; }
+        }
+
+        function engageAudio(title, artist, url) {
+            const dock = document.getElementById('dock');
+            dock.style.display = 'flex';
+            document.getElementById('dock-title').innerText = title.toUpperCase();
+            document.getElementById('dock-artist').innerText = artist;
+            const player = document.getElementById('core-audio');
+            player.src = url;
+            player.play();
+        }
+        window.onload = executeMusicSearch;
+    </script>
+</body>
+</html>
