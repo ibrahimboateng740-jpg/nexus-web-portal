@@ -1,88 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Cinema HQ | TheNexusWeb</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8"><title>TheNexusWeb - Movies Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --nexus-red: #d81e06; --nexus-dark: #0f0f0f; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--nexus-dark); color: #fff; display: flex; }
-        
-        /* SIDEBAR INTERFACE */
-        .sidebar { width: 240px; background: #000; height: 100vh; position: fixed; border-right: 1px solid #222; }
-        .nav-item { display: flex; align-items: center; padding: 15px 25px; text-decoration: none; color: #999; font-size: 13px; font-weight: 600; gap: 12px; }
-        .nav-item.active { background: #161616; color: #fff; border-left: 4px solid var(--nexus-red); }
-        
-        /* MAIN INTERFACE */
-        .main-content { margin-left: 240px; flex-grow: 1; padding: 40px; overflow-y: auto; height: 100vh; box-sizing: border-box; }
-        .category-bar { display: flex; gap: 15px; margin-bottom: 30px; }
-        .cat-btn { background: #1c1c1c; border: 1px solid #333; color: #aaa; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-        .cat-btn:hover, .cat-btn.active { background: var(--nexus-red); color: #fff; border-color: var(--nexus-red); }
-        
-        .search-box { width: 100%; max-width: 600px; padding: 15px 25px; background: #1c1c1c; border: 1px solid #333; border-radius: 30px; color: #fff; font-size: 16px; outline: none; margin-bottom: 40px; }
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
-        .movie-card { background: #161616; border-radius: 8px; border: 1px solid #222; padding: 12px; transition: 0.3s; }
-        .movie-card:hover { transform: translateY(-5px); border-color: var(--nexus-red); }
-        .poster { width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 6px; background: #222; }
-        .title { font-weight: bold; font-size: 14px; margin: 12px 0 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .meta { font-size: 11px; color: #666; margin-bottom: 12px; }
-        .btn-acquire { width: 100%; background: #252525; border: 1px solid #3d3d3d; color: #fff; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
-        .btn-acquire:hover { background: var(--nexus-red); border-color: var(--nexus-red); }
+        body { background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; }
+        .nexus-blue { color: #0254eb; }
+        .portal-panel-header { background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%); border-bottom: 1px solid #7bc5ff; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0254eb; border-radius: 3px; }
     </style>
 </head>
-<body>
-
-    <div class="sidebar">
-        <div style="padding:25px; font-weight:900; color:var(--nexus-red); font-family:serif; font-size:22px;">TheNexusWeb</div>
-        <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home Hub</a>
-        <a href="/news" class="nav-item"><i class="fa-solid fa-rss"></i> News HQ</a>
-        <a href="/movies" class="nav-item active"><i class="fa-solid fa-film"></i> Cinema HQ</a>
-        <a href="/music" class="nav-item"><i class="fa-solid fa-music"></i> Global Beats</a>
-        <a href="/weather" class="nav-item"><i class="fa-solid fa-cloud-sun"></i> Met-Office</a>
+<body class="h-screen w-screen flex flex-col overflow-hidden">
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4"><strong>TheNexusWeb Headquarters</strong> <a href="/" class="text-blue-700 hover:underline">Home</a></div>
+        <div class="font-mono text-[11px]">SYS_STATUS: <strong class="text-emerald-700">ONLINE</strong></div>
+    </header>
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex flex-col items-start"><h1 class="text-4xl font-black italic nexus-blue">TheNexusWeb<span class="not-italic text-amber-500">!</span></h1><span class="text-[10px] font-bold bg-blue-50 border border-blue-200 px-1.5 rounded uppercase font-mono">MOVIES_HUB</span></div>
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm"><div class="flex bg-white border border-[#4a89c0]"><input type="text" placeholder="Search movies, trailers, or showtimes..." class="flex-1 px-3 py-2 text-sm focus:outline-none"><button class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] px-6 py-2 text-xs font-bold text-blue-900 border-l border-[#4a89c0]">Search</button></div></div>
+    </section>
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
+        <aside class="w-56 border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="home" class="w-3.5 h-3.5"></i> Our Front Page</a>
+                <a href="/movies" class="px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2 shadow-sm"><i data-lucide="film" class="w-3.5 h-3.5 text-blue-600"></i> Movies Hub</a>
+            </nav>
+        </aside>
+        <main class="flex-1 border border-gray-300 rounded overflow-hidden bg-white flex flex-col">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-end border-b border-gray-300"><h2 class="text-sm font-bold text-gray-800 pb-1.5">Cinema & Entertainment Feed</h2></div>
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border border-gray-200 rounded p-3 bg-gray-50"><div class="h-32 bg-gray-200 rounded mb-2"></div><h4 class="text-xs font-bold text-blue-900">Featured Release: Logic Gates</h4><p class="text-[10px] text-gray-500">Coming soon to the Nexus cinema stream.</p></div>
+                </div>
+            </div>
+        </main>
+        <aside class="w-72 border border-[#7bc5ff] rounded overflow-hidden bg-[#f4f7f9] p-3 text-xs"><h3 class="font-bold text-blue-900 mb-2">Box Office Hits</h3><p class="text-[11px] text-gray-500 italic">Streaming analytics loading...</p></aside>
     </div>
-
-    <div class="main-content">
-        <h2>CINEMA INTELLIGENCE INDEX</h2>
-        <input type="text" id="movie-search" class="search-box" placeholder="Query global databases for infinite film records..." onkeyup="if(event.key==='Enter') executeSearch()">
-        
-        <div class="category-bar">
-            <button class="cat-btn active" onclick="filterCat('action', this)">Action</button>
-            <button class="cat-btn" onclick="filterCat('sci-fi', this)">Sci-Fi</button>
-            <button class="cat-btn" onclick="filterCat('thriller', this)">Thriller</button>
-            <button class="cat-btn" onclick="filterCat('epic', this)">Epic</button>
-        </div>
-
-        <div id="grid" class="movie-grid">Loading Terminal Data...</div>
-    </div>
-
-    <script>
-        async function executeSearch(term = null) {
-            const query = term || document.getElementById('movie-search').value || '2026';
-            const grid = document.getElementById('grid');
-            grid.innerHTML = '<p>Querying decentralized catalog arrays...</p>';
-            
-            try {
-                const res = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=4f458a6f`);
-                const data = await res.json();
-                if(data.Search) {
-                    grid.innerHTML = data.Search.map(m => `
-                        <div class="movie-card">
-                            <img src="${m.Poster !== 'N/A' ? m.Poster : 'https://via.placeholder.com/300x450'}" class="poster">
-                            <div class="title">${m.Title}</div>
-                            <div class="meta">${m.Year} • ${m.Type.toUpperCase()}</div>
-                            <a href="https://www.amazon.com/s?k=${encodeURIComponent(m.Title)}+movie" target="_blank" class="btn-acquire">📍 RENT / BUY OPTIONS</a>
-                        </div>
-                    `).join('');
-                } else { grid.innerHTML = '<p>No listings discovered matching criteria.</p>'; }
-            } catch(e) { grid.innerHTML = '<p>Signal interference. Re-try execution.</p>'; }
-        }
-
-        function filterCat(cat, btn) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            executeSearch(cat);
-        }
-        window.onload = () => executeSearch('2026');
-    </script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
