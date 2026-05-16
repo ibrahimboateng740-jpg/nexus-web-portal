@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Dictionary // Mainframe Data Bank</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .nexus-glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex overflow-hidden">
+
+    <aside class="w-80 bg-[#0f172a] border-r border-blue-900/40 flex flex-col justify-between p-4 z-20">
+        <div class="flex flex-col gap-6 h-full overflow-y-auto custom-scrollbar pr-1">
+            <div class="flex items-center gap-3 border-b border-blue-900/30 pb-4">
+                <div class="p-2 bg-blue-600/20 text-blue-400 rounded-lg border border-blue-500/30">
+                    <i data-lucide="terminal" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wider text-blue-400">THE NEXUS</h1>
+                    <span class="text-xs text-slate-500 font-mono">v2.1.0 // TEMPLATE</span>
+                </div>
+            </div>
+
+            <nav class="flex flex-col gap-1">
+                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest pl-2 mb-2">Navigation Links</span>
+                <a href="/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-950/40 border border-transparent hover:border-blue-900/30 transition-all text-sm font-medium">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Mainframe Portal
+                </a>
+                <a href="/#social" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-950/40 border border-transparent hover:border-blue-900/30 transition-all text-sm font-medium">
+                    <i data-lucide="share-2" class="w-4 h-4"></i> Social Feed Node
+                </a>
+                <a href="/#news" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-950/40 border border-transparent hover:border-blue-900/30 transition-all text-sm font-medium">
+                    <i data-lucide="rss" class="w-4 h-4"></i> Live RSS Streams
+                </a>
+                <a href="/#podcast" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-950/40 border border-transparent hover:border-blue-900/30 transition-all text-sm font-medium">
+                    <i data-lucide="mic" class="w-4 h-4"></i> Wired Logic Podcast
+                </a>
+                <a href="/dictionary" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-blue-400 bg-blue-950/30 border border-blue-900/30 transition-all text-sm font-medium">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> Nexus Dictionary
+                </a>
+            </nav>
+        </div>
+
+        <div class="bg-[#0b0f19] border border-blue-900/20 rounded-xl p-3 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <div class="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse"></div>
+                <div class="flex flex-col">
+                    <span class="text-xs font-semibold text-slate-300">Lexicon Module</span>
+                    <span class="text-[10px] text-slate-500 font-mono">API Connected</span>
+                </div>
+            </div>
+            <i data-lucide="globe" class="w-4 h-4 text-blue-500/70"></i>
+        </div>
+    </aside>
+
+    <main class="flex-1 bg-[#0b0f19] p-6 overflow-y-auto custom-scrollbar flex flex-col gap-6">
+        
+        <header class="flex justify-between items-center border-b border-blue-900/20 pb-4">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <i data-lucide="book-marked" class="text-blue-400 w-7 h-7"></i> Nexus Dictionary Matrix
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Search or scan terms to verify definitions, usage parameters, and structural morphology.</p>
+            </div>
+        </header>
+
+        <div class="bg-[#0f172a] border border-blue-900/30 rounded-xl p-3 flex flex-wrap gap-1 justify-between items-center">
+            <span class="text-[10px] font-mono text-blue-500 uppercase tracking-wider font-bold px-2">Quick Jump:</span>
+            <div class="flex flex-wrap gap-1" id="alphabetStrip">
+                </div>
+        </div>
+
+        <div class="bg-[#0f172a] border border-blue-900/30 rounded-2xl p-6 flex flex-col gap-4">
+            <label class="text-xs font-mono text-slate-400 uppercase tracking-widest">Execute Lexicographical Scan</label>
+            <div class="flex gap-3">
+                <div class="relative flex-1">
+                    <input type="text" id="pageQueryField" placeholder="Enter target string word or select a letter above..." 
+                           class="w-full bg-[#0b0f19] border border-blue-900/50 rounded-xl px-4 py-3.5 text-sm text-slate-200 focus:outline-none focus:border-blue-400 font-mono transition-all pl-11"
+                           onkeydown="if(event.key === 'Enter') runPageLookup()">
+                    <i data-lucide="search" class="absolute left-4 top-4 w-4 h-4 text-slate-500"></i>
+                </div>
+                <button onclick="runPageLookup()" class="bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all shadow-md flex items-center gap-2">
+                    <i data-lucide="cpu" class="w-4 h-4"></i> Parse Word
+                </button>
+            </div>
+        </div>
+
+        <div id="pageResultDeck" class="bg-[#0f172a] border border-blue-900/20 rounded-2xl p-6 hidden min-h-[300px]">
+            </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Assemble the A-Z Alphabet ribbon container layout components
+        const alphabetStrip = document.getElementById('alphabetStrip');
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        
+        alphabet.forEach(letter => {
+            const btn = document.createElement('button');
+            btn.innerText = letter;
+            btn.className = "px-2.5 py-1 text-xs font-mono font-bold rounded bg-[#0b0f19] border border-blue-950 text-slate-400 hover:text-blue-400 hover:border-blue-800 transition-all";
+            btn.onclick = () => {
+                document.getElementById('pageQueryField').value = letter;
+                runPageLookup();
+            };
+            alphabetStrip.appendChild(btn);
+        });
+
+        // Run deep lookup on Dictionary Core REST networks
+        async function runPageLookup() {
+            const queryInput = document.getElementById('pageQueryField');
+            const resultDeck = document.getElementById('pageResultDeck');
+            const targetWord = queryInput.value.trim();
+
+            if (!targetWord) return;
+
+            resultDeck.classList.remove('hidden');
+            resultDeck.innerHTML = `
+                <div class="flex flex-col items-center justify-center p-12 text-blue-400 gap-3">
+                    <i data-lucide="refresh-cw" class="w-8 h-8 animate-spin"></i>
+                    <span class="text-xs font-mono tracking-widest uppercase">Opening database registry data files...</span>
+                </div>
+            `;
+            lucide.createIcons();
+
+            try {
+                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${targetWord}`);
+                
+                if (!response.ok) {
+                    throw new Error("Target string trace matches 0 standard database arrays.");
+                }
+
+                const data = await response.json();
+                const wordObj = data[0];
+
+                let structuralHTML = `
+                    <div class="flex flex-col gap-6">
+                        <div class="border-b border-blue-900/30 pb-4 flex justify-between items-baseline">
+                            <div>
+                                <h3 class="text-3xl font-extrabold text-blue-400 tracking-wide capitalize font-mono">${wordObj.word}</h3>
+                                <p class="text-sm font-mono text-slate-500 mt-1">${wordObj.phonetic || ''}</p>
+                            </div>
+                            <span class="text-[10px] bg-blue-950/80 border border-blue-800 text-blue-400 px-3 py-1 rounded-full uppercase tracking-wider font-mono">LEXICON MATCHED</span>
+                        </div>
+                `;
+
+                // Loop layout cleanly over all meanings array layers loaded from network
+                wordObj.meanings.forEach((meaning, index) => {
+                    structuralHTML += `
+                        <div class="bg-[#0b0f19]/40 border border-blue-950 p-4 rounded-xl flex flex-col gap-3">
+                            <div class="text-xs font-bold text-amber-500 font-mono uppercase tracking-widest flex items-center gap-2">
+                                <i data-lucide="layers" class="w-3.5 h-3.5"></i> Definition Block #${index + 1} (${meaning.partOfSpeech})
+                            </div>
+                            <ul class="flex flex-col gap-4 pl-2 font-mono">
+                    `;
+
+                    meaning.definitions.slice(0, 3).forEach((def, defIndex) => {
+                        structuralHTML += `
+                            <li class="text-sm text-slate-300 leading-relaxed border-l-2 border-blue-900/40 pl-3">
+                                <span class="text-blue-500 font-bold text-xs">${defIndex + 1}.</span> ${def.definition}
+                                ${def.example ? `<p class="text-xs text-slate-500 italic mt-1.5"><span class="text-slate-400 not-italic font-semibold">Example:</span> "${def.example}"</p>` : ''}
+                            </li>
+                        `;
+                    });
+
+                    structuralHTML += `</ul></div>`;
+                });
+
+                structuralHTML += `</div>`;
+                resultDeck.innerHTML = structuralHTML;
+                lucide.createIcons();
+
+            } catch (err) {
+                resultDeck.innerHTML = `
+                    <div class="flex flex-col items-center justify-center p-12 text-rose-400 gap-3 text-center">
+                        <i data-lucide="shield-alert" class="w-10 h-10 text-rose-500/80"></i>
+                        <span class="text-sm font-bold tracking-wide">Lexicographical System Fault</span>
+                        <p class="text-xs text-slate-500 font-mono max-w-md">No system strings matching "${targetWord}" could be cataloged inside the dictionary schema pipeline. Try parsing an alternate configuration keyword.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
+    </script>
+</body>
+</html>
