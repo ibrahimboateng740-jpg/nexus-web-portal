@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Nexus | Login</title>
+    <meta charset="UTF-8"><title>TheNexusWeb - Login Gateway</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --accent: #8A2BE2; --border: #30363d; }
-        body { background: var(--bg); color: white; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; margin: 0; }
-        .card { background: var(--card); padding: 40px; border-radius: 15px; border: 1px solid var(--border); width: 320px; text-align: center; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #0d1117; border: 1px solid var(--border); color: white; border-radius: 8px; box-sizing: border-box; }
-        .btn-google { display: flex; align-items: center; justify-content: center; width: 100%; height: 45px; background: white; border-radius: 8px; color: black; text-decoration: none; font-weight: 600; margin-top: 20px; }
-        .btn-google img { width: 18px; margin-right: 10px; }
+        body { background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; }
+        .nexus-blue { color: #0254eb; }
+        .portal-panel-header { background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%); border-bottom: 1px solid #7bc5ff; }
+        .nexus-input { border: 1px solid #7bc5ff; border-radius: 4px; padding: 8px; width: 100%; font-size: 13px; outline: none; }
     </style>
 </head>
-<body>
-    <div class="card">
-        <h2 style="color: var(--accent);">Nexus Portal</h2>
-        <input type="text" id="user" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button onclick="localStorage.setItem('isLoggedIn', 'true'); window.location.href='/'" style="width:100%; padding:12px; background:var(--accent); border:none; color:white; border-radius:8px; cursor:pointer;">Login</button>
-        <div style="margin: 20px 0; border-bottom: 1px solid var(--border);"></div>
-        <a href="/oauth2/authorization/google" class="btn-google">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"> Sign in with Google
-        </a>
+<body class="h-screen w-screen flex flex-col overflow-hidden">
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4"><strong>TheNexusWeb Gateway</strong> <a href="/" class="text-blue-700 hover:underline">Home</a></div>
+    </header>
+    <section class="w-full max-w-6xl mx-auto pt-8 pb-4 px-4 flex flex-col items-center">
+        <h1 class="text-4xl font-black italic nexus-blue">TheNexusWeb<span class="not-italic text-amber-500">!</span></h1>
+        <span class="text-[10px] font-bold bg-blue-50 border border-blue-200 px-1.5 rounded uppercase font-mono mt-1">SECURE_GATEWAY</span>
+    </section>
+    <div class="flex-1 max-w-xl w-full mx-auto p-4">
+        <div class="border border-gray-300 rounded overflow-hidden bg-white shadow-lg">
+            <div class="portal-panel-header px-4 py-3 flex justify-between items-center"><h2 class="text-sm font-bold text-gray-800">Verify Identity Credentials</h2></div>
+            <div class="p-8 flex flex-col gap-5">
+                <div><label class="text-xs font-bold text-gray-700 block mb-1">Username or Engine ID:</label><input type="text" class="nexus-input"></div>
+                <div><label class="text-xs font-bold text-gray-700 block mb-1">Passkey Hash:</label><input type="password" class="nexus-input"></div>
+                <button class="w-full bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border border-[#4a89c0] py-2.5 rounded font-bold text-blue-900 shadow hover:to-[#5caee6]">Initialize Login</button>
+                <div class="text-center pt-2"><a href="/signup" class="text-xs text-blue-700 hover:underline">Request New Account Profile</a></div>
+            </div>
+        </div>
     </div>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
