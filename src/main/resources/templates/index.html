@@ -3,226 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb - Portal Hub</title>
+    <title>/TheNexusWeb</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #090d16 !important;
-            color: #f1f5f9 !important;
-            font-family: 'Inter', sans-serif !important;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
         }
-        .portal-card {
-            background-color: #111827;
-            border: 1px solid #1f2937;
+        /* Classic 2007 Yahoo Purple Theme Elements */
+        .yahoo-purple { color: #6001d2; }
+        .yahoo-bg-purple { background-color: #6001d2; }
+        .yahoo-border { border: 1px solid #7bc5ff; }
+        .yahoo-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+        }
+        .yahoo-tab-active {
+            background: #ffffff;
+            border: 1px solid #7bc5ff;
+            border-bottom-color: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
+            width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #111827;
+            background: #f1f1f1;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 4px;
+            background: #6001d2;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body class="h-screen w-screen flex overflow-hidden bg-[#090d16]">
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white">
 
-    <aside class="w-80 bg-[#0f1422] border-r border-gray-800 flex flex-col justify-between p-4 z-20">
-        <div class="flex flex-col gap-6 h-full overflow-y-auto custom-scrollbar pr-1">
-            
-            <div class="flex items-center gap-3 border-b border-gray-800 pb-4">
-                <div class="p-2.5 bg-blue-600 text-white rounded-xl shadow-md">
-                    <i data-lucide="layers" class="w-5 h-5"></i>
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700">Welcome to TheNexusWeb Terminal</span>
+            <a href="#" class="hover:underline text-blue-700">Make Yahoo! Your Homepage</a>
+        </div>
+        <div class="flex items-center gap-3 font-mono text-[11px]">
+            <span>SYS_STATUS: <strong class="text-emerald-700">ONLINE</strong></span>
+            <span>|</span>
+            <span>LATENCY: <strong>0.04ms</strong></span>
+        </div>
+    </header>
+
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter yahoo-purple italic filter drop-shadow-sm">
+                Yahoo<span class="not-italic text-red-600">!</span>
+            </h1>
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-amber-100 border border-amber-300 px-1 rounded mt-0.5">NEXUS_EDITION</span>
+        </div>
+
+        <div class="flex-1 w-full max-w-2xl bg-[#fcd880] p-1.5 rounded border border-[#f1b340] shadow-sm">
+            <div class="flex bg-white border border-[#bc903a]">
+                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
+                    <input type="radio" id="webSearch" name="searchScope" checked> <label for="webSearch" class="cursor-pointer">Web</label>
                 </div>
-                <div>
-                    <h1 class="text-base font-bold tracking-tight text-white">TheNexusWeb</h1>
-                    <span class="text-xs text-gray-400">Integrated Web Portal</span>
-                </div>
+                <input type="text" id="globalWebSearchField" placeholder="Search the dynamic internet or type a terminal shortcut..." 
+                       class="flex-1 px-3 py-2 text-sm text-black focus:outline-none font-sans">
+                <button type="button" class="bg-gradient-to-b from-[#fde69d] to-[#fbc84e] hover:to-[#f0b62e] border-l border-[#bc903a] px-6 py-2 text-xs font-bold text-black cursor-pointer shadow-inner">
+                    Search
+                </button>
             </div>
+        </div>
+    </section>
 
-            <nav class="flex flex-col gap-1.5" id="nexusNavDeck">
-                <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest pl-2 mb-1">Applications</span>
-                
-                <button type="button" id="btn-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer">
-                    <span class="flex items-center gap-3"><i data-lucide="layout-grid" class="w-4 h-4"></i> Main Dashboard</span>
-                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
+
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pb-1.5 border-b border-gray-300 mb-2 pl-1">Services Directory</div>
+            
+            <nav class="flex flex-col gap-0.5" id="yahooNavDeck">
+                <button type="button" id="btn-dashboard" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer bg-white !border-[#7bc5ff] !text-purple-900">
+                    <i data-lucide="home" class="w-3.5 h-3.5 text-gray-500"></i> My Front Page
                 </button>
                 
-                <button type="button" id="btn-social" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
-                    <span class="flex items-center gap-3"><i data-lucide="message-square-share" class="w-4 h-4"></i> Social Feed Node</span>
-                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
+                <button type="button" id="btn-social" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-2"><i data-lucide="users" class="w-3.5 h-3.5 text-gray-500"></i> Yahoo! Messenger</span>
+                    <span class="text-[9px] bg-red-600 text-white px-1 font-mono rounded animate-pulse">NEW!</span>
                 </button>
                 
-                <button type="button" id="btn-news" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
-                    <span class="flex items-center gap-3"><i data-lucide="globe-2" class="w-4 h-4"></i> Live RSS Streams</span>
-                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
+                <button type="button" id="btn-news" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="newspaper" class="w-3.5 h-3.5 text-gray-500"></i> News & Aggregates
                 </button>
                 
-                <button type="button" id="btn-podcast" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
-                    <span class="flex items-center gap-3"><i data-lucide="podcast" class="w-4 h-4"></i> Wired Logic Podcast</span>
-                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
+                <button type="button" id="btn-podcast" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="play-circle" class="w-3.5 h-3.5 text-gray-500"></i> Yahoo! Launch Music
                 </button>
             </nav>
 
-            <div class="border-t border-gray-800 pt-4 flex flex-col gap-3">
-                <div class="flex items-center justify-between px-2">
-                    <span class="text-[11px] text-gray-400 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                        <i data-lucide="book-open" class="w-3.5 h-3.5 text-blue-500"></i> Nexus Dictionary
-                    </span>
-                    <a href="/dictionary" class="text-[10px] text-blue-400 hover:underline flex items-center gap-0.5">Full Page <i data-lucide="external-link" class="w-2.5 h-2.5"></i></a>
-                </div>
-
-                <div class="relative">
-                    <input type="text" id="sidebarDictQuery" placeholder="Look up any word..." 
-                           class="w-full bg-[#090d16] border border-gray-800 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition-all pr-8">
-                    <button type="button" id="btn-sidebar-dict" class="absolute right-2.5 top-3 text-gray-500 hover:text-blue-500 transition-colors cursor-pointer">
-                        <i data-lucide="search" class="w-3.5 h-3.5"></i>
-                    </button>
-                </div>
-
-                <div id="sidebarDictOutput" class="portal-card p-3 rounded-xl text-xs text-gray-400 hidden max-h-56 overflow-y-auto custom-scrollbar shadow-inner">
-                    </div>
+            <div class="mt-4 pt-3 border-t border-gray-300 text-[11px] text-gray-500 pl-1">
+                <strong>Trending Scans:</strong>
+                <ul class="flex flex-col gap-1 mt-1 text-blue-700 font-medium">
+                    <li><a href="#" class="hover:underline">#WiredLogicPodcast</a></li>
+                    <li><a href="#" class="hover:underline">#SpringBootJava</a></li>
+                    <li><a href="#" class="hover:underline">#RenderFreeHosting</a></li>
+                </ul>
             </div>
-        </div>
+        </aside>
 
-        <div class="bg-[#090d16] border border-gray-800/60 rounded-xl p-3 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-2 h-2 bg-emerald-500 rounded-full shadow shadow-emerald-500/50"></div>
-                <div class="flex flex-col">
-                    <span class="text-xs font-medium text-gray-300">Global Node Network</span>
-                    <span class="text-[10px] text-gray-500">Location Dynamic</span>
-                </div>
+        <main id="yahooMainContentWindow" class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            
+            <div class="yahoo-panel-header px-3 pt-2 flex justify-between items-end border-b border-gray-300">
+                <h2 id="viewTitle" class="text-sm font-bold text-gray-800 pb-1.5">Featured News Room & Telemetry</h2>
+                <span class="text-[10px] text-gray-500 pb-1.5 font-mono">Edition: Dynamic Location Node</span>
             </div>
-            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500/80"></i>
-        </div>
-    </aside>
 
-    <main class="flex-1 bg-[#090d16] p-6 overflow-y-auto custom-scrollbar flex flex-col gap-6">
-        
-        <header class="flex justify-between items-center border-b border-gray-800 pb-4">
-            <div>
-                <h2 id="viewTitle" class="text-xl font-bold tracking-tight text-white">System Main Dashboard</h2>
-                <p id="viewDescription" class="text-xs text-gray-400 mt-0.5">Welcome back to your central control hub panel overview.</p>
-            </div>
-            <div class="flex items-center gap-3 text-xs bg-[#111827] px-3.5 py-2 rounded-xl border border-gray-800">
-                <span class="flex items-center gap-1.5 text-gray-300"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Status: Active</span>
-            </div>
-        </header>
+            <div id="nexusViewContainer" class="flex-1 p-4 overflow-y-auto custom-scrollbar">
 
-        <div id="nexusViewContainer" class="flex-1">
-
-            <div id="view-dashboard" class="nexus-view grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 flex flex-col gap-6">
-                    <div class="portal-card rounded-2xl p-5 shadow-sm">
-                        <h3 class="text-sm font-semibold text-white mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="text-blue-500 w-4 h-4"></i> Welcome to TheNexusWeb</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">This is the upgraded modern layout engine built to handle dynamic applications. Select any application node on your left sidebar map navigation dashboard to bring it to full screen focus mode instantly.</p>
+                <div id="view-dashboard" class="nexus-view flex flex-col gap-4">
+                    <div class="bg-blue-50 border border-blue-200 p-3.5 rounded text-xs text-gray-700 leading-relaxed">
+                        <strong class="text-blue-900 block text-sm mb-1">Do You Yahoo!? // Modern Deployment Node</strong>
+                        Welcome to your 2007-inspired web matrix portal homepage workspace. Click the primary applications shortcuts on your left directory panel to flip the central content frame between live network assets automatically without reloading the browser window frame.
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="portal-card p-4 rounded-xl flex items-center gap-3">
-                            <div class="p-3 bg-blue-600/10 text-blue-400 rounded-xl"><i data-lucide="radio" class="w-5 h-5"></i></div>
-                            <div><h4 class="text-xs font-semibold text-gray-200">Podcast Delivery</h4><span class="text-[11px] text-gray-500">Linked to Apple Matrix</span></div>
+                        <div class="border border-gray-200 rounded p-3 bg-gray-50">
+                            <h4 class="text-xs font-bold text-purple-900 border-b border-gray-200 pb-1 mb-2">Wired Logic Podcast Node</h4>
+                            <p class="text-[11px] text-gray-600">Initial master arrays compiled. Ready for syndication distribution layers across Apple Ecosystems.</p>
                         </div>
-                        <div class="portal-card p-4 rounded-xl flex items-center gap-3">
-                            <div class="p-3 bg-emerald-600/10 text-emerald-400 rounded-xl"><i data-lucide="activity" class="w-5 h-5"></i></div>
-                            <div><h4 class="text-xs font-semibold text-gray-200">Server Footprint</h4><span class="text-[11px] text-gray-500">0.04ms Render Latency</span></div>
+                        <div class="border border-gray-200 rounded p-3 bg-gray-50">
+                            <h4 class="text-xs font-bold text-purple-900 border-b border-gray-200 pb-1 mb-2">Compute Infrastructure Status</h4>
+                            <p class="text-[11px] text-gray-600">Running comfortably on free subscription specifications with active automatic lifecycle balancing controls.</p>
                         </div>
                     </div>
                 </div>
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white mb-3">Quick Overview Metrics</h3>
-                    <div class="text-xs text-gray-400 border border-gray-800 p-3 rounded-xl bg-gray-900/30">Select options on your left sidebar to expand your system components here.</div>
-                </div>
-            </div>
 
-            <div id="view-social" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="message-square-share" class="text-blue-500 w-4 h-4"></i> Integrated Social Portal Stream
-                    </h3>
-                    <div class="p-8 border border-dashed border-gray-800 rounded-xl text-center bg-gray-900/10">
-                        <p class="text-xs text-gray-500">Social engine pipeline listening for gateway initialization parameters...</p>
+                <div id="view-social" class="nexus-view hidden flex flex-col gap-3">
+                    <div class="border border-yellow-200 bg-yellow-50 p-4 rounded text-xs text-yellow-900 flex items-start gap-2">
+                        <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-yellow-700 mt-0.5"></i>
+                        <div>
+                            <strong>Nexus Messenger Node Latent Stack</strong>
+                            <p class="mt-1 text-[11px] text-yellow-800">System architecture waiting to trigger until deployment scale expands. This pipeline element will safely sleep on free subscription tiers to preserve system overhead buffers.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="view-news" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="globe-2" class="text-blue-500 w-4 h-4"></i> Global Telemetry News Feed
-                    </h3>
-                    <ul class="flex flex-col gap-3 text-xs">
-                        <li class="border-b border-gray-800/60 pb-2 hover:border-gray-700 transition-colors">
-                            <span class="text-gray-500 text-[10px] block mb-0.5">SYS NEWS // TODAY</span>
-                            <a href="#" class="text-gray-300 hover:text-blue-400 font-medium">System navigation routing layout models cleanly upgraded across deployment zones.</a>
+                <div id="view-news" class="nexus-view hidden flex flex-col gap-3">
+                    <h3 class="text-xs font-bold text-red-700 uppercase tracking-wider border-b border-gray-200 pb-1">Breaking Telemetry Logs</h3>
+                    <ul class="flex flex-col gap-2 text-xs font-sans">
+                        <li class="p-2 hover:bg-blue-50 rounded transition-colors border-b border-gray-100">
+                            <span class="text-gray-400 font-mono text-[10px] mr-1">[05:16 UTC]</span>
+                            <a href="#" class="text-blue-800 hover:underline font-bold">Standard framework structural grids compiled. Layout successfully aligned to classic standard indexes.</a>
                         </li>
                     </ul>
                 </div>
-            </div>
 
-            <div id="view-podcast" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="podcast" class="text-blue-500 w-4 h-4"></i> Wired Logic Media Transmissions
-                    </h3>
-                    <div class="bg-[#090d16] border border-gray-800 p-4 rounded-xl flex items-center gap-4">
-                        <button type="button" class="w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-500 transition-colors flex items-center justify-center text-white shadow shadow-blue-500/20 cursor-pointer">
-                            <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
-                        </button>
-                        <div class="flex-1">
-                            <h4 class="text-xs font-semibold text-gray-200">Episode 01: Compiled Logic Architectures & Layout Designs</h4>
-                            <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 relative">
-                                <div class="bg-blue-500 w-1/4 h-full rounded-full"></div>
+                <div id="view-podcast" class="nexus-view hidden flex flex-col gap-3">
+                    <div class="border border-gray-200 rounded p-4 bg-gray-50">
+                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1.5"><i data-lucide="music" class="w-4 h-4 text-purple-700"></i> Yahoo! Launch Music Player</h4>
+                        <div class="flex items-center gap-4 bg-white p-3 border border-gray-200 rounded shadow-sm">
+                            <button type="button" class="w-9 h-9 rounded-full bg-purple-700 hover:bg-purple-800 text-white flex items-center justify-center cursor-pointer shadow">
+                                <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
+                            </button>
+                            <div class="flex-1">
+                                <span class="text-[11px] font-bold text-purple-900 font-mono block">LOGIC_LOG_01.MP3</span>
+                                <span class="text-[10px] text-gray-400">Stream Transmission Pipeline Active</span>
                             </div>
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </main>
+
+        <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            
+            <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm">
+                <div class="yahoo-panel-header px-3 py-2 border-b border-[#7bc5ff] flex justify-between items-center">
+                    <span class="text-xs font-bold text-purple-900 flex items-center gap-1.5">
+                        <i data-lucide="help-circle" class="w-4 h-4 text-purple-700"></i> Yahoo! Answers Lexicon
+                    </span>
+                    <a href="/dictionary" class="text-[10px] text-blue-800 hover:underline flex items-center gap-0.5">Full Page <i data-lucide="external-link" class="w-2.5 h-2.5"></i></a>
+                </div>
+                
+                <div class="p-3 bg-[#fdfeff] flex flex-col gap-2.5">
+                    <label class="text-[11px] text-gray-600 block">Ask or search any target vocabulary string term:</label>
+                    
+                    <div class="flex gap-1.5">
+                        <input type="text" id="sidebarDictQuery" placeholder="What is your question/word?" 
+                               class="flex-1 bg-white border border-gray-400 rounded px-2.5 py-1.5 text-xs text-black focus:outline-none focus:border-purple-600 font-sans">
+                        <button type="button" id="btn-sidebar-dict" class="bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs px-3 rounded cursor-pointer shadow transition-colors">
+                            Scan
+                        </button>
+                    </div>
+
+                    <div id="sidebarDictOutput" class="border border-gray-200 bg-gray-50 p-2.5 rounded text-xs text-gray-700 hidden max-h-48 overflow-y-auto custom-scrollbar font-sans">
+                        </div>
+                </div>
             </div>
 
-        </div>
-    </main>
+            <div class="border border-gray-300 bg-[#f4f7f9] rounded p-3 flex flex-col gap-2 text-xs">
+                <div class="flex items-center gap-2 font-bold text-gray-700">
+                    <i data-lucide="cloud-sun" class="w-4 h-4 text-amber-600"></i>
+                    <span>Dynamic Weather Widget</span>
+                </div>
+                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">System automatically analyzing client ingress packets to track geolocational metrics safely over cloud layers.</p>
+            </div>
+
+        </aside>
+
+    </div>
 
     <script>
-        // Draw the vector icons instantly on file load Execution
+        // Mount vector models to screen interfaces instantly
         lucide.createIcons();
 
-        // Safe DOM Content Execution Wrapper
+        // Safe DOM Scope Initialization Wrapper (Ensures click responses wire perfectly)
         document.addEventListener("DOMContentLoaded", () => {
             
-            // Map structural objects explicitly to isolate logic execution loops
+            // Map structural items explicitly to protect interface layers
             const interfaceViews = {
                 dashboard: {
                     button: document.getElementById('btn-dashboard'),
                     screen: document.getElementById('view-dashboard'),
-                    headTitle: "System Main Dashboard",
-                    headDesc: "Welcome back to your central control hub panel overview."
+                    headTitle: "Featured News Room & Telemetry"
                 },
                 social: {
                     button: document.getElementById('btn-social'),
                     screen: document.getElementById('view-social'),
-                    headTitle: "Social Communications Link",
-                    headDesc: "Monitor active conversations and developer portal node threads."
+                    headTitle: "Yahoo! Messenger Connector Node"
                 },
                 news: {
                     button: document.getElementById('btn-news'),
                     screen: document.getElementById('view-news'),
-                    headTitle: "Live Telemetry Feeds",
-                    headDesc: "Real-time automated content aggregates coming across your server nodes."
+                    headTitle: "Live RSS Aggregates Stream Directory"
                 },
                 podcast: {
                     button: document.getElementById('btn-podcast'),
                     screen: document.getElementById('view-podcast'),
-                    headTitle: "Wired Logic Console Player",
-                    headDesc: "Stream audio logs and catalog transmission arrays smoothly."
+                    headTitle: "Yahoo! Launch Music Console"
                 }
             };
 
-            // Loop and attach direct click listeners to the specific elements
+            // Loop and bind listeners directly to physical elements
             Object.keys(interfaceViews).forEach(key => {
                 const node = interfaceViews[key];
                 
@@ -230,34 +248,29 @@
                     node.button.addEventListener('click', (e) => {
                         e.preventDefault();
                         
-                        // 1. Hide every screen view container panel
+                        // 1. Force absolute hidden class properties on all screen matrices
                         Object.keys(interfaceViews).forEach(k => {
                             interfaceViews[k].screen.classList.add('hidden');
                         });
                         
-                        // 2. Clear out the hidden class boundary rule on selected panel
+                        // 2. Clear out visibility blocker on specific option choice
                         node.screen.classList.remove('hidden');
                         
-                        // 3. Clear design attributes globally from all buttons
+                        // 3. Clear chosen design colors from navigation rows
                         document.querySelectorAll('.nav-btn').forEach(btn => {
-                            btn.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer";
-                            const iconChevron = btn.querySelector('[data-lucide="chevron-right"]');
-                            if (iconChevron) iconChevron.classList.add('opacity-0');
+                            btn.className = "nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center justify-between cursor-pointer";
                         });
                         
-                        // 4. Paint selected style specifications onto the active node button
-                        node.button.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer";
-                        const activeChevronIcon = node.button.querySelector('[data-lucide="chevron-right"]');
-                        if (activeChevronIcon) activeChevronIcon.classList.remove('opacity-0');
+                        // 4. Paint Yahoo 2007 highlighted active colors onto clicked button node
+                        node.button.className = "nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-purple-900 bg-white border border-[#7bc5ff] rounded transition-all flex items-center justify-between cursor-pointer shadow-sm";
                         
-                        // 5. Update display headers dynamically
+                        // 5. Upgrade workspace titles directly inside the ribbon component
                         document.getElementById('viewTitle').innerText = node.headTitle;
-                        document.getElementById('viewDescription').innerText = node.headDesc;
                     });
                 }
             });
 
-            // Dictionary Interactive Execution Wiring Links
+            // Dictionary Interactive Submit Event Bindings (Button + Enter triggers)
             const searchFieldElement = document.getElementById('sidebarDictQuery');
             const targetTriggerBtn = document.getElementById('btn-sidebar-dict');
 
@@ -280,8 +293,7 @@
             if (!sanitizedString) return;
 
             renderTargetNode.classList.remove('hidden');
-            renderTargetNode.innerHTML = `<div class="flex items-center gap-2 text-blue-400 animate-pulse"><i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Processing string...</div>`;
-            lucide.createIcons();
+            renderTargetNode.innerHTML = `<div class="text-[11px] text-purple-700 animate-pulse font-mono">Parsing registry data vectors...</div>`;
 
             try {
                 const restConnection = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${sanitizedString}`);
@@ -295,19 +307,18 @@
                 const textualContextExample = primaryMatchObject.meanings[0]?.definitions[0]?.example;
 
                 renderTargetNode.innerHTML = `
-                    <div class="flex flex-col gap-1.5">
-                        <div class="flex items-center justify-between border-b border-gray-800 pb-1">
-                            <strong class="text-blue-400 font-bold">${primaryMatchObject.word}</strong>
-                            <span class="text-[10px] text-gray-500">${primaryMatchObject.phonetic || ''}</span>
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center justify-between border-b border-gray-200 pb-0.5 mb-1">
+                            <strong class="text-purple-900">${primaryMatchObject.word}</strong>
+                            <span class="text-[10px] text-gray-400">${primaryMatchObject.phonetic || ''}</span>
                         </div>
-                        <span class="text-[9px] text-amber-500 font-bold uppercase">[ ${wordClassification} ]</span>
-                        <p class="text-gray-300 text-[11px] leading-relaxed">${definitiveText}</p>
-                        ${textualContextExample ? `<p class="text-gray-500 italic text-[10px] mt-0.5 border-l border-gray-700 pl-1.5">"${textualContextExample}"</p>` : ''}
+                        <span class="text-[9px] text-amber-600 font-bold uppercase tracking-wider">[ ${wordClassification} ]</span>
+                        <p class="text-gray-700 text-[11px] leading-normal mt-0.5">${definitiveText}</p>
+                        ${textualContextExample ? `<p class="text-gray-400 italic text-[10px] mt-1 border-l border-gray-300 pl-1.5">"${textualContextExample}"</p>` : ''}
                     </div>
                 `;
             } catch (err) {
-                renderTargetNode.innerHTML = `<div class="text-rose-400 flex items-center gap-1.5"><i data-lucide="info" class="w-3.5 h-3.5"></i> Match trace dropped.</div>`;
-                lucide.createIcons();
+                renderTargetNode.innerHTML = `<div class="text-rose-700 font-medium text-[11px]">No verification matches found.</div>`;
             }
         }
     </script>
