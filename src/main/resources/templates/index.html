@@ -48,22 +48,22 @@
             <nav class="flex flex-col gap-1.5" id="nexusNavDeck">
                 <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest pl-2 mb-1">Applications</span>
                 
-                <button onclick="switchNexusView('dashboard', this)" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer">
+                <button id="btn-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="layout-grid" class="w-4 h-4"></i> Main Dashboard</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                 </button>
                 
-                <button onclick="switchNexusView('social', this)" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button id="btn-social" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="message-square-share" class="w-4 h-4"></i> Social Feed Node</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
                 
-                <button onclick="switchNexusView('news', this)" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button id="btn-news" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="globe-2" class="w-4 h-4"></i> Live RSS Streams</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
                 
-                <button onclick="switchNexusView('podcast', this)" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
+                <button id="btn-podcast" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer">
                     <span class="flex items-center gap-3"><i data-lucide="podcast" class="w-4 h-4"></i> Wired Logic Podcast</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-0"></i>
                 </button>
@@ -79,9 +79,8 @@
 
                 <div class="relative">
                     <input type="text" id="sidebarDictQuery" placeholder="Look up any word..." 
-                           class="w-full bg-[#090d16] border border-gray-800 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition-all pr-8"
-                           onkeydown="if(event.key === 'Enter') executeSidebarDictLookup()">
-                    <button onclick="executeSidebarDictLookup()" class="absolute right-2.5 top-3 text-gray-500 hover:text-blue-500 transition-colors">
+                           class="w-full bg-[#090d16] border border-gray-800 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition-all pr-8">
+                    <button id="btn-sidebar-dict" class="absolute right-2.5 top-3 text-gray-500 hover:text-blue-500 transition-colors">
                         <i data-lucide="search" class="w-3.5 h-3.5"></i>
                     </button>
                 </div>
@@ -135,77 +134,3 @@
                         </div>
                     </div>
                 </div>
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white mb-3">Quick Overview Metrics</h3>
-                    <div class="text-xs text-gray-400 border border-gray-800 p-3 rounded-xl bg-gray-900/30">Select options on your left sidebar to bring modules full screen.</div>
-                </div>
-            </div>
-
-            <div id="view-social" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="message-square-share" class="text-blue-500 w-4 h-4"></i> Integrated Social Portal Stream
-                    </h3>
-                    <div class="p-8 border border-dashed border-gray-800 rounded-xl text-center bg-gray-900/10">
-                        <p class="text-xs text-gray-500">Social engine pipeline listening for gateway initialization parameters...</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view-news" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="globe-2" class="text-blue-500 w-4 h-4"></i> Global Telemetry News Feed
-                    </h3>
-                    <ul class="flex flex-col gap-3 text-xs">
-                        <li class="border-b border-gray-800/60 pb-2 hover:border-gray-700 transition-colors">
-                            <span class="text-gray-500 text-[10px] block mb-0.5">SYS NEWS // TODAY</span>
-                            <a href="#" class="text-gray-300 hover:text-blue-400 font-medium">System navigation routing layout models cleanly upgraded across deployment zones.</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="view-podcast" class="nexus-view hidden flex flex-col gap-4">
-                <div class="portal-card rounded-2xl p-5">
-                    <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 mb-4 flex items-center gap-2">
-                        <i data-lucide="podcast" class="text-blue-500 w-4 h-4"></i> Wired Logic Media Transmissions
-                    </h3>
-                    <div class="bg-[#090d16] border border-gray-800 p-4 rounded-xl flex items-center gap-4">
-                        <button class="w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-500 transition-colors flex items-center justify-center text-white shadow shadow-blue-500/20 cursor-pointer">
-                            <i data-lucide="play" class="w-5 h-5 fill-white ml-0.5"></i>
-                        </button>
-                        <div class="flex-1">
-                            <h4 class="text-xs font-semibold text-gray-200">Episode 01: Compiled Logic Architectures & Layout Designs</h4>
-                            <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 relative">
-                                <div class="bg-blue-500 w-1/4 h-full rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <script>
-        lucide.createIcons();
-
-        // 1. DYNAMIC NAVIGATION SWITCH ENGINE BLOCK
-        function switchNexusView(viewId, targetBtn) {
-            // Hide all screen element layers safely
-            document.querySelectorAll('.nexus-view').forEach(view => view.classList.add('hidden'));
-            
-            // Unveil targeted user container window matrix
-            document.getElementById(`view-${viewId}`).classList.remove('hidden');
-            
-            // Reset active style parameters across all structural button elements
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800/50 border border-transparent hover:border-gray-800 text-sm font-medium transition-all cursor-pointer";
-                const chevron = btn.querySelector('[data-lucide="chevron-right"]');
-                if (chevron) chevron.classList.add('opacity-0');
-            });
-            
-            // Set high-visibility design values on currently active click event element
-            targetBtn.className = "nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-blue-400 bg-blue-600/10 border border-blue-500/20 text-sm font-medium transition-all cursor-pointer";
-            const currentChevron = targetBtn.querySelector('
