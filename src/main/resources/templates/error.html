@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNexusWeb - System Fault Terminal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .nexus-blue { color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0254eb;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white">
+
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700">Welcome to TheNexusWeb Headquarters Gateway</span>
+            <a href="/" class="hover:underline text-blue-700 font-medium">Return to Safety (Homepage)</a>
+        </div>
+        <div class="flex items-center gap-3 font-mono text-[11px]">
+            <span>SYS_STATUS: <strong class="text-rose-600">EXCEPTION_FAULT</strong></span>
+            <span>|</span>
+            <span>CODE: <strong class="text-rose-700">4XX_5XX</strong></span>
+        </div>
+    </header>
+
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter nexus-blue italic filter drop-shadow-sm">
+                TheNexusWeb<span class="not-italic text-amber-500">!</span>
+            </h1>
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-red-50 border border-red-200 px-1.5 rounded mt-0.5">FAULT_ISOLATION</span>
+        </div>
+    </section>
+
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
+
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <div class="text-[11px] font-bold text-gray-500 uppercase tracking-wider pb-1.5 border-b border-gray-300 mb-2 pl-1">Nexus Core Matrix</div>
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2">
+                    <i data-lucide="home" class="w-3.5 h-3.5 text-gray-500"></i> Our Front Page
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-end border-b border-gray-300">
+                <h2 class="text-sm font-bold text-gray-800 pb-1.5">Runtime Stack Exception Diagnostic</h2>
+                <span class="text-[10px] text-gray-500 pb-1.5 font-mono">Channel: System Intercept</span>
+            </div>
+
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-4">
+                <div class="border border-red-200 bg-red-50 p-4 rounded text-xs text-red-900 flex items-start gap-3">
+                    <i data-lucide="alert-octagon" class="w-5 h-5 text-red-600 shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="text-sm text-red-950 block mb-1">Target Resource Not Positioned / Pipeline Error</strong>
+                        Our platform loop encountered an unexpected vector challenge or broken destination mapping sequence. The engine isolated this crash safely inside our interface.
+                    </div>
+                </div>
+
+                <div class="flex-1 bg-gray-950 text-emerald-400 font-mono text-[11px] p-4 rounded border border-gray-800 shadow-inner overflow-auto custom-scrollbar">
+                    <div class="text-gray-500 mb-2">// LOG ANALYSIS STREAM</div>
+                    <div>[ERROR] Core path descriptor returned non-valid completion values.</div>
+                    <div>[STATUS] Safety interlocks activated. Heap allocation clean.</div>
+                    <div class="mt-4 text-amber-400">>> Suggestion: Verify routing matrices inside Java controller configurations.</div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            <div class="border border-gray-300 bg-[#f4f7f9] rounded p-3 flex flex-col gap-2 text-xs">
+                <div class="flex items-center gap-2 font-bold text-gray-700">
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-red-600"></i>
+                    <span>Ecosystem Integrity Monitor</span>
+                </div>
+                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">System cores are holding steady. This isolated view block is running cleanly over active microservices to preserve security layers.</p>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
