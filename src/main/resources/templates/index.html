@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheNexusWeb Portal Hub</title>
+    <title>TheNexusWeb - Our Platform Hub</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -12,10 +12,9 @@
             color: #000000;
             font-family: Arial, Helvetica, sans-serif;
         }
-        /* Elite Classic 2007 Portal Styling Specs */
+        /* Custom High-Utility Portal Layout Styles */
         .nexus-blue { color: #0254eb; }
-        .nexus-purple { color: #6001d2; }
-        .nexus-bg-header { background-color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
         .nexus-border { border: 1px solid #7bc5ff; }
         .portal-panel-header {
             background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
@@ -38,7 +37,7 @@
     <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
         <div class="flex items-center gap-4">
             <span class="font-bold text-gray-700">Welcome to TheNexusWeb Headquarters Gateway</span>
-            <a href="#" class="hover:underline text-blue-700">Set TheNexusWeb As Your Default Core Homepage</a>
+            <a href="#" class="hover:underline text-blue-700 font-medium">Set TheNexusWeb As Our Default Core Homepage</a>
         </div>
         <div class="flex items-center gap-3 font-mono text-[11px]">
             <span>SYS_STATUS: <strong class="text-emerald-700">ONLINE</strong></span>
@@ -52,7 +51,7 @@
             <h1 class="text-4xl font-black tracking-tighter nexus-blue italic filter drop-shadow-sm">
                 TheNexusWeb<span class="not-italic text-amber-500">!</span>
             </h1>
-            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-blue-50 border border-blue-200 px-1.5 rounded mt-0.5">CENTRAL_COMMAND</span>
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-blue-50 border border-blue-200 px-1.5 rounded mt-0.5">COMMUNITY_COMMAND</span>
         </div>
 
         <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
@@ -76,20 +75,27 @@
             
             <nav class="flex flex-col gap-0.5" id="nexusNavDeck">
                 <button type="button" id="btn-dashboard" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer bg-white !border-[#7bc5ff] !text-blue-900">
-                    <i data-lucide="home" class="w-3.5 h-3.5 text-blue-600"></i> My Front Page
+                    <i data-lucide="home" class="w-3.5 h-3.5 text-blue-600"></i> Our Front Page
                 </button>
                 
                 <button type="button" id="btn-social" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center justify-between cursor-pointer">
-                    <span class="flex items-center gap-2"><i data-lucide="message-circle" class="w-3.5 h-3.5 text-gray-500"></i> Nexus Messenger</span>
-                    <span class="text-[9px] bg-red-600 text-white px-1 font-mono rounded animate-pulse">SOON</span>
+                    <span class="flex items-center gap-2"><i data-lucide="message-circle" class="w-3.5 h-3.5 text-gray-500"></i> Nexus Social</span>
                 </button>
                 
                 <button type="button" id="btn-news" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
-                    <i data-lucide="rss" class="w-3.5 h-3.5 text-gray-500"></i> Live RSS Streams
+                    <i data-lucide="rss" class="w-3.5 h-3.5 text-gray-500"></i> Live News Streams
+                </button>
+
+                <button type="button" id="btn-weather" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="cloud-sun" class="w-3.5 h-3.5 text-gray-500"></i> Weather Radar
+                </button>
+
+                <button type="button" id="btn-movies" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="film" class="w-3.5 h-3.5 text-gray-500"></i> Movies Hub
                 </button>
                 
                 <button type="button" id="btn-podcast" class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white border border-transparent rounded transition-all flex items-center gap-2 cursor-pointer">
-                    <i data-lucide="radio" class="w-3.5 h-3.5 text-gray-500"></i> Wired Logic Media
+                    <i data-lucide="radio" class="w-3.5 h-3.5 text-gray-500"></i> Music & Podcast
                 </button>
             </nav>
 
@@ -114,13 +120,13 @@
 
                 <div id="view-dashboard" class="nexus-view flex flex-col gap-4">
                     <div class="bg-blue-50 border border-blue-200 p-3.5 rounded text-xs text-gray-700 leading-relaxed">
-                        <strong class="text-blue-900 block text-sm mb-1">Welcome to TheNexusWeb Central Ecosystem Hub</strong>
-                        This is your dedicated 2007-inspired master portal layout. Click the primary navigation components on your left system directory map to swap active workspaces instantly without triggering heavy browser reloads.
+                        <strong class="text-blue-900 block text-sm mb-1">Welcome to Our Shared TheNexusWeb Central Ecosystem Hub</strong>
+                        This is our dedicated master portal layout, built for the whole platform ecosystem. Click the primary navigation components on our left system directory map to swap active workspaces instantly without triggering heavy browser reloads.
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="border border-gray-200 rounded p-3 bg-gray-50">
                             <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-2">Wired Logic Podcast Node</h4>
-                            <p class="text-[11px] text-gray-600">Initial audio master files successfully generated. Standing by for distribution matrix syncing steps.</p>
+                            <p class="text-[11px] text-gray-600">Initial audio master files successfully generated. Standing by for community distribution matrix syncing steps.</p>
                         </div>
                         <div class="border border-gray-200 rounded p-3 bg-gray-50">
                             <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-2">Infrastructure Footprint</h4>
@@ -133,8 +139,8 @@
                     <div class="border border-blue-200 bg-blue-50 p-4 rounded text-xs text-blue-900 flex items-start gap-2">
                         <i data-lucide="info" class="w-4 h-4 shrink-0 text-blue-700 mt-0.5"></i>
                         <div>
-                            <strong>Nexus Messenger Node Latent Stack</strong>
-                            <p class="mt-1 text-[11px] text-blue-800">System architecture waiting to trigger until deployment scale expands. This pipeline element safely sleeps on free subscription tiers to preserve server memory bounds.</p>
+                            <strong>Nexus Social Feed Stack</strong>
+                            <p class="mt-1 text-[11px] text-blue-800">Shared social network feed and messenger portal pipeline. Listening for active incoming user interactions and network pings...</p>
                         </div>
                     </div>
                 </div>
@@ -144,21 +150,35 @@
                     <ul class="flex flex-col gap-2 text-xs font-sans">
                         <li class="p-2 hover:bg-blue-50 rounded transition-colors border-b border-gray-100">
                             <span class="text-gray-400 font-mono text-[10px] mr-1">[05:16 UTC]</span>
-                            <a href="#" class="text-blue-800 hover:underline font-bold">Standard framework structural grids compiled. Layout successfully aligned to classic standard indexes.</a>
+                            <a href="#" class="text-blue-800 hover:underline font-bold">Standard framework structural grids compiled. Layout successfully aligned to classic standard indexes across all regional nodes.</a>
                         </li>
                     </ul>
                 </div>
 
+                <div id="view-weather" class="nexus-view hidden flex flex-col gap-3">
+                    <div class="border border-gray-200 rounded p-4 bg-gray-50">
+                        <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-3">Live Geolocational Weather Analytics</h4>
+                        <p class="text-xs text-gray-600">Detecting system coordinate access arrays... Standby for active atmospheric telemetry streaming updates.</p>
+                    </div>
+                </div>
+
+                <div id="view-movies" class="nexus-view hidden flex flex-col gap-3">
+                    <div class="border border-gray-200 rounded p-4 bg-gray-50">
+                        <h4 class="text-xs font-bold text-blue-900 border-b border-gray-200 pb-1 mb-3">TheNexusWeb Cinema Feed</h4>
+                        <p class="text-xs text-gray-600">Catalog entries loading from external dynamic entertainment streams...</p>
+                    </div>
+                </div>
+
                 <div id="view-podcast" class="nexus-view hidden flex flex-col gap-3">
                     <div class="border border-gray-200 rounded p-4 bg-gray-50">
-                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1.5"><i data-lucide="radio" class="w-4 h-4 text-blue-700"></i> Wired Logic Media Center Console</h4>
+                        <h4 class="text-xs font-bold text-gray-700 mb-3 flex items-center gap-1.5"><i data-lucide="radio" class="w-4 h-4 text-blue-700"></i> Wired Logic Media Center & Music Player</h4>
                         <div class="flex items-center gap-4 bg-white p-3 border border-gray-200 rounded shadow-sm">
                             <button type="button" class="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center cursor-pointer shadow">
                                 <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
                             </button>
                             <div class="flex-1">
                                 <span class="text-[11px] font-bold text-blue-900 font-mono block">WIRED_LOGIC_EP01.MP3</span>
-                                <span class="text-[10px] text-gray-400">Stream Transmission Line Primed</span>
+                                <span class="text-[10px] text-gray-400">Stream Transmission Line Primed for All Listeners</span>
                             </div>
                         </div>
                     </div>
@@ -198,7 +218,7 @@
                     <i data-lucide="cloud-sun" class="w-4 h-4 text-blue-600"></i>
                     <span>Dynamic Weather Widget</span>
                 </div>
-                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">Ecosystem automatically assessing ingress socket descriptors to capture dynamic geolocational variables safely over secure network profiles.</p>
+                <p class="text-[11px] text-gray-500 leading-normal border-l-2 border-gray-300 pl-2">Our ecosystem automatically assesses ingress socket descriptors to capture dynamic geolocational variables safely over secure network profiles.</p>
             </div>
 
         </aside>
@@ -206,13 +226,13 @@
     </div>
 
     <script>
-        // Mount vector models to screen interfaces instantly
+        // Paint layout vector tokens immediately
         lucide.createIcons();
 
-        // Safe DOM Scope Initialization Wrapper (Ensures click responses wire perfectly)
+        // Safe DOM Isolation scope closure
         document.addEventListener("DOMContentLoaded", () => {
             
-            // Map structural items explicitly to protect interface layers
+            // Map structural configurations securely
             const interfaceViews = {
                 dashboard: {
                     button: document.getElementById('btn-dashboard'),
@@ -222,21 +242,31 @@
                 social: {
                     button: document.getElementById('btn-social'),
                     screen: document.getElementById('view-social'),
-                    headTitle: "Nexus Messenger Connector Node"
+                    headTitle: "Nexus Connected Social Stream"
                 },
                 news: {
                     button: document.getElementById('btn-news'),
                     screen: document.getElementById('view-news'),
                     headTitle: "Live RSS Aggregates Stream Directory"
                 },
+                weather: {
+                    button: document.getElementById('btn-weather'),
+                    screen: document.getElementById('view-weather'),
+                    headTitle: "Live Atmospheric Weather Radar Network"
+                },
+                movies: {
+                    button: document.getElementById('btn-movies'),
+                    screen: document.getElementById('view-movies'),
+                    headTitle: "TheNexusWeb Cinema Feed Hub"
+                },
                 podcast: {
                     button: document.getElementById('btn-podcast'),
                     screen: document.getElementById('view-podcast'),
-                    headTitle: "Wired Logic Media Console"
+                    headTitle: "Wired Logic Media & Music Console"
                 }
             };
 
-            // Loop and bind listeners directly to physical elements
+            // Bind isolated click interaction rules to physical elements
             Object.keys(interfaceViews).forEach(key => {
                 const node = interfaceViews[key];
                 
@@ -244,7 +274,7 @@
                     node.button.addEventListener('click', (e) => {
                         e.preventDefault();
                         
-                        // 1. Force absolute hidden class properties on all screen matrices
+                        // 1. Enforce display limits on alternate panels
                         Object.keys(interfaceViews).forEach(k => {
                             interfaceViews[k].screen.classList.add('hidden');
                         });
