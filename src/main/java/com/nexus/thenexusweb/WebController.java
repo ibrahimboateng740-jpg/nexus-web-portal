@@ -9,20 +9,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-    // 1. The Yahoo-style Public Landing Page
+    // 1. The Public Landing Page (Unprotected)
     @GetMapping("/")
-    public String landingPage() {
-        return "index"; // Serves your public index.html page
+    public String index() {
+        return "index";
     }
 
-    // 2. The Secure Inside Portal Dashboard
-    @GetMapping("/dashboard")
-    public String dashboard(Model model, @AuthenticationPrincipal OAuth2User principal) {
+    // 2. The Custom Login Page (Unprotected)
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    // 3. The Custom Signup Page (Unprotected)
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
+    // 4. RESTORED: Your original secure home screen with your sidebar applications
+    @GetMapping("/home")
+    public String home(Model model, @AuthenticationPrincipal OAuth2User principal) {
         if (principal != null) {
             model.addAttribute("name", principal.getAttribute("name"));
             model.addAttribute("email", principal.getAttribute("email"));
             model.addAttribute("picture", principal.getAttribute("picture"));
         }
-        return "dashboard"; // Serves your secure dashboard.html page
+        // This targets your original file containing your apps sidebar layout
+        return "home"; 
     }
 }
