@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-    // Public Base Gateway Route
+    // 1. The Yahoo-style Public Landing Page
     @GetMapping("/")
-    public String index() {
-        return "index"; // Maps to index.html (Your login access screen)
+    public String landingPage() {
+        return "index"; // Serves your public index.html page
     }
 
-    // Protected Dashboard Destination Route
-    @GetMapping("/home")
-    public String home(Model model, @AuthenticationPrincipal OAuth2User principal) {
+    // 2. The Secure Inside Portal Dashboard
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, @AuthenticationPrincipal OAuth2User principal) {
         if (principal != null) {
-            // Safely pass the logged-in user's name down into your UI template layout
             model.addAttribute("name", principal.getAttribute("name"));
             model.addAttribute("email", principal.getAttribute("email"));
+            model.addAttribute("picture", principal.getAttribute("picture"));
         }
-        return "home"; // Maps to home.html (Your official dashboard page)
+        return "dashboard"; // Serves your secure dashboard.html page
     }
 }
