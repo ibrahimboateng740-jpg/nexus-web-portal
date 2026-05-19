@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import jakarta.servlet.DispatcherType;
 
@@ -11,28 +12,40 @@ import jakarta.servlet.DispatcherType;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // ⚡ THE CRITICAL BYPASS: This completely rips the public pages out of Spring's security filter chain.
+    // This absolutely guarantees that typing your URL loads index.html instead of triggering Google.
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers(
+            "/", 
+            "/index.html", 
+            "/login", 
+            "/signup", 
+            "/error", 
+            "/css/**", 
+            "/js/**", 
+            "/images/**"
+        );
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 
-                // 1. PUBLIC ROUTES: Anyone can view your landing page, styles, and error pages
-                .requestMatchers("/", "/index.html", "/error", "/css/**", "/js/**", "/images/**").permitAll()
-                
-                // 2. OAUTH ROUTES: Keep the login triggers open
+                // Keep the OAuth processing pipelines open internally
                 .requestMatchers("/login/oauth2/code/**", "/oauth2/authorization/**").permitAll()
                 
-                // 3. PROTECTED ROUTES: Only logged-in users can see the actual portal dashboard
-                .requestMatchers("/dashboard", "/portal/**").authenticated()
-                
+                // SECURE PATHS: Your home sidebar dashboard requires authentication
+                .requestMatchers("/home").authenticated()
                 .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2
-                // 4. If an unauthenticated user tries to hit a protected page, send them to our public landing page instead of auto-triggering Google
-                .loginPage("/") 
-                // 5. Land here upon a successful click-login
-                .defaultSuccessUrl("/dashboard", true)
+                // If an unauthenticated user attempts to access /home, redirect them to our public /login page
+                .loginPage("/login")
+                // On a successful button click, drop them on your original sidebar dashboard
+                .defaultSuccessUrl("/home", true)
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
