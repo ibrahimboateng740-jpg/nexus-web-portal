@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNexusWeb - Live News Room</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='18' y='27' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-style='italic' font-size='34' fill='%23f59e0b' text-anchor='middle'%3E!%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        /* Custom High-Utility Portal Layout Styles (Reverted to Blue and White) */
+        .nexus-blue { color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+            transition: background 0.2s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0254eb;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white text-black">
+
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700">TheNexusWeb News Wire Core</span>
+            <a href="/" class="hover:underline text-blue-700 font-medium">Return to Safety (Homepage)</a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <div th:if="${userProfile != null}" class="flex items-center gap-2">
+                <img th:src="${userProfile.avatarUrl != null ? userProfile.avatarUrl : '/images/default-avatar.png'}" 
+                     class="w-5 h-5 rounded-full border border-blue-400 object-cover" id="ribbonAvatarDisplay">
+                <span class="font-bold text-gray-800" th:text="${userProfile.username}">UserNode</span>
+                <span class="text-gray-300">|</span>
+                <a href="/logout" class="text-rose-600 hover:underline font-bold">Disconnect</a>
+            </div>
+
+            <div th:if="${userProfile == null}">
+                <a href="/login" class="bg-gradient-to-b from-blue-500 to-blue-600 text-white font-bold px-3 py-1 rounded text-[11px] shadow hover:from-blue-600 hover:to-blue-700 tracking-wide flex items-center gap-1">
+                    <i data-lucide="log-in" class="w-3 h-3"></i> Sign In
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6 bg-white">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter text-[#0254eb] italic filter drop-shadow-sm">
+                TheNexusWeb<span class="not-italic text-amber-500">!</span>
+            </h1>
+        </div>
+
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
+            <div class="flex bg-white border border-[#4a89c0]">
+                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
+                    <i data-lucide="search" class="w-3.5 h-3.5 text-blue-600"></i> <label>News Wire</label>
+                </div>
+                <input type="text" placeholder="Filter dynamic real-time streams..." class="flex-1 px-3 py-2 text-sm text-black focus:outline-none">
+                <button class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 shadow-inner">Filter</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4 bg-white">
+
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i> Our Front Page
+                </a>
+                <a href="/social-feed" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Nexus Social
+                </a>
+                <a href="/news" class="w-full text-left px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2">
+                    <i data-lucide="rss" class="w-3.5 h-3.5 text-blue-600"></i> Live News Streams
+                </a>
+                <a href="/cinema-hub" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="film" class="w-3.5 h-3.5"></i> Movies Hub
+                </a>
+                <a href="/podcast" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="mic" class="w-3.5 h-3.5"></i> Nexus Podcasts
+                </a>
+                <a href="/music-hub" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="radio" class="w-3.5 h-3.5"></i> Global Beats Music
+                </a>
+                <a href="/dictionary" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Nexus Dictionary
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-center border-b border-gray-300">
+                <h2 class="text-sm font-bold text-gray-800 pb-0.5 flex items-center gap-1.5">
+                    <i data-lucide="globe" class="w-4 h-4 text-[#0254eb]"></i> Live Global Headlines
+                </h2>
+                <span class="text-[10px] text-gray-400 font-medium">Updated Real-Time via API</span>
+            </div>
+
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-6 bg-white">
+                
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-2 border-b border-blue-200 pb-1">
+                        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                        <h3 class="text-xs font-bold text-blue-900 uppercase tracking-wider">Google News Desk Feed</h3>
+                    </div>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div th:each="article : ${googleNewsArticles}" class="p-2 border rounded hover:border-blue-400 bg-gray-50 transition-colors">
+                            <a th:href="${article.url}" target="_blank" class="block group">
+                                <h4 class="font-bold text-xs text-gray-900 group-hover:text-[#0254eb] group-hover:underline" th:text="${article.title}">Google News API Title Baseline Injection Card...</h4>
+                                <p class="text-[10px] text-gray-500 mt-0.5" th:text="${article.description}">Summary description snippet pulled directly through your custom endpoint...</p>
+                                <div class="flex gap-3 text-[9px] text-gray-400 mt-1 font-medium">
+                                    <span th:text="${article.source}">Google News</span> <span th:text="${article.time}">30 mins ago</span>
+                                    <span th:if="${article.category != null}" class="text-amber-600 font-bold" th:text="${article.category}">CATEGORY</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div th:if="${googleNewsArticles == null}" class="flex flex-col gap-2">
+                            <div class="p-2 border rounded hover:border-blue-400 bg-gray-50 transition-colors group">
+                                <a href="https://news.google.com" target="_blank" class="block">
+                                    <h4 class="font-bold text-xs text-gray-900 group-hover:text-[#0254eb] group-hover:underline">Global Digital Infrastructure Framework Expands to Support Cloud Telemetry</h4>
+                                    <p class="text-[10px] text-gray-500 mt-0.5">Engineers announce new low-latency data pipelines optimized for microservice clusters globally.</p>
+                                    <div class="flex gap-3 text-[9px] text-gray-400 mt-1 font-medium">
+                                        <span>Google News</span> <span>12 mins ago</span> <span class="text-blue-600 font-bold">TECH</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-2 border-b border-rose-200 pb-1">
+                        <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+                        <h3 class="text-xs font-bold text-rose-900 uppercase tracking-wider">BBC World Service</h3>
+                    </div>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div th:each="article : ${bbcArticles}" class="p-2 border rounded hover:border-rose-400 bg-gray-50 transition-colors">
+                            <a th:href="${article.url}" target="_blank" class="block group">
+                                <h4 class="font-bold text-xs text-gray-900 group-hover:text-rose-700 group-hover:underline" th:text="${article.title}">BBC Title Baseline Card...</h4>
+                                <div class="flex gap-3 text-[9px] text-gray-400 mt-1 font-medium">
+                                    <span>BBC News Wire</span> <span th:text="${article.time}">1 hour ago</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div th:if="${bbcArticles == null}" class="flex flex-col gap-2">
+                            <div class="p-2 border rounded hover:border-rose-400 bg-gray-50 transition-colors group">
+                                <a href="https://www.bbc.com/news" target="_blank" class="block">
+                                    <h4 class="font-bold text-xs text-gray-900 group-hover:text-rose-700 group-hover:underline">Strategic Partnership Announced to Boost Sustainable Regional Energy Grids</h4>
+                                    <div class="flex gap-3 text-[9px] text-gray-400 mt-1 font-medium">
+                                        <span>BBC News Wire</span> <span>45 mins ago</span> <span class="text-rose-600 font-bold">WORLD</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm bg-white">
+                <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff]">
+                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Regional Wire Filters
+                    </span>
+                </div>
+                <div class="p-3 bg-[#fdfeff] flex flex-wrap gap-1.5 text-[10px] font-bold">
+                    <span class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-800 cursor-pointer hover:bg-white">Accra Core</span>
+                    <span class="px-2 py-1 bg-gray-50 border border-gray-200 rounded text-gray-600 cursor-pointer hover:bg-white">London Hub</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
