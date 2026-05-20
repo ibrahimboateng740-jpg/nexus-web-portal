@@ -1,0 +1,28 @@
+package com.thenexusweb.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+public class NewsController {
+
+    @GetMapping("/news-hub")
+    public String displayNewsHub(Model model) {
+        // 🌟 1. Inject your User Profile (if active)
+        // model.addAttribute("userProfile", currentProfile);
+
+        // 🌟 2. Inject your real Google News / API list data structure here
+        // List<Map<String, String>> googleNews = newsService.fetchGoogleNews();
+        // model.addAttribute("googleNewsArticles", googleNews);
+        
+        // 🌟 3. Inject your BBC News wires
+        // List<Map<String, String>> bbcNews = newsService.fetchBbcNews();
+        // model.addAttribute("bbcArticles", bbcNews);
+
+        // Returns the exact name of your layout template file without the .html extension
+        return "news-hub"; 
+    }
+}
