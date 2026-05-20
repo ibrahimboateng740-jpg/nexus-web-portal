@@ -1,57 +1,47 @@
-package com.thenexus.config;
+package com.thenexusweb.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
-import jakarta.servlet.DispatcherType;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // ⚡ THE CRITICAL BYPASS: This completely rips the public pages out of Spring's security filter chain.
-    // This absolutely guarantees that typing your URL loads index.html instead of triggering Google.
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(
-            "/", 
-            "/index.html", 
-            "/login", 
-            "/signup", 
-            "/error", 
-            "/css/**", 
-            "/js/**", 
-            "/images/**"
-        );
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // 🌐 ACCESS CONTROL SETTINGS
             .authorizeHttpRequests(auth -> auth
-                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                
-                // Keep the OAuth processing pipelines open internally
-                .requestMatchers("/login/oauth2/code/**", "/oauth2/authorization/**").permitAll()
-                
-                // SECURE PATHS: Your home sidebar dashboard requires authentication
-                .requestMatchers("/home").authenticated()
+                // Allow anyone to access static assets, your icon, the homepage, and signup without being logged in
+                .requestMatchers("/", "/signup", "/favicon.svg", "/css/**", "/js/**").permitAll()
+                // Everything else (like our custom login check) requires security clearance
                 .anyRequest().authenticated()
             )
-            .oauth2Login(oauth2 -> oauth2
-                // If an unauthenticated user attempts to access /home, redirect them to our public /login page
+            
+            // 👤 STRIP DEFAULT FORM LOGIN & INJECT YOUR BLUE CUSTOM PAGE
+            .formLogin(form -> form
+                // This forces Spring Boot to look directly at your custom login.html file
                 .loginPage("/login")
-                // On a successful button click, drop them on your original sidebar dashboard
-                .defaultSuccessUrl("/home", true)
+                // Redirects users straight back to your dashboard homepage upon successful authentication
+                .defaultSuccessUrl("/", true)
+                .permitAll()
             )
+            
+            // 🌐 STRIP DEFAULT OAUTH WHITE SCREEN & INTEGRATE GOOGLE SIGN-IN
+            .oauth2Login(oauth -> oauth
+                // This tells Google's authentication loop to also trigger inside your custom layout page
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+            )
+            
+            // 🚪 SESSION SEVERANCE DISCONNECT UTILITY
             .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
+                // Clears the cookie tokens and securely drops the user off back at the login screen
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
             );
 
         return http.build();
