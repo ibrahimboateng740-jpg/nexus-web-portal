@@ -1,75 +1,165 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: common-head('TheNexusWeb - Login')}">
-    </head>
-<body class="h-screen w-screen flex flex-col overflow-hidden">
-    
+<head>
     <meta charset="UTF-8">
-    <title>Nexus Portal - Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNexusWeb - Portal Gateway</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='18' y='27' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-style='italic' font-size='34' fill='%23f59e0b' text-anchor='middle'%3E!%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1c20; color: #e1e4e6; display: flex; align-items: center; justify-content: center; height: 100vh; }
-        
-        .login-container { width: 400px; background: #111215; border: 1px solid #2d3139; border-radius: 12px; padding: 40px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); text-align: center; }
-        .brand-header { margin-bottom: 30px; }
-        .brand-header h2 { color: #00bcd4; font-size: 28px; letter-spacing: 1px; margin-bottom: 8px; }
-        .brand-header p { color: #787f95; font-size: 14px; }
-        
-        .form-group { text-align: left; margin-bottom: 20px; }
-        .form-group label { display: block; color: #a0a5b5; font-size: 13px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-input { width: 100%; background: #1a1c20; border: 1px solid #2d3139; border-radius: 6px; padding: 12px 16px; color: #ffffff; font-size: 15px; transition: border-color 0.2s; }
-        .form-input:focus { outline: none; border-color: #00bcd4; }
-        
-        /* Interactive Buttons */
-        .action-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
-        .btn-submit { width: 100%; background: #00bcd4; color: #111215; border: none; border-radius: 6px; padding: 14px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .btn-submit:hover { background: #008ba3; }
-        
-        .btn-secondary-signup { width: 100%; background: transparent; color: #a0a5b5; border: 1px solid #2d3139; border-radius: 6px; padding: 12px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
-        .btn-secondary-signup:hover { background: #1e222b; color: #fff; border-color: #a0a5b5; }
-        
-        .divider { display: flex; align-items: center; text-align: center; color: #51586d; font-size: 12px; font-weight: 600; text-transform: uppercase; margin: 25px 0; }
-        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #2d3139; }
-        .divider:not(:empty)::before { margin-right: .75em; }
-        .divider:not(:empty)::after { margin-left: .75em; }
-        
-        .google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #1e222b; border: 1px solid #2d3139; color: #ffffff; padding: 12px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; transition: all 0.2s; }
-        .google-btn:hover { background: #252a36; border-color: #a0a5b5; }
-        .google-icon { width: 18px; height: 18px; }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        /* Custom High-Utility Portal Layout Styles matching Homepage */
+        .nexus-blue { color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+            transition: background 0.2s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0254eb;
+            border-radius: 3px;
+        }
     </style>
 </head>
-<body>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white text-black">
 
-    <div class="login-container">
-        <div class="brand-header">
-            <h2>NEXUS</h2>
-            <p>Welcome back! Sign in to secure your node.</p>
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700">TheNexusWeb Authentication Core</span>
+            <a href="/" class="hover:underline text-blue-700 font-medium">Return to Safety (Homepage)</a>
         </div>
-        
-        <form th:action="@{/login}" method="POST">
-            <div class="form-group">
-                <label for="username">Username or Email</label>
-                <input type="text" id="username" name="username" class="form-input" placeholder="Enter your credentials" autocomplete="off" />
+        <div class="text-gray-400 font-bold uppercase text-[10px]">Security Gateway</div>
+    </header>
+
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6 bg-white">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter text-[#0254eb] italic filter drop-shadow-sm">
+                TheNexusWeb<span class="not-italic text-amber-500">!</span>
+            </h1>
+        </div>
+        <div class="flex-1 text-center md:text-left text-xs text-gray-400 font-medium italic">
+            Secure multi-node infrastructure sign-in portal framework...
+        </div>
+    </section>
+
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4 bg-white">
+
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i> Our Front Page
+                </a>
+                <a href="/social-feed" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2 cursor-not-allowed opacity-50">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Nexus Social
+                </a>
+                <a href="/news" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="rss" class="w-3.5 h-3.5"></i> Live News Streams
+                </a>
+                <a href="/cinema-hub" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2 cursor-not-allowed opacity-50">
+                    <i data-lucide="film" class="w-3.5 h-3.5"></i> Movies Hub
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-center border-b border-gray-300">
+                <h2 class="text-sm font-bold text-gray-800 pb-0.5 flex items-center gap-1.5">
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-[#0254eb]"></i> Identity Access Validation Node
+                </h2>
             </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" />
+
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col items-center justify-center bg-white">
+                
+                <div class="w-full max-w-sm border border-gray-200 bg-white shadow-sm rounded overflow-hidden">
+                    
+                    <form th:action="@{/login}" method="POST" class="p-5 flex flex-col gap-4 text-xs">
+                        
+                        <div th:if="${param.error}" class="p-2.5 bg-rose-50 border border-rose-200 text-rose-700 font-bold rounded">
+                            Validation Failure: Incorrect handle signature or matrix code keys.
+                        </div>
+                        <div th:if="${signupSuccess}" class="p-2.5 bg-blue-50 border border-blue-200 text-blue-700 font-bold rounded">
+                            Node created successfully. You may authenticate below.
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="username" class="font-bold text-gray-700 flex items-center gap-1">
+                                <i data-lucide="user" class="w-3.5 h-3.5 text-[#0254eb]"></i> User Identity Handle:
+                            </label>
+                            <input type="text" id="username" name="username" required placeholder="Enter login handle..." 
+                                   class="border border-gray-300 p-2 rounded text-sm focus:outline-none focus:border-[#0254eb] text-black bg-white">
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="password" class="font-bold text-gray-700 flex items-center gap-1">
+                                <i data-lucide="lock" class="w-3.5 h-3.5 text-[#0254eb]"></i> Passkey Security Matrix:
+                            </label>
+                            <input type="password" id="password" name="password" required placeholder="••••••••" 
+                                   class="border border-gray-300 p-2 rounded text-sm focus:outline-none focus:border-[#0254eb] text-black bg-white">
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black py-2 rounded text-sm shadow cursor-pointer tracking-wide mt-2">
+                            Authenticate Secure Session
+                        </button>
+                        
+                        <a href="/signup" class="w-full border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold py-2 rounded text-center text-xs shadow-sm tracking-wide transition-colors">
+                            Sign Up / Establish Account Node
+                        </a>
+
+                        <div class="relative flex py-1 items-center">
+                            <div class="flex-grow border-t border-gray-200"></div>
+                            <span class="flex-shrink mx-3 text-gray-400 font-bold text-[9px] uppercase tracking-wider">Identity SSO Link</span>
+                            <div class="flex-grow border-t border-gray-200"></div>
+                        </div>
+
+                        <a th:href="@{/oauth2/authorization/google}" class="w-full border border-[#4285F4] bg-white hover:bg-blue-50/50 text-gray-700 font-bold py-2 px-3 rounded flex items-center justify-center gap-2 text-xs shadow-sm transition-colors">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                            </svg>
+                            Sign In with Google Identity Node
+                        </a>
+
+                    </form>
+                </div>
+
             </div>
-            
-            <div class="action-stack">
-                <button type="submit" class="btn-submit">Sign In</button>
-                <a href="/signup" class="btn-secondary-signup">Create New Account</a>
+        </main>
+
+        <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm bg-white">
+                <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff]">
+                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Verification Protocol Help
+                    </span>
+                </div>
+                <div class="p-3 bg-[#fdfeff] text-xs text-gray-600 leading-relaxed">
+                    Authentication confirms data stream access settings for individual layouts. Need assistance? Please consult platform infrastructure operations.
+                </div>
             </div>
-        </form>
-        
-        <div class="divider">or continue with</div>
-        
-        <a href="/oauth2/authorization/google" class="google-btn">
-            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_活跃图标.svg" alt="Google Logo"/>
-            Sign In with Google
-        </a>
+        </aside>
+
     </div>
 
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
