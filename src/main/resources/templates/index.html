@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: common-head('TheNexusWeb - Our Platform Hub')}">
-    </head>
-<body class="h-screen w-screen flex flex-col overflow-hidden">
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white text-black">
 
     <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
         <div class="flex items-center gap-4">
@@ -32,9 +32,9 @@
         </div>
     </header>
 
-    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6 bg-white">
         <div class="flex flex-col items-center md:items-start select-none">
-            <h1 class="text-4xl font-black tracking-tighter nexus-blue italic filter drop-shadow-sm">
+            <h1 class="text-4xl font-black tracking-tighter text-[#0254eb] italic filter drop-shadow-sm">
                 TheNexusWeb<span class="not-italic text-amber-500">!</span>
             </h1>
         </div>
@@ -50,13 +50,13 @@
         </div>
     </section>
 
-    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4 bg-white">
 
         <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
             <nav class="flex flex-col gap-0.5">
-                <button class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2">
+                <a href="/" class="w-full text-left px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2">
                     <i data-lucide="home" class="w-3.5 h-3.5 text-blue-600"></i> Our Front Page
-                </button>
+                </a>
                 <a href="/social-feed" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
                     <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Nexus Social
                 </a>
@@ -90,12 +90,12 @@
                 <h2 id="panelTitleText" class="text-sm font-bold text-gray-800 pb-1.5">Featured News Room & Telemetry</h2>
             </div>
 
-            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar">
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar bg-white">
                 
                 <div id="settingsWorkspaceBox" class="hidden flex flex-col gap-6">
                     <div class="border border-blue-200 bg-blue-50 p-4 rounded text-xs">
                         <strong class="text-blue-900 block mb-1 text-sm">System Parameter Console</strong>
-                        Modify runtime preferences across your shared layout profiles instantly.
+                        Modify preferences across your shared layout profiles instantly.
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50">
-                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900">Passkey Matrix Modification</h3>
+                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900">Passkey Modification</h3>
                             <form action="/api/profile/password" method="POST" class="flex flex-col gap-2">
                                 <div>
                                     <label class="block mb-0.5">Existing Password Verification:</label>
@@ -142,7 +142,6 @@
                     <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
                         <i data-lucide="cloud-sun" class="w-3.5 h-3.5"></i> Regional Weather Feed
                     </span>
-                    <span class="text-[10px] bg-amber-500 text-white px-1.5 py-0.5 font-bold rounded uppercase">Live</span>
                 </div>
                 <div class="p-3 bg-[#fdfeff] flex flex-col gap-3">
                     <div class="flex justify-between items-center">
@@ -154,59 +153,6 @@
                             <span class="text-2xl font-black tracking-tight text-blue-900" th:text="${weatherTemp != null ? weatherTemp : '29°C'}">29°C</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 border-t border-gray-100 pt-2 text-[10px] text-gray-600 font-medium">
-                        <div class="flex items-center gap-1">
-                            <i data-lucide="droplets" class="w-3 h-3 text-blue-500"></i> Humid: <span th:text="${weatherHumidity != null ? weatherHumidity : '78%'}">78%</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <i data-lucide="wind" class="w-3 h-3 text-teal-500"></i> Wind: <span th:text="${weatherWind != null ? weatherWind : '14 km/h'}">14 km/h</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm bg-white flex-1 flex flex-col">
-                <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff] flex justify-between items-center">
-                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
-                        <i data-lucide="newspaper" class="w-3.5 h-3.5"></i> Local News Desk
-                    </span>
-                    <i data-lucide="refresh-cw" class="w-3 h-3 text-gray-400 hover:text-blue-600 cursor-pointer animate-spin-slow"></i>
-                </div>
-                
-                <div class="p-2 bg-[#fdfeff] flex flex-col gap-1.5 divide-y divide-gray-100 overflow-y-auto custom-scrollbar text-xs">
-                    
-                    <div th:each="item : ${localNewsList}" class="pt-1.5 first:pt-0 group">
-                        <a href="#" class="block hover:text-blue-700 transition-colors">
-                            <span class="text-[9px] font-bold text-amber-600 block uppercase tracking-tight" th:text="${item.category}">BREAKING</span>
-                            <p class="font-bold text-gray-800 text-[11px] leading-tight group-hover:underline" th:text="${item.title}">Dynamic headline injecting successfully from server nodes...</p>
-                            <span class="text-[9px] text-gray-400" th:text="${item.timeString}">12 mins ago</span>
-                        </a>
-                    </div>
-
-                    <div th:if="${localNewsList == null}" class="flex flex-col gap-2 divide-y divide-gray-100">
-                        <div class="pt-2 first:pt-0 group">
-                            <a href="#" class="block">
-                                <span class="text-[9px] font-bold text-blue-600 block uppercase tracking-tight">Infrastructure</span>
-                                <p class="font-bold text-gray-800 text-[11px] leading-tight group-hover:underline group-hover:text-blue-700">Digital Gateway Upgrades Confirmed Across Major Metropolitan Hubs</p>
-                                <span class="text-[9px] text-gray-400">24 mins ago</span>
-                            </a>
-                        </div>
-                        <div class="pt-2 group">
-                            <a href="#" class="block">
-                                <span class="text-[9px] font-bold text-emerald-600 block uppercase tracking-tight">Commerce</span>
-                                <p class="font-bold text-gray-800 text-[11px] leading-tight group-hover:underline group-hover:text-blue-700">Tech Innovation Summit Announces Strategic Partnership Pipeline</p>
-                                <span class="text-[9px] text-gray-400">1 hour ago</span>
-                            </a>
-                        </div>
-                        <div class="pt-2 group">
-                            <a href="#" class="block">
-                                <span class="text-[9px] font-bold text-amber-600 block uppercase tracking-tight">Transit</span>
-                                <p class="font-bold text-gray-800 text-[11px] leading-tight group-hover:underline group-hover:text-blue-700">Smart Grid Integrations Set to Optimize Regional High-Speed Logistics</p>
-                                <span class="text-[9px] text-gray-400">3 hours ago</span>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -217,8 +163,8 @@
                     </span>
                 </div>
                 <div class="p-3 bg-[#fdfeff] flex flex-col gap-2">
-                    <input type="text" placeholder="Scan vocabulary term..." class="border p-1 text-xs rounded outline-none focus:border-blue-400">
-                    <button class="bg-blue-600 text-white font-bold text-xs py-1 rounded hover:bg-blue-700 shadow-sm transition-colors">Scan Knowledge Base</button>
+                    <input type="text" placeholder="Scan vocabulary term..." class="border p-1 text-xs rounded outline-none">
+                    <button class="bg-blue-600 text-white font-bold text-xs py-1 rounded hover:bg-blue-700">Scan Knowledge Base</button>
                 </div>
             </div>
 
@@ -226,9 +172,7 @@
     </div>
 
     <script>
-        // Init Lucide icons for weather, droplets, wind, newspaper, etc.
         lucide.createIcons();
-
         document.addEventListener("DOMContentLoaded", () => {
             const gearBtn = document.getElementById('triggerSettingsPanel');
             const homeView = document.getElementById('standardHomepageBox');
