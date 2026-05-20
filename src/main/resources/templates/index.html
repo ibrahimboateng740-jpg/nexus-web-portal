@@ -32,56 +32,23 @@
             background: #0254eb;
             border-radius: 3px;
         }
-
-        /* 🌙 SYSTEM DARK MODE REGISTRY INJECTIONS */
-        body.dark-theme {
-            background-color: #121214 !important;
-            color: #e4e6eb !important;
-        }
-        body.dark-theme .bg-white, 
-        body.dark-theme aside, 
-        body.dark-theme main {
-            background-color: #1a1a1e !important;
-            color: #e4e6eb !important;
-            border-color: #2d2d34 !important;
-        }
-        body.dark-theme header {
-            background-color: #151518 !important;
-            border-color: #2d2d34 !important;
-            color: #a0a5b1 !important;
-        }
-        body.dark-theme .portal-panel-header {
-            background: linear-gradient(to bottom, #1e1e24 0%, #151518 100%) !important;
-            border-color: #2d2d34 !important;
-        }
-        body.dark-theme .bg-gray-50, 
-        body.dark-theme .bg-[#f4f8fb], 
-        body.dark-theme .bg-[#f4f7f9] {
-            background-color: #1e1e24 !important;
-            color: #e4e6eb !important;
-        }
-        body.dark-theme input {
-            background-color: #25252c !important;
-            color: #ffffff !important;
-            border-color: #3a3a44 !important;
-        }
     </style>
 </head>
-<body th:class="${userProfile != null and userProfile.darkMode} ? 'h-screen w-screen flex flex-col overflow-hidden dark-theme' : 'h-screen w-screen flex flex-col overflow-hidden'">
+<body class="h-screen w-screen flex flex-col overflow-hidden">
 
     <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
         <div class="flex items-center gap-4">
-            <span class="font-bold text-gray-700 dark:text-gray-300">TheNexusWeb Interface Core</span>
-            <a href="#" class="hover:underline text-blue-700 font-medium dark:text-blue-400">Set As Shared Homepage</a>
+            <span class="font-bold text-gray-700">TheNexusWeb Interface Core</span>
+            <a href="#" class="hover:underline text-blue-700 font-medium">Set As Shared Homepage</a>
         </div>
         
         <div class="flex items-center gap-4">
             <div th:if="${userProfile != null}" class="flex items-center gap-2">
                 <img th:src="${userProfile.avatarUrl != null ? userProfile.avatarUrl : '/images/default-avatar.png'}" 
                      class="w-5 h-5 rounded-full border border-blue-400 object-cover" id="ribbonAvatarDisplay">
-                <span class="font-bold text-gray-800 dark:text-gray-200" th:text="${userProfile.username}">UserNode</span>
+                <span class="font-bold text-gray-800" th:text="${userProfile.username}">UserNode</span>
                 
-                <button type="button" id="triggerSettingsPanel" class="p-0.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors" title="Engine Settings">
+                <button type="button" id="triggerSettingsPanel" class="p-0.5 text-gray-500 hover:text-blue-600 cursor-pointer transition-colors" title="Engine Settings">
                     <i data-lucide="settings" class="w-4 h-4"></i>
                 </button>
                 <span class="text-gray-300">|</span>
@@ -104,9 +71,9 @@
             </h1>
         </div>
 
-        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
             <div class="flex bg-white border border-[#4a89c0]">
-                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2 dark:bg-gray-800 dark:text-gray-300">
+                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
                     <input type="radio" id="webSearch" checked> <label for="webSearch">Network</label>
                 </div>
                 <input type="text" placeholder="Search the dynamic internet..." class="flex-1 px-3 py-2 text-sm text-black focus:outline-none">
@@ -152,26 +119,20 @@
 
         <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
             <div class="portal-panel-header px-3 py-2 flex justify-between items-end border-b border-gray-300">
-                <h2 id="panelTitleText" class="text-sm font-bold text-gray-800 dark:text-gray-200 pb-1.5">Featured News Room & Telemetry</h2>
+                <h2 id="panelTitleText" class="text-sm font-bold text-gray-800 pb-1.5">Featured News Room & Telemetry</h2>
             </div>
 
             <div class="flex-1 p-4 overflow-y-auto custom-scrollbar">
                 
                 <div id="settingsWorkspaceBox" class="hidden flex flex-col gap-6">
-                    <div class="border border-blue-200 bg-blue-50 dark:bg-zinc-900 dark:border-zinc-700 p-4 rounded text-xs">
-                        <strong class="text-blue-900 dark:text-blue-400 block mb-1 text-sm">System Parameter Console</strong>
+                    <div class="border border-blue-200 bg-blue-50 p-4 rounded text-xs">
+                        <strong class="text-blue-900 block mb-1 text-sm">System Parameter Console</strong>
                         Modify runtime preferences across your shared layout profiles instantly.
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                        <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50 dark:bg-zinc-900">
-                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 dark:text-blue-400">Visual Configuration</h3>
-                            <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 border rounded">
-                                <span>Platform Dark Mode Framework:</span>
-                                <button type="button" id="btnThemeToggleAction" class="bg-gray-300 dark:bg-blue-600 px-3 py-1 font-bold rounded text-[11px] cursor-pointer">
-                                    Toggle Theme
-                                </button>
-                            </div>
+                        <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50">
+                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900">Visual Configuration</h3>
                             <form action="/api/profile/avatar" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2">
                                 <label class="font-bold">Update Profile Image Vector:</label>
                                 <input type="file" name="avatarFile" accept="image/*" class="w-full text-xs">
@@ -179,8 +140,8 @@
                             </form>
                         </div>
 
-                        <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50 dark:bg-zinc-900">
-                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 dark:text-blue-400">Passkey Matrix Modification</h3>
+                        <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50">
+                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900">Passkey Matrix Modification</h3>
                             <form action="/api/profile/password" method="POST" class="flex flex-col gap-2">
                                 <div>
                                     <label class="block mb-0.5">Existing Password Verification:</label>
@@ -197,8 +158,8 @@
                 </div>
 
                 <div id="standardHomepageBox" class="flex flex-col gap-4">
-                    <div class="bg-blue-50 dark:bg-zinc-900 border border-blue-200 dark:border-zinc-700 p-3.5 rounded text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
-                        <strong class="text-blue-900 dark:text-blue-400 block text-sm mb-1">Welcome to Our Shared TheNexusWeb Central Ecosystem Hub</strong>
+                    <div class="bg-blue-50 border border-blue-200 p-3.5 rounded text-xs text-gray-700 leading-relaxed">
+                        <strong class="text-blue-900 block text-sm mb-1">Welcome to Our Shared TheNexusWeb Central Ecosystem Hub</strong>
                         This is our dedicated master portal layout, built for the whole platform ecosystem.
                     </div>
                 </div>
@@ -209,11 +170,11 @@
         <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
             <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm bg-white">
                 <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff] flex justify-between items-center">
-                    <span class="text-xs font-bold text-blue-900 dark:text-blue-400 flex items-center gap-1.5">
+                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
                         <i data-lucide="help-circle"></i> Nexus Answers Lexicon
                     </span>
                 </div>
-                <div class="p-3 bg-[#fdfeff] dark:bg-zinc-900 flex flex-col gap-2">
+                <div class="p-3 bg-[#fdfeff] flex flex-col gap-2">
                     <input type="text" placeholder="Scan vocabulary term..." class="border p-1 text-xs rounded">
                     <button class="bg-blue-600 text-white font-bold text-xs py-1 rounded">Scan Knowledge Base</button>
                 </div>
@@ -229,7 +190,6 @@
             const homeView = document.getElementById('standardHomepageBox');
             const settingsView = document.getElementById('settingsWorkspaceBox');
             const panelTitle = document.getElementById('panelTitleText');
-            const themeToggleBtn = document.getElementById('btnThemeToggleAction');
 
             if (gearBtn) {
                 gearBtn.addEventListener('click', () => {
@@ -241,17 +201,6 @@
                         settingsView.classList.add('hidden');
                         homeView.classList.remove('hidden');
                         panelTitle.innerText = "Featured News Room & Telemetry";
-                    }
-                });
-            }
-
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener('click', async () => {
-                    const isDarkActive = document.body.classList.toggle('dark-theme');
-                    try {
-                        await fetch(`/api/profile/theme?darkMode=${isDarkActive}`, { method: 'POST' });
-                    } catch (err) {
-                        console.error("Database theme persistence tracking fault encountered.");
                     }
                 });
             }
