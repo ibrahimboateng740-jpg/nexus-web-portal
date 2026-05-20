@@ -1,111 +1,155 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TheNexusWeb - Portal Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNexusWeb - Our Platform Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1c20; color: #e1e4e6; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        /* CLASSIC PORTAL TOP BAR */
-        .portal-header { background: #111215; border-bottom: 1px solid #2d3139; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; }
-        .system-status { font-size: 13px; color: #787f95; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .system-status span { color: #00bcd4; }
-        
-        /* TOP RIGHT ACCOUNT HUB & FAR RIGHT LOGOUT */
-        .user-nav-zone { display: flex; align-items: center; gap: 20px; }
-        .user-greeting { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; color: #ffffff; }
-        .user-avatar { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #00bcd4; object-fit: cover; }
-        .btn-logout { background: transparent; border: 1px solid #ff5252; color: #ff5252; text-decoration: none; font-size: 13px; font-weight: bold; padding: 8px 16px; border-radius: 4px; transition: all 0.2s; }
-        .btn-logout:hover { background: #ff5252; color: #ffffff; }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        /* Custom High-Utility Portal Layout Styles */
+        .nexus-blue { color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+            transition: background 0.2s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0254eb;
+            border-radius: 3px;
+        }
 
-        /* THE CENTRALIZED MAIN BRAND - THENEXUSWEB */
-        .portal-hero { text-align: center; padding: 60px 20px 40px 20px; }
-        .portal-hero h1 { font-size: 52px; font-weight: 900; color: #00bcd4; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
-        .portal-hero p { color: #a0a5b5; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.5; }
-
-        /* COMPLETE CENTRAL INTERFACE DIRECTORY GRID */
-        .portal-container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 40px 60px 40px; flex-grow: 1; }
-        .directory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        
-        /* Directory Link Cards */
-        .directory-card { background: #111215; border: 1px solid #2d3139; border-radius: 8px; padding: 25px; text-decoration: none; color: inherit; transition: all 0.2s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .directory-card:hover { transform: translateY(-4px); border-color: #00bcd4; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-        .directory-card h3 { color: #ffffff; font-size: 19px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .directory-card p { color: #787f95; font-size: 13.5px; line-height: 1.5; }
-        
-        /* Coming Soon Utility Styles */
-        .card-disabled { opacity: 0.5; cursor: not-allowed; position: relative; }
-        .card-disabled:hover { transform: none; border-color: #2d3139; box-shadow: none; }
-        .tag-soon { position: absolute; top: 15px; right: 15px; background: rgba(0, 188, 212, 0.15); color: #00bcd4; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+        /* 🌙 SYSTEM DARK MODE REGISTRY INJECTIONS */
+        body.dark-theme {
+            background-color: #121214 !important;
+            color: #e4e6eb !important;
+        }
+        body.dark-theme .bg-white, 
+        body.dark-theme aside, 
+        body.dark-theme main {
+            background-color: #1a1a1e !important;
+            color: #e4e6eb !important;
+            border-color: #2d2d34 !important;
+        }
+        body.dark-theme header {
+            background-color: #151518 !important;
+            border-color: #2d2d34 !important;
+            color: #a0a5b1 !important;
+        }
+        body.dark-theme .portal-panel-header {
+            background: linear-gradient(to bottom, #1e1e24 0%, #151518 100%) !important;
+            border-color: #2d2d34 !important;
+        }
+        body.dark-theme .bg-gray-50, 
+        body.dark-theme .bg-[#f4f8fb], 
+        body.dark-theme .bg-[#f4f7f9] {
+            background-color: #1e1e24 !important;
+            color: #e4e6eb !important;
+        }
+        body.dark-theme input {
+            background-color: #25252c !important;
+            color: #ffffff !important;
+            border-color: #3a3a44 !important;
+        }
     </style>
 </head>
-<body>
+<body th:class="${userProfile != null and userProfile.darkMode} ? 'h-screen w-screen flex flex-col overflow-hidden dark-theme' : 'h-screen w-screen flex flex-col overflow-hidden'">
 
-    <header class="portal-header">
-        <div class="system-status">TheNexusWeb Node Security: <span>Active</span></div>
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700 dark:text-gray-300">TheNexusWeb Command Interface</span>
+            <a href="#" class="hover:underline text-blue-700 font-medium dark:text-blue-400">Set As Shared Homepage</a>
+        </div>
         
-        <div class="user-nav-zone">
-            <div class="user-greeting">
-                <img th:if="${picture != null}" th:src="${picture}" class="user-avatar" alt="Avatar"/>
-                <span>Hi, <strong th:text="${name != null ? name : 'Operator'}">Operator</strong></span>
+        <div class="flex items-center gap-4">
+            <div th:if="${userProfile != null}" class="flex items-center gap-2">
+                <img th:src="${userProfile.avatarUrl != null ? userProfile.avatarUrl : '/images/default-avatar.png'}" 
+                     class="w-5 h-5 rounded-full border border-blue-400 object-cover" id="ribbonAvatarDisplay">
+                
+                <span>Hi, <strong class="font-bold text-gray-800 dark:text-gray-200" th:text="${userProfile.username}">UserNode</strong></span>
+                
+                <button type="button" id="triggerSettingsPanel" class="p-0.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors" title="Engine Settings">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                </button>
+                <span class="text-gray-300">|</span>
+                
+                <a href="/logout" class="text-rose-600 hover:underline font-bold">Disconnect</a>
             </div>
-            <a href="/logout" class="btn-logout">Sign Out</a>
+
+            <div th:if="${userProfile == null}" class="flex items-center gap-2">
+                <a href="/login" class="bg-gradient-to-b from-blue-500 to-blue-600 text-white font-bold px-3 py-1 rounded text-[11px] shadow hover:from-blue-600 hover:to-blue-700 tracking-wide flex items-center gap-1">
+                    <i data-lucide="log-in" class="w-3 h-3"></i> Sign In
+                </a>
+                <a href="/signup" class="bg-white text-gray-700 border border-gray-300 font-bold px-3 py-1 rounded text-[11px] shadow-sm hover:bg-gray-50 tracking-wide flex items-center gap-1 dark:bg-zinc-800 dark:text-gray-200 dark:border-zinc-700 dark:hover:bg-zinc-700">
+                    <i data-lucide="user-plus" class="w-3 h-3"></i> Sign Up
+                </a>
+            </div>
         </div>
     </header>
 
-    <section class="portal-hero">
-        <h1>TheNexusWeb</h1>
-        <p>Your secure cloud web management portal infrastructure. Select an active platform directory node below.</p>
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter nexus-blue italic filter drop-shadow-sm">
+                TheNexusWeb<span class="not-italic text-amber-500">!</span>
+            </h1>
+            <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase font-mono bg-blue-50 border border-blue-200 px-1.5 rounded mt-0.5 dark:bg-gray-800 dark:border-gray-700">COMMUNITY_COMMAND</span>
+        </div>
+
+        <div class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex bg-white border border-[#4a89c0]">
+                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2 dark:bg-gray-800 dark:text-gray-300">
+                    <input type="radio" id="webSearch" checked> <label for="webSearch">Network</label>
+                </div>
+                <input type="text" placeholder="Search the dynamic internet..." class="flex-1 px-3 py-2 text-sm text-black focus:outline-none">
+                <button class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 shadow-inner">Search</button>
+            </div>
+        </div>
     </section>
 
-    <main class="portal-container">
-        <div class="directory-grid">
-            
-            <a href="/social-feed" class="directory-card">
-                <h3>💬 Social Feed</h3>
-                <p>Interact and manage internal platform system communication feeds and active discussions.</p>
-            </a>
-            
-            <a href="/podcast" class="directory-card">
-                <h3>🎙️ Nexus Podcasts</h3>
-                <p>Access audio management workflows, episode publication setups, and distribution tracking loops.</p>
-            </a>
-            
-            <a href="/music-hub" class="directory-card">
-                <h3>🎵 Global Beats Music</h3>
-                <p>Stream global music audio playlists, look up iTunes tracks, and manage your favorites list.</p>
-            </a>
-            
-            <a href="/news-hub" class="directory-card">
-                <h3>📰 News Hub</h3>
-                <p>Read global aggregated news feeds, security bulletins, and platform updates instantly.</p>
-            </a>
-            
-            <a href="/cinema-hub" class="directory-card">
-                <h3>🎬 Cinema Hub</h3>
-                <p>Track multi-media playback queues, streaming index frameworks, and asset logs.</p>
-            </a>
-            
-            <a href="/dictionary" class="directory-card">
-                <h3>📖 Nexus Dictionary</h3>
-                <p>Interact with the A-Z terminology lookup tool for complex system references and definitions.</p>
-            </a>
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4">
 
-            <div class="directory-card card-disabled">
-                <span class="tag-soon">Soon</span>
-                <h3>✉️ Nexus Messenger</h3>
-                <p>Direct real-time communication framework and secure chat network infrastructure node.</p>
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <button class="nav-btn w-full text-left px-2 py-1.5 text-xs font-bold text-blue-900 bg-white border border-[#7bc5ff] rounded flex items-center gap-2"><i data-lucide="home" class="w-3.5 h-3.5 text-blue-600"></i> Our Front Page</button>
+                <a href="/social" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Nexus Social</a>
+                <a href="/news" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="rss" class="w-3.5 h-3.5"></i> Live News Streams</a>
+                <a href="/weather" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="cloud-sun" class="w-3.5 h-3.5"></i> Weather Radar</a>
+                <a href="/movies" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="film" class="w-3.5 h-3.5"></i> Movies Hub</a>
+                <a href="/podcasts" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2"><i data-lucide="radio" class="w-3.5 h-3.5"></i> Music & Podcast</a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-end border-b border-gray-300">
+                <h2 id="panelTitleText" class="text-sm font-bold text-gray-800 dark:text-gray-200 pb-1.5">Featured News Room & Telemetry</h2>
             </div>
 
-            <div class="directory-card card-disabled">
-                <span class="tag-soon">Soon</span>
-                <h3>❓ Nexus Answers</h3>
-                <p>Community knowledge marketplace database. Ask questions, log documentation, and share solutions.</p>
-            </div>
-            
-        </div>
-    </main>
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar">
+                
+                <div id="settingsWorkspaceBox" class="hidden flex flex-col gap-6">
+                    <div class="border border-blue-200 bg-blue-50 dark:bg-zinc-900 dark:border-zinc-700 p-4 rounded text-xs">
+                        <strong class="text-blue-900 dark:text-blue-400 block mb-1 text-sm">System Parameter Console</strong>
+                        Modify runtime preferences across your shared layout profiles instantly. Changes sync safely to our permanent database entity tables.
+                    </div>
 
-</body>
-</html>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <div class="flex flex-col gap-4 border border-gray-200 p-4 rounded bg-gray-50 dark:bg-zinc-900">
+                            <h3 class="font-bold border-b pb-1 mb-2 text-blue-900 dark:text-blue-400">Visual Configuration</h3>
+                            
+                            <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 border rounded">
+                                <span>Platform Dark Mode Framework:</span>
+                                <button type="button" id="btnThemeToggleAction" class="bg-gray-300 dark:bg-blue-6
