@@ -1,4 +1,4 @@
-package com.thenexusweb.config; // Ensure this package line matches its exact folder path
+package com.thenexusweb.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,31 +13,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // 1. Completely disable cross-site requests to prevent backend form blocking
+            // Completely disable cross-site request tokens to avoid initial asset blocks
             .csrf(csrf -> csrf.disable())
             
-            // 2. Open up the web traffic gates completely for asset layout folders
+            // 🌐 OPEN ACCESS ROUTING MAP
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/signup", "/", "/favicon.svg", "/static/**", "/templates/**").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                // 🌟 FIX: Explicitly permits anyone to access the root home page layout without being logged in
+                .requestMatchers("/").permitAll()
+                // Let anyone see the login screen, signup page, and branding assets freely
+                .requestMatchers("/login", "/signup", "/favicon.svg").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                // Everything else (like Nexus Social or Movies Hub) still requires an active account node session
                 .anyRequest().authenticated()
             )
             
-            // 3. Inject your custom blue dashboard login layout page framework
+            // 👤 INJECT CUSTOM FORM LOGIN LAYER
             .formLogin(form -> form
                 .loginPage("/login")
-                .loginProcessingUrl("/login") // Matches your HTML form action attribute exactly
-                .defaultSuccessUrl("/", true)
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/", true) // Sends users directly to home page after standard form login
                 .permitAll()
             )
             
-            // 4. Overwrite Google Single Sign-On intercept gates
+            // 🌐 OVERWRITE GOOGLE SINGLE SIGN-ON LOOP
             .oauth2Login(oauth -> oauth
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/", true) // Sends users directly to home page after Google login
             )
             
-            // 5. Setup session clearance disconnect path
+            // 🚪 SECURITY SESSION DISCONNECT DISCOVERY
             .logout(logout -> logout
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
