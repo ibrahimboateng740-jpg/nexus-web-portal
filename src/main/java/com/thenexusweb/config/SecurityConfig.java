@@ -13,24 +13,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // Disable CSRF tokens to keep web forms from being blocked on the live server
+            // Disable CSRF tokens to ensure live web forms post correctly on Render
             .csrf(csrf -> csrf.disable())
             
             // 🌐 LIVE ACCESS ROUTING MAP
             .authorizeHttpRequests(auth -> auth
-                // Let anyone see the root home page layout without being logged in
-                .requestMatchers("/").permitAll()
-                // Let anyone see the login layout screen, signup page, and branding assets freely
-                .requestMatchers("/login", "/signup", "/favicon.svg").permitAll()
+                // Allow public viewing of the homepage, login page, and signup page
+                .requestMatchers("/", "/login", "/signup", "/favicon.svg").permitAll()
+                // Allow public access to all asset folders so your design templates render correctly
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                // Everything else (like Nexus Social or Movies Hub) requires an active login session
+                // Any other internal dashboard route requires an active authenticated session
                 .anyRequest().authenticated()
             )
             
             // 👤 INJECT CUSTOM FORM LOGIN LAYER (OUR BLUE DESIGN)
             .formLogin(form -> form
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
+                // 🌟 FIX: We removed the duplicate loginProcessingUrl to break the loop!
                 .defaultSuccessUrl("/", true)
                 .permitAll()
             )
