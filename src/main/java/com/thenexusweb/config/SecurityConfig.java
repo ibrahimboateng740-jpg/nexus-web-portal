@@ -1,4 +1,4 @@
-package com.example.thenexusweb.config; // 🌟 MAKE SURE THIS MATCHES YOUR PROJECT FOLDER STRUCTURE!
+package com.thenexusweb.config; // Ensure this package line matches its exact folder path
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,22 +13,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // 1. Completely disable cross-site requests to prevent backend form blocking
+            .csrf(csrf -> csrf.disable())
+            
+            // 2. Open up the web traffic gates completely for asset layout folders
             .authorizeHttpRequests(auth -> auth
-                // Let anyone see the login screen elements, home page, and icon without logging in
-                .requestMatchers("/login", "/signup", "/", "/favicon.svg", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login", "/signup", "/", "/favicon.svg", "/static/**", "/templates/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
             )
+            
+            // 3. Inject your custom blue dashboard login layout page framework
             .formLogin(form -> form
-                // 🌟 This completely overrides the default white screen with your blue layout!
                 .loginPage("/login")
+                .loginProcessingUrl("/login") // Matches your HTML form action attribute exactly
                 .defaultSuccessUrl("/", true)
                 .permitAll()
             )
+            
+            // 4. Overwrite Google Single Sign-On intercept gates
             .oauth2Login(oauth -> oauth
-                // 🌟 This overrides the white screen for the Google Sign-In button too!
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
             )
+            
+            // 5. Setup session clearance disconnect path
             .logout(logout -> logout
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
