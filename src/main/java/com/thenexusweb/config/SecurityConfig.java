@@ -13,35 +13,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // Completely disable cross-site request tokens to avoid initial asset blocks
+            // Disable CSRF tokens to keep web forms from being blocked on the live server
             .csrf(csrf -> csrf.disable())
             
-            // 🌐 OPEN ACCESS ROUTING MAP
+            // 🌐 LIVE ACCESS ROUTING MAP
             .authorizeHttpRequests(auth -> auth
-                // 🌟 FIX: Explicitly permits anyone to access the root home page layout without being logged in
+                // Let anyone see the root home page layout without being logged in
                 .requestMatchers("/").permitAll()
-                // Let anyone see the login screen, signup page, and branding assets freely
+                // Let anyone see the login layout screen, signup page, and branding assets freely
                 .requestMatchers("/login", "/signup", "/favicon.svg").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                // Everything else (like Nexus Social or Movies Hub) still requires an active account node session
+                // Everything else (like Nexus Social or Movies Hub) requires an active login session
                 .anyRequest().authenticated()
             )
             
-            // 👤 INJECT CUSTOM FORM LOGIN LAYER
+            // 👤 INJECT CUSTOM FORM LOGIN LAYER (OUR BLUE DESIGN)
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/", true) // Sends users directly to home page after standard form login
+                .defaultSuccessUrl("/", true)
                 .permitAll()
             )
             
             // 🌐 OVERWRITE GOOGLE SINGLE SIGN-ON LOOP
             .oauth2Login(oauth -> oauth
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true) // Sends users directly to home page after Google login
+                .defaultSuccessUrl("/", true)
             )
             
-            // 🚪 SECURITY SESSION DISCONNECT DISCOVERY
+            // 🚪 SECURITY SESSION DISCONNECT
             .logout(logout -> logout
                 .logoutSuccessUrl("/login?logout")
                 .permitAll()
