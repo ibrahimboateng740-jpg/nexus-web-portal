@@ -1,18 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Nexus Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheNexusWeb - Search Matrix</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='18' y='27' font-family='Impact, Arial Black, sans-serif' font-weight='900' font-style='italic' font-size='34' fill='%23f59e0b' text-anchor='middle'%3E!%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background: #0a0c10; color: #fff; font-family: sans-serif; padding: 40px; }
-        .gsc-control-cse { background: transparent !important; border: none !important; }
-        .gs-title, .gs-title * { color: #8A2BE2 !important; text-decoration: none !important; font-size: 1.2rem !important; }
-        .gs-snippet { color: #8b949e !important; }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .nexus-blue { color: #0254eb; }
+        .nexus-bg-blue { background-color: #0254eb; }
+        .nexus-border { border: 1px solid #7bc5ff; }
+        .portal-panel-header {
+            background: linear-gradient(to bottom, #f5fafe 0%, #e4f2fc 100%);
+            border-bottom: 1px solid #7bc5ff;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0254eb;
+            border-radius: 3px;
+        }
     </style>
 </head>
-<body>
-    <a href="/" style="color: #8A2BE2; text-decoration: none; display: inline-block; margin-bottom: 20px;">← Back to Portal</a>
-    <script async src="https://cse.google.com/cse.js?cx=30c4d041d5b7a45b8"></script>
-    <div class="gcse-searchresults-only"></div>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-white text-black">
+
+    <header class="w-full bg-[#f4f7f9] border-b border-gray-300 px-4 py-1.5 flex justify-between items-center text-xs text-gray-600">
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-gray-700">TheNexusWeb Global Search Engine</span>
+            <a href="/" class="hover:underline text-blue-700 font-medium">Return to Home</a>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <div th:if="${userProfile != null}" class="flex items-center gap-2">
+                <span class="font-bold text-gray-800" th:text="${userProfile.username}">UserNode</span>
+                <span class="text-gray-300">|</span>
+                <a href="/logout" class="text-rose-600 hover:underline font-bold">Disconnect</a>
+            </div>
+            <div th:if="${userProfile == null}">
+                <a href="/login" class="bg-gradient-to-b from-blue-500 to-blue-600 text-white font-bold px-3 py-1 rounded text-[11px] shadow hover:from-blue-600 hover:to-blue-700 tracking-wide flex items-center gap-1">
+                    <i data-lucide="log-in" class="w-3 h-3"></i> Sign In
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="w-full max-w-6xl mx-auto pt-4 pb-2 px-4 flex flex-col md:flex-row items-center gap-6 bg-white">
+        <div class="flex flex-col items-center md:items-start select-none">
+            <h1 class="text-4xl font-black tracking-tighter text-[#0254eb] italic filter drop-shadow-sm">
+                <a href="/">TheNexusWeb<span class="not-italic text-amber-500">!</span></a>
+            </h1>
+        </div>
+
+        <form action="/search" method="GET" class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
+            <div class="flex bg-white border border-[#4a89c0]">
+                <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
+                    <i data-lucide="search" class="w-3.5 h-3.5 text-blue-600"></i> <label for="queryField">Web Query</label>
+                </div>
+                <input type="text" id="queryField" name="q" th:value="${query}" placeholder="Explore articles, media streams, network nodes..." required class="flex-1 px-3 py-2 text-sm text-black focus:outline-none bg-white">
+                <button type="submit" class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 shadow-inner cursor-pointer hover:from-[#a6d5fa]">Execute Search</button>
+            </div>
+        </form>
+    </section>
+
+    <div class="flex-1 max-w-6xl w-full mx-auto flex overflow-hidden px-4 pb-4 gap-4 bg-white">
+
+        <aside class="w-56 flex flex-col border border-gray-300 bg-[#f4f8fb] rounded p-2 overflow-y-auto custom-scrollbar">
+            <nav class="flex flex-col gap-0.5">
+                <a href="/" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i> Our Front Page
+                </a>
+                <a href="/social-feed" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Nexus Social
+                </a>
+                <a href="/news" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="rss" class="w-3.5 h-3.5"></i> Live News Streams
+                </a>
+                <a href="/cinema-hub" class="px-2 py-1.5 text-xs font-bold text-blue-800 hover:bg-white flex items-center gap-2">
+                    <i data-lucide="film" class="w-3.5 h-3.5"></i> Movies Hub
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col border border-gray-300 rounded overflow-hidden bg-white">
+            <div class="portal-panel-header px-3 py-2 flex justify-between items-center border-b border-gray-300">
+                <h2 class="text-sm font-bold text-gray-800 pb-0.5 flex items-center gap-1.5">
+                    <i data-lucide="sliders" class="w-4 h-4 text-[#0254eb]"></i> 
+                    Search Index Matrix: <span class="text-blue-700 italic font-black ml-0.5" th:text="'&quot;' + ${query} + '&quot;'">"Query"</span>
+                </h2>
+                <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold" th:text="${resultsCount} + ' Nodes Identified'">0 Nodes Identified</span>
+            </div>
+
+            <div class="flex-1 p-4 overflow-y-auto custom-scrollbar flex flex-col gap-3 bg-white">
+                
+                <div th:each="item : ${searchResults}" class="p-3 border border-gray-200 rounded hover:border-blue-400 bg-gray-50 transition-colors">
+                    <div class="flex justify-between items-start gap-2">
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-600 text-white uppercase tracking-wider" th:text="${item.category}">TECH</span>
+                        <span class="text-[10px] text-gray-400 font-medium" th:text="${item.date}">2026-05-22</span>
+                    </div>
+                    <h3 class="font-bold text-sm text-gray-900 mt-1 hover:text-[#0254eb] hover:underline">
+                        <a th:href="${item.url}" th:text="${item.title}">Dynamic Search Matrix Title Node...</a>
+                    </h3>
+                    <p class="text-xs text-gray-600 mt-1" th:text="${item.description}">This is a dynamic snippet preview mapping directly onto your specified keyword context...</p>
+                </div>
+
+                <div th:if="${#lists.isEmpty(searchResults)}" class="flex flex-col items-center justify-center py-16 text-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+                        <i data-lucide="search-code" class="w-6 h-6 text-gray-400"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-gray-800">Zero Node Matrix Matches Found</h3>
+                    <p class="text-xs text-gray-400 max-w-xs mt-1">We couldn't locate any items matching your request string. Verify inputs or refine filters.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <aside class="w-72 flex flex-col gap-4 overflow-y-auto custom-scrollbar">
+            <div class="border border-[#7bc5ff] rounded overflow-hidden shadow-sm bg-white">
+                <div class="portal-panel-header px-3 py-2 border-b border-[#7bc5ff]">
+                    <span class="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+                        <i data-lucide="info" class="w-3.5 h-3.5"></i> Engine Diagnostics
+                    </span>
+                </div>
+                <div class="p-3 bg-[#fdfeff] text-xs text-gray-600 space-y-2">
+                    <p>Matches are indexed across categories, database layers, and active media channels.</p>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
