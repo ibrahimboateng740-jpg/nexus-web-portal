@@ -43,9 +43,22 @@
             <div class="flex bg-white border border-[#4a89c0]">
                 <div class="flex items-center gap-2 pl-3 text-xs font-bold text-gray-700 bg-gray-50 border-r border-gray-200 pr-2">
                     <input type="radio" id="webSearch" checked> <label for="webSearch">Network</label>
-                </div>
-                <input type="text" placeholder="Search the dynamic internet..." class="flex-1 px-3 py-2 text-sm text-black focus:outline-none">
-                <button class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 shadow-inner">Search</button>
+                <form action="/search" method="GET" class="flex-1 w-full max-w-2xl bg-[#9ecaed] p-1.5 rounded border border-[#66a9e0] shadow-sm">
+    <div class="flex bg-white border border-[#4a89c0]">
+        
+        <input type="text" 
+               name="q" 
+               placeholder="Explore articles, media streams, network nodes..." 
+               required 
+               class="flex-1 px-3 py-2 text-sm text-black focus:outline-none bg-white">
+               
+        <button type="submit" 
+                class="bg-gradient-to-b from-[#bce1fd] to-[#7bc5ff] border-l border-[#4a89c0] px-6 py-2 text-xs font-bold text-blue-900 shadow-inner cursor-pointer hover:from-[#a6d5fa]">
+            Execute Search
+        </button>
+        
+    </div>
+</form>
             </div>
         </div>
     </section>
